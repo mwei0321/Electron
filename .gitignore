@@ -1,0 +1,11 @@
+/Cache
+*~
+*tmp
+/Uploads/*
+*/Conf/dbcon*
+.idea*
+access.log
+error.log
+.sett*
+.buildp*
+.proje*
