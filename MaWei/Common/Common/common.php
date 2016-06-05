@@ -7,15 +7,15 @@
 	*  +---------------------------------------------------------------------------------+
 	*   | Creater Time : 2016年6月2日
 	*  +---------------------------------------------------------------------------------+
-	*   | Link :		http://www.phpython.com	     
+	*   | Link :		http://www.phpython.com
 	*  +---------------------------------------------------------------------------------+
 	**/
-	
+
 
     /**
 	 * 返回数组的某个值的集合
-	 * @param array $_data 
-	 * @param string $_key 
+	 * @param array $_data
+	 * @param string $_key
 	 * @param string $_unique 值唯一
 	 * @return array $onearray
      * @author MaWei (http://www.phpython.com)
@@ -28,7 +28,7 @@
         }
         return $_unique ? array_unique($onearray) : $onearray;
     }
-    
+
     /**
      * 把数组的某的值做为键
      * @param array $_data 数组
@@ -49,7 +49,34 @@
         }
         return $newdata;
     }
-    
+
+    /**
+     * 返回两到三层的树形菜单
+     * @param  array $_list
+     * @param  int $_level
+     * @return array
+     * @author MaWei (http://www.phpyrb.com)
+     * @date 2014-10-18  上午11:05:59
+     */
+    function getTree($_list,$_level = 2){
+        $pid = $pid2 = null;
+        $tree = array();
+        foreach ($_list as $k => $v){
+            if($v['pid'] == 0){
+                $pid = $k;
+                $tree[$k] = $v;
+            }else{
+                if($_level == 2 || $v['level'] == 1){
+                    $tree[$pid]['children'][$k] = $v;
+                    $pid2 = $v['pid'];
+                }elseif($_level == 3 || $v['level'] > 1){
+                    $tree[$pid]['children'][$pid2][$k] = $v;
+                }
+            }
+        }
+        return $tree;
+    }
+
     /**
      * 函数用于过滤标签，输出没有html的干净的文本
      * @param string text 文本内容
@@ -62,7 +89,7 @@
         $text = trim($text);
         return $text;
     }
-    
+
     /**
      * 去掉HTML标签
      * @param  string $str
@@ -75,7 +102,7 @@
         $str = html_entity_decode($str,ENT_QUOTES,'UTF-8');
         return strip_tags($str, $allowable_tags);
     }
-    
+
     /**
      * 把字符串写成文件
      * @param string $_str 要写入字符串
@@ -96,7 +123,7 @@
         }
         return $status;
     }
-    
+
     /**
      * 读取文件
      * @param string $_path 文件路径
@@ -124,7 +151,7 @@
             return null;
         }
     }
-    
+
     /**
      * 文件上传
      * @param  string　$_path 文件夹名（默认为 UPLOAD_PATH 定义下
@@ -146,7 +173,7 @@
         }
         return $filename;
     }
-    
+
     /**
      * 下载文件
      * @param  string $_url 下载文件的地址
@@ -173,7 +200,7 @@
         if(! $_path){
             $_path = UPLOAD_PATH.'avatar/'.date('Ym').'/';
         }
-         
+
         createDir($_path);
         $path = $_path.$_name;
         file_put_contents($path, $img);
@@ -183,7 +210,7 @@
         }
         return null;
     }
-    
+
     /**
      * 返回文件的后缀名
      * @param string $_file
@@ -196,7 +223,7 @@
         $exname = substr(strrchr($file,'.'), 1);
         return  strtolower($exname);
     }
-    
+
     /**
      * 创建文件夹
      * @param  string $_path 文件夹路径
@@ -210,7 +237,7 @@
             mkdir($_path, 0777);
         }
     }
-    
+
     /**
      * 返回目录下的文件夹名称
      * @param string $_path 路径
@@ -231,7 +258,7 @@
             return null;
         }
     }
-    
+
     /**
      * 把数组里的字符转换成全小、大写,暂时只支持一维数组
      * @param array $_arr 要转换的数组
@@ -246,7 +273,7 @@
         }
         return $_arr;
     }
-    
+
     /**
      * 检查字符串是否是UTF8编码
      * @param string $string 字符串
@@ -277,7 +304,7 @@
         }
         return true;
     }
-    
+
     /**
      * 字符串剪切
      * @param array
@@ -302,17 +329,17 @@
                 //$strlenth +=  0.475;  // 字符像素宽度比例 汉字为1
                 $strlenth   +=  0.5;    // 字符字节长度比例 汉字为1
             }
-    
+
             if ($strlenth > $length) {
                 $output .= $ext;
                 break;
             }
-    
+
             $output .=  $v;
         }
         return $output;
     }
-    
+
     /**
      * 字符串截取，支持中文和其他编码
      * @static
@@ -339,7 +366,7 @@
             }
             return $suffix ? $slice.'...' : $slice;
     }
-    
+
     /**
      * 产生随机字串，可用来自动生成密码
      * 默认长度6位 字母和数字混合 支持中文
@@ -387,7 +414,7 @@
         }
         return $str;
     }
-    
+
     /**
      * 生成一定数量的随机数，并且不重复
      * @param integer $number 数量
@@ -416,7 +443,7 @@
         $rand = array_slice(array_unique ($rand),0,$number);
         return $rand;
     }
-    
+
     /**
      *  带格式生成随机字符 支持批量生成
      *  但可能存在重复
@@ -451,13 +478,13 @@
         }
         return $number==1? $strtemp : $str ;
     }
-    
+
     /**
      * 自动转换字符集 支持数组转换
-     * @param  string $string 要转换的字符  
+     * @param  string $string 要转换的字符
      * @param  string $from 要转换的字符字符编码
      * @param  string $to 转换成字符编码
-     * @return array 
+     * @return array
      * @author MaWei (http://www.phpython.com)
      * @date 2016年6月2日 下午3:43:39
      */
@@ -491,7 +518,7 @@
             return $string;
         }
     }
-    
+
     /**
      * h函数用于过滤不安全的html标签，输出安全的html
      * @param string $text 待过滤的字符串
@@ -529,7 +556,7 @@
         }
         return $text;
     }
-    
+
     /**
      * 友好的时间显示
      *
@@ -599,7 +626,7 @@
             }
         }
     }
-    
+
 
     /**
      * 加密函数
@@ -655,7 +682,7 @@
         $tmp = substr_replace($tmp, $ch1, $knum % ++ $tmplen, 0);
         return $tmp;
     }
-    
+
     /**
      * 解密函数
      * @param string $txt  需要解密的字符串

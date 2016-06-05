@@ -1,0 +1,53 @@
+<!-- admin system menu edit -->
+<!-- stystem menu content -->
+<div class="row" style="width:850px;">
+    <div class="col-lg-12">
+        <div class="panel panel-default bootstrap-admin-no-table-panel">
+            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
+                <form class="form-horizontal" method="post" action="{:U('Admin/Electron/addupdata',array('type'=>'electron'))}" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="{$info['id']}" />
+                    <fieldset>
+                    	<div class="form-group">
+                            <label class="col-lg-2 control-label" for="disabledInput">元件类别</label>
+                            <div class="col-lg-3">
+                                <select class="form-control" name="elect_cate_id">
+                                    <volist name="cate" id="c">
+                                        <option value="{$c['id']}" <if condition="$info['elect_cate_id'] EQ $c['id']">selected</if>>{$c['name']}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="focusedInput">元件名称</label>
+                            <div class="col-lg-3">
+                                <input class="form-control" name="name" id="focusedInput" type="text" placeholder="元件名称" value="{$info['name']}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="focusedInput">型号</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" type="text" name="model" placeholder="" value="{$info['model']}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="focusedInput">封装</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" type="text" name="packaging" placeholder="SOT-230" value="{$info['packaging']}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label" for="focusedInput">值</label>
+                            <div class="col-lg-3">
+                                <input class="form-control" type="text" name="value" placeholder="10K" value="{$info['value']}">
+                            </div>
+                        </div>
+                        <div class="fr bntmr20">
+                        <button type="submit" class="btn btn-primary">确定</button>
+                        <button type="reset" class="btn btn-default" onclick="layer.close(0.3);">取消</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

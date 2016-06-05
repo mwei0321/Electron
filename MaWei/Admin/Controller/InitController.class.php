@@ -31,21 +31,24 @@
 	     * @date 2014-8-13 下午12:24:24
 	     */
 	    private function initMenu(){
-			$NavMenu = new \Library\AdminNaviMenu();
+			$AdminNavMenu = new \Library\AdminNaviMenu();
 
-			$a = $NavMenu->getAdminNaviMenu(['status'=>1]);
+			$naviMenu = $AdminNavMenu->getAdminNaviMenu(['status'=>1]);
+			$naviMenu = getTree($naviMenu);
+			$naviMenu = fieldtokey($naviMenu,'key');
+// 			var_dump($naviMenu);
 
-	        $NavMenu = array(
-	            'topmenu' => array(
-	                'System' => array('系统设置',U('Admin/System/index'))
-	            ),
-	            'leftmenu' => array(
-	                'System' => array(
-	                    array('系统设置',U('Admin/System/index'),'index'),
-	                    array('后台菜单设置',U('Admin/System/adminmenu'),'adminmenu'),
-	                )
-	            )
-	        );
-	        $this->assign('navMenu',$NavMenu);
+// 	        $NavMenu = array(
+// 	            'topmenu' => array(
+// 	                'System' => array('系统设置',U('Admin/System/index'))
+// 	            ),
+// 	            'leftmenu' => array(
+// 	                'System' => array(
+// 	                    array('系统设置',U('Admin/System/index'),'index'),
+// 	                    array('后台菜单设置',U('Admin/System/adminmenu'),'adminmenu'),
+// 	                )
+// 	            )
+// 	        );
+	        $this->assign('naviMenu',$naviMenu);
 	    }
 	}

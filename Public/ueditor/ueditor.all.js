@@ -11622,31 +11622,42 @@ UE.plugins['insertcode'] = function() {
         utils.cssRule('pre','pre{margin:.5em 0;padding:.4em .6em;border-radius:8px;background:#f8f8f8;}',
             me.document)
     });
+//    me.setOpt('insertcode',{
+//            'as3':'ActionScript3',
+//            'bash':'Bash/Shell',
+//            'cpp':'C/C++',
+//            'css':'Css',
+//            'cf':'CodeFunction',
+//            'c#':'C#',
+//            'delphi':'Delphi',
+//            'diff':'Diff',
+//            'erlang':'Erlang',
+//            'groovy':'Groovy',
+//            'html':'Html',
+//            'java':'Java',
+//            'jfx':'JavaFx',
+//            'js':'Javascript',
+//            'pl':'Perl',
+//            'php':'Php',
+//            'plain':'Plain Text',
+//            'ps':'PowerShell',
+//            'python':'Python',
+//            'ruby':'Ruby',
+//            'scala':'Scala',
+//            'sql':'Sql',
+//            'vb':'Vb',
+//            'xml':'Xml'
+//    });
     me.setOpt('insertcode',{
-            'as3':'ActionScript3',
+	        'php':'PHP',
+	        'python':'Python',
             'bash':'Bash/Shell',
-            'cpp':'C/C++',
-            'css':'Css',
-            'cf':'CodeFunction',
-            'c#':'C#',
-            'delphi':'Delphi',
-            'diff':'Diff',
-            'erlang':'Erlang',
-            'groovy':'Groovy',
-            'html':'Html',
-            'java':'Java',
-            'jfx':'JavaFx',
+            'c':'C/C++',
+            'css':'CSS',
             'js':'Javascript',
-            'pl':'Perl',
-            'php':'Php',
-            'plain':'Plain Text',
-            'ps':'PowerShell',
-            'python':'Python',
             'ruby':'Ruby',
-            'scala':'Scala',
-            'sql':'Sql',
-            'vb':'Vb',
-            'xml':'Xml'
+            'java':'Java',
+            'sql':'Sql'
     });
 
     /**
@@ -11679,7 +11690,7 @@ UE.plugins['insertcode'] = function() {
                 rng = me.selection.getRange(),
                 pre = domUtils.findParentByTagName(rng.startContainer,'pre',true);
             if(pre){
-                pre.className = 'brush:'+lang+';toolbar:false;';
+                pre.className = 'language-'+lang;
             }else{
                 var code = '';
                 if(rng.collapsed){
@@ -11759,7 +11770,7 @@ UE.plugins['insertcode'] = function() {
 
                     });
                 }
-                me.execCommand('inserthtml','<pre id="coder"class="brush:'+lang+';toolbar:false">'+code+'</pre>',true);
+                me.execCommand('inserthtml','<pre id="coder" class="language-'+lang+'">'+code+'</pre>',true);
 
                 pre = me.document.getElementById('coder');
                 domUtils.removeAttributes(pre,'id');

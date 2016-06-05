@@ -2,24 +2,24 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50709
+Source Server Version : 50617
 Source Host           : localhost:3306
-Source Database       : mw_electrical
+Source Database       : mw_electron
 
 Target Server Type    : MYSQL
-Target Server Version : 50709
+Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-06-02 18:58:27
+Date: 2016-06-05 22:13:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for admin_system_menu
+-- Table structure for admin_navigator_menu
 -- ----------------------------
-DROP TABLE IF EXISTS `admin_system_menu`;
-CREATE TABLE `admin_system_menu` (
+DROP TABLE IF EXISTS `admin_navigator_menu`;
+CREATE TABLE `admin_navigator_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL COMMENT '父级菜单',
   `name` varchar(20) DEFAULT NULL COMMENT '菜单名称',
@@ -30,7 +30,16 @@ CREATE TABLE `admin_system_menu` (
   `sort` tinyint(2) DEFAULT '1' COMMENT '菜单排序',
   `position` tinyint(20) DEFAULT NULL COMMENT '位置  顶部0　左则1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
+
+-- ----------------------------
+-- Records of admin_navigator_menu
+-- ----------------------------
+INSERT INTO `admin_navigator_menu` VALUES ('1', '0', '系统管理', 'System', 'index', 'Admin/System/index', '1', '90', '0');
+INSERT INTO `admin_navigator_menu` VALUES ('2', '1', '后台导航菜单', 'System', 'adminmenu', 'Admin/System/adminmenu', '1', '80', '1');
+INSERT INTO `admin_navigator_menu` VALUES ('11', '0', '元件管理', 'Electron', 'index', 'Admin/Electron/index', '1', '90', '0');
+INSERT INTO `admin_navigator_menu` VALUES ('12', '11', '元件列表', 'Electron', 'index', 'Admin/Electron/index', '1', '80', '1');
+INSERT INTO `admin_navigator_menu` VALUES ('13', '11', '元件分类', 'Electron', 'category', 'Admin/Electron/category', '1', '70', '1');
 
 -- ----------------------------
 -- Table structure for admin_user
@@ -47,6 +56,10 @@ CREATE TABLE `admin_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='后台用户';
 
 -- ----------------------------
+-- Records of admin_user
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for app
 -- ----------------------------
 DROP TABLE IF EXISTS `app`;
@@ -58,6 +71,10 @@ CREATE TABLE `app` (
   `app_entry` varchar(120) CHARACTER SET utf8 DEFAULT NULL COMMENT 'app入口，如 ‘Home/Index’',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of app
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for article
@@ -73,16 +90,19 @@ CREATE TABLE `article` (
   `author` int(11) NOT NULL COMMENT '作者ID',
   `hots` int(11) NOT NULL COMMENT '点击率',
   `keyword` varchar(100) DEFAULT NULL COMMENT '关键字',
-  `addtime` int(11) NOT NULL COMMENT '添加时间',
   `uptime` int(11) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 -- ----------------------------
--- Table structure for article_category
+-- Records of article
 -- ----------------------------
-DROP TABLE IF EXISTS `article_category`;
-CREATE TABLE `article_category` (
+
+-- ----------------------------
+-- Table structure for article_category_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `article_category_tag`;
+CREATE TABLE `article_category_tag` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父ID',
   `uid` int(11) NOT NULL COMMENT '用户ID',
@@ -93,6 +113,10 @@ CREATE TABLE `article_category` (
   `sort` tinyint(3) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='分类表';
+
+-- ----------------------------
+-- Records of article_category_tag
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for article_comment
@@ -112,6 +136,10 @@ CREATE TABLE `article_comment` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='评论、留言本';
 
 -- ----------------------------
+-- Records of article_comment
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for article_content
 -- ----------------------------
 DROP TABLE IF EXISTS `article_content`;
@@ -123,17 +151,27 @@ CREATE TABLE `article_content` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章内容';
 
 -- ----------------------------
+-- Records of article_content
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for electron_category
 -- ----------------------------
 DROP TABLE IF EXISTS `electron_category`;
 CREATE TABLE `electron_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT '0' COMMENT '元件父分类',
-  `name` char(10) CHARACTER SET latin1 DEFAULT NULL COMMENT '元件分类名',
-  `alias_name` char(20) DEFAULT NULL COMMENT '元件分类别名',
+  `name` char(10) DEFAULT NULL COMMENT '元件分类名',
+  `mark` char(10) DEFAULT NULL COMMENT '元件分类别名',
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 (1:有效，0:失效)',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='电子元件分类表';
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='电子元件分类表';
+
+-- ----------------------------
+-- Records of electron_category
+-- ----------------------------
+INSERT INTO `electron_category` VALUES ('1', '0', '电阻', 'R', '0');
+INSERT INTO `electron_category` VALUES ('2', '0', '电容', 'C', '0');
 
 -- ----------------------------
 -- Table structure for electron_componet
@@ -148,7 +186,13 @@ CREATE TABLE `electron_componet` (
   `value` char(20) DEFAULT NULL COMMENT '值',
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 (1:有效，0:失效)',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='电子元件表';
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='电子元件表';
+
+-- ----------------------------
+-- Records of electron_componet
+-- ----------------------------
+INSERT INTO `electron_componet` VALUES ('1', '1', 'aaa', 'aaaa', 'aaaa', 'aaa', '1');
+INSERT INTO `electron_componet` VALUES ('2', '1', '贴片电容', '0805', 'SOT－223', '107C', '1');
 
 -- ----------------------------
 -- Table structure for grade
@@ -165,6 +209,10 @@ CREATE TABLE `grade` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
+-- Records of grade
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for grade_type
 -- ----------------------------
 DROP TABLE IF EXISTS `grade_type`;
@@ -174,6 +222,10 @@ CREATE TABLE `grade_type` (
   `alias` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '别名(一般为英文）',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of grade_type
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for member
@@ -198,6 +250,10 @@ CREATE TABLE `member` (
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 -- ----------------------------
+-- Records of member
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for member_electron_order
 -- ----------------------------
 DROP TABLE IF EXISTS `member_electron_order`;
@@ -210,6 +266,10 @@ CREATE TABLE `member_electron_order` (
   `uptime` int(11) DEFAULT NULL COMMENT '订单时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员元件订单表';
+
+-- ----------------------------
+-- Records of member_electron_order
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for system_init_config
@@ -226,3 +286,7 @@ CREATE TABLE `system_init_config` (
   `model` varchar(15) DEFAULT NULL COMMENT '配置模块(全局配置　Public)',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='系统初始化配置';
+
+-- ----------------------------
+-- Records of system_init_config
+-- ----------------------------

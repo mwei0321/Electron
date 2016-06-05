@@ -15,12 +15,12 @@
 
     class AdminNaviMenu {
         //model objedt var
-        protected $navimenu;
+        protected $naviMenu;
         //var
         protected $menu;
 
         function __construct(){
-            $this->navimenu = M('AdminNavigatorMenu');
+            $this->naviMenu = M('AdminNavigatorMenu');
         }
 
         /**

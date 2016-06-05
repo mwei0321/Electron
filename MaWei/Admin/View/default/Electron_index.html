@@ -1,0 +1,94 @@
+<!-- include public templates -->
+<extend name="Public:Temp" />
+
+<!-- page title name -->
+<block name="PageName">
+	{$name[$tp]}中心
+</block>
+
+<!-- user list content -->
+<block name="content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="text-muted bootstrap-admin-box-title">
+						电子元件列表
+					</div>
+					<div class="clr"> </div>
+                    <if condition="$tp EQ 'cate'">
+                        <!--div class="seach_select">
+                            <form action="{:U('Admin/CateTag/index',array('type'=>'cate'))}" method="post">
+                                <input type="text" name="id" class="intext" value="{$seach['id']}" placeholder="分类ID"/>
+                                <input type="text" name="keyword" class="intext" value="{$seach['keyword']}" placeholder="用户名或邮箱"/>
+                                <input type="submit" class="btn btn-sm btn-primary" value="搜索"　/>
+                            </form>
+                        </div -->
+                        
+                    <elseif condition="$tp EQ 'tag'" />
+                        <div class="seach_select">
+                            <form action="{:U('Admin/CateTag/index',array('type'=>'tag'))}" method="post">
+                                <input type="text" name="id" class="intext" value="{$seach['id']}" placeholder="标签ID"/>
+                                <input type="text" name="keyword" class="intext" value="{$seach['keyword']}" placeholder="名称"/>
+                                <input type="submit" class="btn btn-sm btn-primary" value="搜索"　/>
+                            </form>
+                        </div>
+                        <div class="seach_select">
+                            <input type="button" onclick="layer.load('标签编辑','{:U('Admin/CateTag/edit',array('type'=>'tag'))}');" class="btn btn-sm btn-success opn"  value="添加标签"/>
+                        </div>
+                    </if>
+                    <div class="seach_select">
+                            <input type="button" onclick="layer.load('元件编辑','{:U('Admin/Electron/edit',array('type'=>'cate'))}');" class="btn btn-sm btn-success opn"  value="添加元件"/>
+                    </div>
+                    <div class="pull-right flpostion">
+                        <span class="badge">{$count}</span>
+                    </div>
+				</div>
+				<div class="bootstrap-admin-panel-content">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<!-- <th><input type="checkbox"  check='1' id="checkall"/> -->
+								<th>ID</th>
+								<th>元件名称</th>
+								<th>元件分类</th>
+								<th>型号</th>
+								<th>封装</th>
+								<th>值</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						    <volist name="list" id="u">
+    							<tr id="deleid_{$u['id']}">
+    								<!-- <td><input type="checkbox" name="ids[]" value="{$u['id']}" class="checkalls"/></td> -->
+    								<td>{$u['id']}</td>
+    								<td>{$u['name']}</td>
+    								<td>{$u['elect_cate_id']}</td>
+    								<td>{$u['model']}</td>
+    								<td>{$u['packaging']}</td>
+    								<td>{$u['value']}</td>
+    								<td class="bnt-pl3">
+    								    <a href="javascript:;" onclick="layer.load('电子元件编辑','{:U('Admin/Electron/edit',array('id'=>$u['id'],'type'=>'electron'))}')" ><i class="glyphicon glyphicon-pencil"></i></a>
+    								    <!-- set status -->
+    								    <a href="javascript:void(0);" url="{:U('Admin/CateTag/status',array('type'=>$tp))}" status="{$u['status']}" onclick="setstatus($(this),{$u['id']});">
+    								        <if condition="$u['status'] EQ 1">
+                                            <i class="glyphicon glyphicon-minus-sign" style="color:red;"></i>
+                                            <else />
+                                            <i class="glyphicon glyphicon-ok" style="color:green;"></i>
+                                            </if>
+    								    </a>
+    								    <!-- delete -->
+    								    <a href="javascript:void(0);" url="{:U('Admin/CateTag/delect',array('type'=>$type))}" title="删除" onclick="delall($(this),{$u['id']});"><i class="glyphicon glyphicon-trash"></i></a>
+    								</td>
+    							</tr>
+							</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- include public js-->
+</block>
+

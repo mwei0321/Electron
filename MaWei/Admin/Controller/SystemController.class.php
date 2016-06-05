@@ -15,10 +15,11 @@
 	use Admin\Controller\InitController;
 
 	class SystemController extends InitController{
-		protected $app;
+		protected $app,$System;
 		function _init(){
 			parent::_init();
 			$this->assign('position',array('顶部','左则'));
+			$this->System = new \Library\AdminNaviMenu();
 		}
 
 		function index(){
@@ -31,7 +32,7 @@
 		* @date 2014-10-5  上午10:53:46
 		*/
 		function adminmenu(){
-			$menu = $this->System->getAdminMenu();
+			$menu = $this->System->getAdminNaviMenu();
 			$this->assign('list',$menu);
 			$this->display();
 		}
@@ -51,7 +52,7 @@
 					if($id){
 						$info = $this->System->getMenuInfo($id);
 					}
-					$pmenu = $this->System->getAdminMenu(array('position'=>0,'status'=>1));
+					$pmenu = $this->System->getAdminNaviMenu(array('position'=>0,'status'=>1));
 					$template = 'menuedit';
 					$this->assign('pmenu',$pmenu);
 					break;
@@ -124,7 +125,7 @@
 					$data['action'] = text($_REQUEST['action']);
 					$data['url'] = $_REQUEST['url'];
 					$data['status'] = $_REQUEST['status'] ? intval($_REQUEST['status']) : 1;
-					$reid = addUpdata($data,'AdminSystemMenu');
+					$reid = addUpdata($data,'AdminNavigatorMenu');
 					$url = U('Admin/System/adminmenu');
 					S('Menu',null);
 					break;
