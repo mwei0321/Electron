@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-06-05 22:13:33
+Date: 2016-06-14 22:01:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `admin_navigator_menu` (
   `sort` tinyint(2) DEFAULT '1' COMMENT '菜单排序',
   `position` tinyint(20) DEFAULT NULL COMMENT '位置  顶部0　左则1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
 
 -- ----------------------------
 -- Records of admin_navigator_menu
@@ -40,6 +40,12 @@ INSERT INTO `admin_navigator_menu` VALUES ('2', '1', '后台导航菜单', 'Syst
 INSERT INTO `admin_navigator_menu` VALUES ('11', '0', '元件管理', 'Electron', 'index', 'Admin/Electron/index', '1', '90', '0');
 INSERT INTO `admin_navigator_menu` VALUES ('12', '11', '元件列表', 'Electron', 'index', 'Admin/Electron/index', '1', '80', '1');
 INSERT INTO `admin_navigator_menu` VALUES ('13', '11', '元件分类', 'Electron', 'category', 'Admin/Electron/category', '1', '70', '1');
+INSERT INTO `admin_navigator_menu` VALUES ('14', '0', '文章管理', 'Article', 'index', 'Admin/Article/index', '1', '90', '0');
+INSERT INTO `admin_navigator_menu` VALUES ('15', '14', '文章列表', 'Article', 'index', 'Admin/Article/index', '1', '80', '1');
+INSERT INTO `admin_navigator_menu` VALUES ('16', '14', '文章编辑', 'Article', 'edit', 'Admin/Article/edit', '1', '70', '1');
+INSERT INTO `admin_navigator_menu` VALUES ('17', '14', '文章分类标签', 'CateTag', 'index', 'Admin/CateTag/index', '1', '75', '1');
+INSERT INTO `admin_navigator_menu` VALUES ('18', '14', '文章分类编辑', 'CateTag', 'edit', 'Admin/CateTag/edit', '1', '65', '1');
+INSERT INTO `admin_navigator_menu` VALUES ('19', '14', '文章标签', 'CateTag', 'tagedit', 'Admin/CateTag/tagedit', '1', '60', '1');
 
 -- ----------------------------
 -- Table structure for admin_user
@@ -99,23 +105,21 @@ CREATE TABLE `article` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for article_category_tag
+-- Table structure for article_category
 -- ----------------------------
-DROP TABLE IF EXISTS `article_category_tag`;
-CREATE TABLE `article_category_tag` (
+DROP TABLE IF EXISTS `article_category`;
+CREATE TABLE `article_category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父ID',
-  `uid` int(11) NOT NULL COMMENT '用户ID',
   `name` varchar(30) NOT NULL COMMENT '分类名',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态（0 隐藏、1显示）',
-  `menu` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '菜单显示',
   `description` varchar(120) DEFAULT NULL COMMENT '描述',
   `sort` tinyint(3) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
 -- ----------------------------
--- Records of article_category_tag
+-- Records of article_category
 -- ----------------------------
 
 -- ----------------------------
@@ -152,6 +156,23 @@ CREATE TABLE `article_content` (
 
 -- ----------------------------
 -- Records of article_content
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for article_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `article_tag`;
+CREATE TABLE `article_tag` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cate_id` int(11) DEFAULT '0' COMMENT '分类ID',
+  `name` char(10) DEFAULT NULL COMMENT '标签名称',
+  `description` varchar(120) DEFAULT NULL COMMENT '描述',
+  `sort` tinyint(2) DEFAULT '100' COMMENT '排序',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章标签表';
+
+-- ----------------------------
+-- Records of article_tag
 -- ----------------------------
 
 -- ----------------------------

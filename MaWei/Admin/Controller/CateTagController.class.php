@@ -5,40 +5,45 @@
 	*  +----------------------------------------------------------------------------------------------+
 	*   | Author: ONLY <1123265518@qq.com>
 	*  +----------------------------------------------------------------------------------------------+
-	*   | Creater Time : 2014-5-23 	
+	*   | Creater Time : 2014-5-23
 	*  +----------------------------------------------------------------------------------------------+
-	*   | Link :		http://www.phpyrb.com	     
+	*   | Link :		http://www.phpyrb.com
 	*  +----------------------------------------------------------------------------------------------+
 	**/
 
 	namespace Admin\Controller;
-	use Admin\Controller\IniController;
-	use Pub\Page;
-		
-	class CateTagController extends IniController{
-		function _initialize(){
-			parent::_initialize();
-			import('Pub\Page');
-			$this->assign('view','catetag');
+	use Admin\Controller\InitController;
+	use Library\ArticleCateTag;
+
+	class CateTagController extends InitController{
+	    protected $artCateTag,$type;
+		function _init(){
+			parent::_init();
+            //定义标签，分类对象
+			$this->artCateTag = new ArticleCateTag();
+
+			//操作类型
+			$this->type = in_array($_REQUEST['type'],['cate','tag']) ? : '';
+			$this->assign('typedes',['cate'=>'分类','tag'=>'标签']);
+			$this->assign('type',$this->type);
 		}
-		
+
 		/**
 		* 分类列表
 		* @author MaWei (http://www.phpyrb.com)
 		* @date 2014-5-23  下午10:14:08
 		*/
 		function index(){
-// 			dump(S('CateList'));
-			$count = count(S('CateList'));
-// 			dump($count);exit;
-			$cpage = new Page($count, 25);
-			$cate = array_slice(S('CateList'), $cpage->firstRow,$cpage->listRows);
-			$this->assign('cate',$cate);
-			$this->assign('cpage',$cpage->show());
-			$this->assign('action','category');
+		    //分类列表
+		    $catelist = $this->artCateTag->getArtCateList();
+            //标签列表
+		    $taglist = $this->artCateTag->getArtTagList();
+
+            $this->assign('taglist',$taglist);
+			$this->assign('catelist',$catelist);
 			$this->display();
 		}
-		
+
 		/**
 		* 标签列表
 		* @author MaWei (http://www.phpyrb.com)
@@ -46,28 +51,31 @@
 		*/
 		function tags(){
 			$tagcount = count(S('Tags'));
-			$tpage = new Page($tagcount, 25);
 			$tags = array_slice(S('Tags'), $tpage->firstRow,$tpage->listRows);
 			$this->assign('tag',$tags);
 			$this->assign('tpage',$tpage->show());
 			$this->assign('action','tags');
 			$this->display();
 		}
-		
+
 		/**
 		* 标签、分类编辑
 		* @author MaWei (http://www.phpyrb.com)
 		* @date 2014-5-24  上午12:16:57
 		*/
 		function edit(){
-			$type = (!$_REQUEST['cateid'] && !$_REQUEST['tagid']) || $_REQUEST['cateid'] ? 'cate' : 'tags';
-			$this->assign('cateid',$_REQUEST['cateid']);
-			$this->assign('tagid',$_REQUEST['tagid']);
-			$this->assign('type',$type);
-			$this->assign('action','ctedit');
+		    $id = intval($_REQUEST['id']);
+		    if($id > 0){
+		        if($this->type == 'cate'){
+		            $info = $this->artCateTag->getArtCateInfo($id);
+		        }elseif($this->type == 'tag'){
+		            $info = $this->artCateTag->getArtTInfo($id);
+		        }
+                $this->assign('info',$info);
+		    }
 			$this->display();
 		}
-		
+
 		/**
 		* 分类、标签更新、添加到数据库
 		* @author MaWei (http://www.phpyrb.com)
@@ -97,7 +105,7 @@
 				$this->success('操作成功！',$url);
 			}
 		}
-		
+
 		/**
 		* 标签、分类删除
 		* @author MaWei (http://www.phpyrb.com)

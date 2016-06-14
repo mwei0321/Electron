@@ -7,7 +7,7 @@
 
 <!-- page title name -->
 <block name="PageName">
-	{$name[$tp]}中心
+	{$name[$type]}中心
 </block>
 
 <!-- user list content -->
@@ -17,10 +17,10 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="text-muted bootstrap-admin-box-title">
-						{$name[$tp]}列表
+						{$name[$type]}列表
 					</div>
 					<div class="clr"> </div>
-                    <if condition="$tp EQ 'cate'">
+                    <if condition="$type EQ 'cate'">
                         <!--div class="seach_select">
                             <form action="{:U('Admin/CateTag/index',array('type'=>'cate'))}" method="post">
                                 <input type="text" name="id" class="intext" value="{$seach['id']}" placeholder="分类ID"/>
@@ -31,7 +31,7 @@
                         <div class="seach_select">
                             <input type="button" onclick="layer.load('分类编辑','{:U('Admin/CateTag/edit',array('type'=>'cate'))}');" class="btn btn-sm btn-success opn"  value="添加分类"/>
                         </div>
-                    <elseif condition="$tp EQ 'tag'" />
+                    <elseif condition="$type EQ 'tag'" />
                         <div class="seach_select">
                             <form action="{:U('Admin/CateTag/index',array('type'=>'tag'))}" method="post">
                                 <input type="text" name="id" class="intext" value="{$seach['id']}" placeholder="标签ID"/>
@@ -53,12 +53,12 @@
 							<tr>
 								<!-- <th><input type="checkbox"  check='1' id="checkall"/> -->
 								<th>ID</th>
-								<if condition="$tp EQ 'cate'">
+								<if condition="$type EQ 'cate'">
 								    <th>Pid</th>
 								</if>
-								<th>{$name[$tp]}名称</th>
+								<th>{$typedes[$type]}名称</th>
 								<th>状态</th>
-								<if condition="$tp EQ 'cate'">
+								<if condition="$type EQ 'cate'">
 								<th>层级</th>
 								<th>推荐</th>
 								<th>图标</th>
@@ -71,7 +71,7 @@
     							<tr id="deleid_{$u['id']}">
     								<!-- <td><input type="checkbox" name="ids[]" value="{$u['id']}" class="checkalls"/></td> -->
     								<td>{$u['id']}</td>
-    								<if condition="$tp EQ 'cate'">
+    								<if condition="$type EQ 'cate'">
     								    <if condition="$u['pid'] EQ 0">
     								        <td>顶级分类</td>
     								    <else />
@@ -81,7 +81,7 @@
                                     </if>
     								<td>{$u['levelstr']}{$u['name']}</td>
     								<td class="upstat">{$status[$u['status']]}</td>
-    								<if condition="$tp EQ 'cate'">
+    								<if condition="$type EQ 'cate'">
         								<td>{$u['path']}</td>
         								<td class="recomm">{$recomm[$u['recommend']]}</td>
         								<td><i style="background-position:{$u['icon']};"></i></td>
@@ -99,7 +99,7 @@
                                             </a>
                                         </if>
     								    <!-- set status -->
-    								    <a href="javascript:void(0);" url="{:U('Admin/CateTag/status',array('type'=>$tp))}" status="{$u['status']}" onclick="setstatus($(this),{$u['id']});">
+    								    <a href="javascript:void(0);" url="{:U('Admin/CateTag/status',array('type'=>$type))}" status="{$u['status']}" onclick="setstatus($(this),{$u['id']});">
     								        <if condition="$u['status'] EQ 1">
                                             <i class="glyphicon glyphicon-minus-sign" style="color:red;"></i>
                                             <else />

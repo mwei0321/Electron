@@ -78,6 +78,28 @@
     }
 
     /**
+     *
+     * @param  array
+     * @param  string
+     * @return array
+     * @author MaWei (http://www.phpython.com)
+     * @date 2016年6月11日 下午8:25:22
+    */
+    function level($_menu,$_pid = 0,$_level=0){
+        static $leval = [];
+        foreach ($_menu as $k => $v){
+            if($v['pid'] == $_pid){
+                $leval[$k] = $v;
+                $leval[$k]['level'] = $_level;
+                $leval[$k]['str'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;|----', $_level);
+                unset($_menu[$k]);
+                level($_menu,$v['id'],$_level+1);
+            }
+        }
+        return $leval;
+    }
+
+    /**
      * 函数用于过滤标签，输出没有html的干净的文本
      * @param string text 文本内容
      * @return string 处理后内容

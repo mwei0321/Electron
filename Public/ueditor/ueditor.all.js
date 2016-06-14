@@ -11770,7 +11770,7 @@ UE.plugins['insertcode'] = function() {
 
                     });
                 }
-                me.execCommand('inserthtml','<pre id="coder" class="language-'+lang+'">'+code+'</pre>',true);
+                me.execCommand('inserthtml','<pre class="language-'+lang+'"><code class="language-'+lang+'">'+code+'</code></pre>',true);
 
                 pre = me.document.getElementById('coder');
                 domUtils.removeAttributes(pre,'id');
