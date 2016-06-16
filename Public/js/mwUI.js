@@ -28,25 +28,39 @@ var mwUI = {};
 			});
 			return toStr ? reIds.toString() : reIds; 
 		},
-	});
-})(jQuery,window,document);
-//ajax请求
-;(function ($,window,document){
-	$.fn.extend(mwUI,{
-		ReqAjax : function (Obj){
+		//表单为空检查
+		CheckNull: function (Obj){
+			var obj = Obj ? 1 : 12;
+		},
+		//ajax表单提交
+		AjaxForm : function (Obj){
+			//表单为空检查
+			var formObj = Obj.parents('form');
+			var nullstatus = 0;
+			formObj.find('.checknull').each(function () {
+//				console.log($(this).attr('name'));
+				if(! $(this).val()){
+					layer.error($(this).attr('emsg'));
+					nullstatus ++;
+					return false;
+				}
+			});
+			if (nullstatus > 0) return false;
+			var formVal = formObj.serialize();
 			var url = Obj.attr('url');
-			var data = Obj.attr('data');
-			if(url){
-				$.ajax({
-					type : 'POST',
-					url  : url,
-					data : data
-				}).done(function (msg) {
-					layer.msg(msg,msg);
-				});
-			}else{
-				layer.error('没有请求地址！');
-			}
+			$.ajax({
+				type : 'POST',
+				url  : url,
+				data : formVal,
+				dataType : 'JOSN'
+			}).done(function (e) {
+				if(e.reCode == 200){
+					layer.msgjump(e.msg,e.url);
+				}else{
+					layer.msg(e.msg);
+				}
+			});
 		},
 	});
 })(jQuery,window,document);
+

@@ -23,7 +23,7 @@
 			$this->artCateTag = new ArticleCateTag();
 
 			//操作类型
-			$this->type = in_array($_REQUEST['type'],['cate','tag']) ? : '';
+			$this->type = in_array($_REQUEST['type'],['cate','tag']) ? $_REQUEST['type'] : 'cate';
 			$this->assign('typedes',['cate'=>'分类','tag'=>'标签']);
 			$this->assign('type',$this->type);
 		}
@@ -41,20 +41,6 @@
 
             $this->assign('taglist',$taglist);
 			$this->assign('catelist',$catelist);
-			$this->display();
-		}
-
-		/**
-		* 标签列表
-		* @author MaWei (http://www.phpyrb.com)
-		* @date 2014-5-23  下午10:14:32
-		*/
-		function tags(){
-			$tagcount = count(S('Tags'));
-			$tags = array_slice(S('Tags'), $tpage->firstRow,$tpage->listRows);
-			$this->assign('tag',$tags);
-			$this->assign('tpage',$tpage->show());
-			$this->assign('action','tags');
 			$this->display();
 		}
 
@@ -81,29 +67,28 @@
 		* @author MaWei (http://www.phpyrb.com)
 		* @date 2014-5-24  上午1:20:10
 		*/
-		function add_updata(){
+		function addupdata(){
 			$data = array();
 			$data['name'] = $_REQUEST['name'];
-			$_REQUEST['type'] ? $data['pid'] = $_REQUEST['cate'] : $data['cateid'] = $_REQUEST['cid'];
-			$data['uid'] = $_SESSION['uid'];
-			$data['status'] = $_REQUEST['status'];
-			$data['menu'] = $_REQUEST['menu'];
-			$data['description'] = $_REQUEST['des'];
-			$_REQUEST['cateid'] || $_REQUEST['tagid'] ? ($_REQUEST['cateid'] ? $data['id'] = $_REQUEST['cateid'] : $data['id'] = $_REQUEST['tagid']) : FALSE;
-			$_REQUEST['type'] ? $data['sort'] = intval($_REQUEST['order']) : FALSE;
-			$model = $_REQUEST['type'] ? 'Category' : 'Tag';
-			$reid = S('Article')->add_updata($data,$model);
-			$url = $_REQUEST['type'] ? U('CateTag/index',array('delcache'=>1)) : U('CateTag/tags',array('delcache'=>1));
-// 			if($_REQUEST['type']){
-// 				$url = U('CateTag/index',array('delcache'=>1));
-// 			}else {
-// 				$url = U('CateTag/index',array('delcache'=>1));
-// 			}
-			if($reid === FALSE){
-				$this->error('操作失败！',$url);
-			}else {
-				$this->success('操作成功！',$url);
+			$data['status'] = intval($_REQUEST['status']);
+			$data['sort'] = intval($_REQUEST['sort']);
+			$data['description'] = text($_REQUEST['description']);
+			if($_REQUEST['type'] == 'cate'){
+				$data['pid'] = intval($_REQUEST['pid']);
+				$model = 'ArticleCategory';
+				$url = U('CateTag/index',array('delcache'=>1,'type'=>'cate'));
+			}elseif($_REQUEST['type'] == 'tag'){
+				$data['cateid'] = intval($_REQUEST['cateid']);
+				$model = 'ArticleTag';
+				$url = U('CateTag/index',array('delcache'=>1,'type'=>'tag'));
 			}
+			$reid = addUpdata($data, $model);
+
+			$rearray = [
+				'reCode' => 200,
+				'reUrl'  => $url,
+				'msg'	 => 'success!'
+			];
 		}
 
 		/**

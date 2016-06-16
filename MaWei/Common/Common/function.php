@@ -5,9 +5,9 @@
 	*  +----------------------------------------------------------------------------------------------+
 	*   | Author: ONLY <1123265518@qq.com>
 	*  +----------------------------------------------------------------------------------------------+
-	*   | Creater Time : 2014-4-24 	
+	*   | Creater Time : 2014-4-24
 	*  +----------------------------------------------------------------------------------------------+
-	*   | Link :		http://www.phpython.com	     
+	*   | Link :		http://www.phpython.com
 	*  +----------------------------------------------------------------------------------------------+
 	**/
 
@@ -16,7 +16,7 @@
      * @param  array $_data 数据
      * @param  string $_model 表名
      * @param  string|array $_upfiled 更新字段
-     * @return array 
+     * @return array
      * @author MaWei (http://www.phpython.com)
      * @date 2016年6月2日 下午6:48:11
      */
@@ -41,7 +41,7 @@
 //         echo $this->remind_M->getLastSql();
         return $reid;
     }
-    
+
     /**
      * 公共删除函数
      * @param  int | string $_ids
@@ -53,10 +53,10 @@
     function delall($_ids,$_model){
         $model = M("$_model");
         $reid = $model->delete($_ids);
-    
+
         return $reid;
     }
-    
+
     /**
      * 排序
      * @param array
@@ -84,7 +84,7 @@
             return 1;
         }
     }
-    
+
     /**
      * 修改状态
      * @param model $_model 表名
@@ -108,4 +108,21 @@
         $reid = $model->where($where)->setField('status',$_status);
         // 		echo $model->getlastsql();
         return $reid;
+    }
+
+	/**
+	 * json return
+	 * @param  array
+	 * @param  string
+	 * @return array
+	 * @author MaWei (http://www.phpython.com)
+	 * @date 2016年6月16日 上午10:50:21
+	*/
+    function jsonReturn($_reUrl = -1,$_reCode = 200,$_msg = 'opertion success!'){
+    	$reCode = $_reCode ? : 200;
+    	$_reUrl = $_reUrl ? : -1;
+		$_msg = $_msg ? :1;
+		$data = [
+			'reCode'	=>	$reCode,
+		];
     }
