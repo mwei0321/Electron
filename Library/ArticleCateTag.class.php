@@ -31,7 +31,6 @@
         function getArtCateList($_where = []){
             $list = $this->catetag->where($_where)->select();
             $list = level($list);
-//             var_dump($list);exit;
             return $list;
         }
 

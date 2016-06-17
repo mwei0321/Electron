@@ -39,8 +39,14 @@
             //标签列表
 		    $taglist = $this->artCateTag->getArtTagList();
 
+		    if($this->type == 'cate')
+		        $list = $catelist;
+		    else
+		        $list = $taglist;
+
             $this->assign('taglist',$taglist);
 			$this->assign('catelist',$catelist);
+			$this->assign('list',$list);
 			$this->display();
 		}
 
@@ -59,6 +65,9 @@
 		        }
                 $this->assign('info',$info);
 		    }
+
+		    $catelist = $this->artCateTag->getArtCateList();
+		    $this->assign('catelist',$catelist);
 			$this->display();
 		}
 
@@ -83,12 +92,13 @@
 				$url = U('CateTag/index',array('delcache'=>1,'type'=>'tag'));
 			}
 			$reid = addUpdata($data, $model);
-
+            //return
 			$rearray = [
 				'reCode' => 200,
-				'reUrl'  => $url,
-				'msg'	 => 'success!'
+				'msg'	 => 'success!',
+			    'emsg'   => 'error!'
 			];
+            echo json_encode($rearray);
 		}
 
 		/**

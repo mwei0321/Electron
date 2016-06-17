@@ -91,7 +91,7 @@
             if($v['pid'] == $_pid){
                 $leval[$k] = $v;
                 $leval[$k]['level'] = $_level;
-                $leval[$k]['str'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;|----', $_level);
+                $leval[$k]['levelstr'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;|----', $_level);
                 unset($_menu[$k]);
                 level($_menu,$v['id'],$_level+1);
             }

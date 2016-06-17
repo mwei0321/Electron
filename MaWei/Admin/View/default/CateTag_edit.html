@@ -14,7 +14,6 @@
 	                                <div class="col-lg-4">
 	                                    <select class="form-control checknull" name="pid" >
 	                                        <option value="0" <if condition="$info['pid'] EQ $c['id']">selected</if> >顶级分类</option>
-	                                        <option value="2" <if condition="$info['pid'] EQ $c['id']">selected</if> >顶级分类2</option>
 	                                    <volist name="catelist" id="c">
 	                                        <if condition="$c['level'] LT 1">
 	                                        <option value="{$c['id']}" <if condition="$info['pid'] EQ $c['id']">selected</if> >{$c['levelstr']}{$c['name']}</option>

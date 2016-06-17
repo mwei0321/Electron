@@ -40,8 +40,11 @@ var layer = {};
 			layer._center('#laymsgmw');
      		var setmsg = setTimeout(function() {
      			//消息关闭
-				$('#laymsgmw').fadeOut('1000', function() {
-					window.location.herf=url ? url :$(this).attr('jumpurl');
+				$('#laymsgmw').fadeOut('1300', function() {
+					if(url)
+						window.location.herf = url;
+					else
+						window.location.reload(true);
 				});
 			}, time * 1000);
 			return false;

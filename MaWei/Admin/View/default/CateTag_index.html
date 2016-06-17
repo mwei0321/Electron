@@ -17,17 +17,10 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<div class="text-muted bootstrap-admin-box-title">
-						{$name[$type]}列表
+						{$typedes[$type]}列表
 					</div>
 					<div class="clr"> </div>
                     <if condition="$type EQ 'cate'">
-                        <!--div class="seach_select">
-                            <form action="{:U('Admin/CateTag/index',array('type'=>'cate'))}" method="post">
-                                <input type="text" name="id" class="intext" value="{$seach['id']}" placeholder="分类ID"/>
-                                <input type="text" name="keyword" class="intext" value="{$seach['keyword']}" placeholder="用户名或邮箱"/>
-                                <input type="submit" class="btn btn-sm btn-primary" value="搜索"　/>
-                            </form>
-                        </div -->
                         <div class="seach_select">
                             <input type="button" onclick="layer.load('分类编辑','{:U('Admin/CateTag/edit',array('type'=>'cate'))}');" class="btn btn-sm btn-success opn"  value="添加分类"/>
                         </div>
@@ -53,16 +46,12 @@
 							<tr>
 								<!-- <th><input type="checkbox"  check='1' id="checkall"/> -->
 								<th>ID</th>
+								<th>{$typedes[$type]}名称</th>
 								<if condition="$type EQ 'cate'">
 								    <th>Pid</th>
 								</if>
-								<th>{$typedes[$type]}名称</th>
 								<th>状态</th>
-								<if condition="$type EQ 'cate'">
-								<th>层级</th>
-								<th>推荐</th>
-								<th>图标</th>
-								</if>
+								<th>描述</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -71,6 +60,7 @@
     							<tr id="deleid_{$u['id']}">
     								<!-- <td><input type="checkbox" name="ids[]" value="{$u['id']}" class="checkalls"/></td> -->
     								<td>{$u['id']}</td>
+    								<td>{$u['name']}</td>
     								<if condition="$type EQ 'cate'">
     								    <if condition="$u['pid'] EQ 0">
     								        <td>顶级分类</td>
@@ -79,16 +69,12 @@
     								    </if>
                                        
                                     </if>
-    								<td>{$u['levelstr']}{$u['name']}</td>
-    								<td class="upstat">{$status[$u['status']]}</td>
-    								<if condition="$type EQ 'cate'">
-        								<td>{$u['path']}</td>
-        								<td class="recomm">{$recomm[$u['recommend']]}</td>
-        								<td><i style="background-position:{$u['icon']};"></i></td>
-    								</if>
+    								<td>{$u['status']}</td>
+    								<td>{$u['description']}</td>
     								<td class="bnt-pl3">
-    								    <a href="javascript:;" onclick="layer.load('{$name[$type]}编辑','{:U('Admin/CateTag/edit',array('id'=>$u['id'],'type'=>$type))}')" ><i class="glyphicon glyphicon-pencil"></i></a>
+    								    <a href="javascript:;" onclick="layer.load('{$typedes[$type]}编辑','{:U('Admin/CateTag/edit',array('id'=>$u['id'],'type'=>$type))}')" ><i class="glyphicon glyphicon-pencil"></i></a>
                                         <!-- set recommend -->
+                                        <!-- 
                                         <if condition="$type EQ 'cate'">
                                             <a href="javascript:void(0);" url="{:U('Admin/CateTag/recommend')}" recomm="{$u['recommend']}" onclick="recommend($(this),{$u['id']});">
                                                 <if condition="$u['recommend'] EQ 1">
@@ -97,7 +83,7 @@
                                                     <i class="glyphicon glyphicon-flag" style="color:red;"></i>
                                                 </if>
                                             </a>
-                                        </if>
+                                        </if> -->
     								    <!-- set status -->
     								    <a href="javascript:void(0);" url="{:U('Admin/CateTag/status',array('type'=>$type))}" status="{$u['status']}" onclick="setstatus($(this),{$u['id']});">
     								        <if condition="$u['status'] EQ 1">

@@ -74,7 +74,7 @@
 			$_ids = intval($_REQUEST['ids']);
 			switch ($type) {
 				case 'menu' :
-					$reid = delall($_ids, 'AdminSystemMenu');
+					$reid = delall($_ids, 'AdminNavigatorMenu');
 					if($reid === false){
 						echo null;
 					}else{

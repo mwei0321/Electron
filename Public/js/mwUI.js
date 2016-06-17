@@ -38,7 +38,6 @@ var mwUI = {};
 			var formObj = Obj.parents('form');
 			var nullstatus = 0;
 			formObj.find('.checknull').each(function () {
-//				console.log($(this).attr('name'));
 				if(! $(this).val()){
 					layer.error($(this).attr('emsg'));
 					nullstatus ++;
@@ -46,18 +45,18 @@ var mwUI = {};
 				}
 			});
 			if (nullstatus > 0) return false;
-			var formVal = formObj.serialize();
+			var formVal = formObj.serializeArray();
 			var url = Obj.attr('url');
 			$.ajax({
 				type : 'POST',
 				url  : url,
 				data : formVal,
-				dataType : 'JOSN'
+				dataType : 'json'
 			}).done(function (e) {
 				if(e.reCode == 200){
-					layer.msgjump(e.msg,e.url);
+					layer.msgjump(e.msg,e.reUrl);
 				}else{
-					layer.msg(e.msg);
+					layer.msg(e.emsg);
 				}
 			});
 		},
