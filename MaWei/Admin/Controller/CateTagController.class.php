@@ -106,14 +106,10 @@
 		* @author MaWei (http://www.phpyrb.com)
 		* @date 2014-5-24  上午12:16:31
 		*/
-		function delart(){
-			$id = $_REQUEST['cateid'] ? $_REQUEST['cateid'] : $_REQUEST['tagid'];
-			$model = $_REQUEST['cateid'] ? M('Category') : M('Tag');
+		function delect(){
+			$id = $_REQUEST['ids'];
+			$model = $this->type == 'cate' ? M('ArticleCategory') : M('ArticleTag');
 			$reid = $model->delete($id);
-			if($reid === FALSE){
-				$this->error('删除失败！',U('CateTag/index'));
-			}else {
-				$this->success('删除成功！',U('CateTag/index',array('delcache'=>1)));
-			}
+			echo intval($reid);
 		}
 	}

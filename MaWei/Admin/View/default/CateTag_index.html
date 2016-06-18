@@ -44,7 +44,6 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<!-- <th><input type="checkbox"  check='1' id="checkall"/> -->
 								<th>ID</th>
 								<th>{$typedes[$type]}名称</th>
 								<if condition="$type EQ 'cate'">
@@ -58,7 +57,6 @@
 						<tbody>
 						    <volist name="list" id="u">
     							<tr id="deleid_{$u['id']}">
-    								<!-- <td><input type="checkbox" name="ids[]" value="{$u['id']}" class="checkalls"/></td> -->
     								<td>{$u['id']}</td>
     								<td>{$u['name']}</td>
     								<if condition="$type EQ 'cate'">
@@ -73,17 +71,6 @@
     								<td>{$u['description']}</td>
     								<td class="bnt-pl3">
     								    <a href="javascript:;" onclick="layer.load('{$typedes[$type]}编辑','{:U('Admin/CateTag/edit',array('id'=>$u['id'],'type'=>$type))}')" ><i class="glyphicon glyphicon-pencil"></i></a>
-                                        <!-- set recommend -->
-                                        <!-- 
-                                        <if condition="$type EQ 'cate'">
-                                            <a href="javascript:void(0);" url="{:U('Admin/CateTag/recommend')}" recomm="{$u['recommend']}" onclick="recommend($(this),{$u['id']});">
-                                                <if condition="$u['recommend'] EQ 1">
-                                                    <i class="glyphicon glyphicon-flag" style="color:green;"></i>
-                                                <else />
-                                                    <i class="glyphicon glyphicon-flag" style="color:red;"></i>
-                                                </if>
-                                            </a>
-                                        </if> -->
     								    <!-- set status -->
     								    <a href="javascript:void(0);" url="{:U('Admin/CateTag/status',array('type'=>$type))}" status="{$u['status']}" onclick="setstatus($(this),{$u['id']});">
     								        <if condition="$u['status'] EQ 1">
