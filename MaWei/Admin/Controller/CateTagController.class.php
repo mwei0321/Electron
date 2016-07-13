@@ -26,6 +26,7 @@
 			$this->type = in_array($_REQUEST['type'],['cate','tag']) ? $_REQUEST['type'] : 'cate';
 			$this->assign('typedes',['cate'=>'分类','tag'=>'标签']);
 			$this->assign('type',$this->type);
+
 		}
 
 		/**
@@ -44,7 +45,7 @@
 		    else
 		        $list = $taglist;
 
-            $this->assign('taglist',$taglist);
+		    $this->assign('taglist',$taglist);
 			$this->assign('catelist',$catelist);
 			$this->assign('list',$list);
 			$this->display();
@@ -61,9 +62,9 @@
 		        if($this->type == 'cate'){
 		            $info = $this->artCateTag->getArtCateInfo($id);
 		        }elseif($this->type == 'tag'){
-		            $info = $this->artCateTag->getArtTInfo($id);
+		            $info = $this->artCateTag->getArtTagInfo($id);
 		        }
-                $this->assign('info',$info);
+		        $this->assign('info',$info);
 		    }
 
 		    $catelist = $this->artCateTag->getArtCateList();
@@ -82,6 +83,8 @@
 			$data['status'] = intval($_REQUEST['status']);
 			$data['sort'] = intval($_REQUEST['sort']);
 			$data['description'] = text($_REQUEST['description']);
+			intval($_REQUEST['id']) && $data['id'] = intval($_REQUEST['id']);
+
 			if($_REQUEST['type'] == 'cate'){
 				$data['pid'] = intval($_REQUEST['pid']);
 				$model = 'ArticleCategory';
@@ -106,7 +109,7 @@
 		* @author MaWei (http://www.phpyrb.com)
 		* @date 2014-5-24  上午12:16:31
 		*/
-		function delect(){
+		function delete(){
 			$id = $_REQUEST['ids'];
 			$model = $this->type == 'cate' ? M('ArticleCategory') : M('ArticleTag');
 			$reid = $model->delete($id);

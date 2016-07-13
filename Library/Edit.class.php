@@ -5,43 +5,43 @@
 	*  +----------------------------------------------------------------------------------------------+
 	*   | Author: ONLY <1123265518@qq.com>
 	*  +----------------------------------------------------------------------------------------------+
-	*   | Creater Time : 2014-9-18 	
+	*   | Creater Time : 2014-9-18
 	*  +----------------------------------------------------------------------------------------------+
-	*   | Link :		http://www.phpyrb.com	     
+	*   | Link :		http://www.phpyrb.com
 	*  +----------------------------------------------------------------------------------------------+
 	**/
-	
+
 	namespace Library;
 
 	class Edit {
 
 		//public $uid;//要操作的用户id 如有登录需要则去掉注释
-		
+
 		private $output;//要输出的数据
-		
+
 		private $st;
-		
+
 		private $rootpath = '/Uploads';
-		
+
 		private $savepath = null;
-		
+
 		private $fileInfo = null;
-		
+
 		public function __construct($uid = ''){
 			//uid 为空则导入当前会话uid
 			//if(''===$uid) $this->uid = session('uid');
-		
+
 			//\Vin\FileStorage::connect(STORAGE_TYPE);
 			//导入设置
 			$CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents(CONF_PATH."editconfig.json")), true);
 
 			$action = htmlspecialchars($_GET['action']);
-		
+
 			switch($action){
 				case 'config':
 					$result = json_encode($CONFIG);
 					break;
-		
+
 				case 'uploadimage':
 					$config = array(
 					"pathFormat" => $CONFIG['imagePathFormat'],
@@ -51,7 +51,7 @@
 					$fieldName = $CONFIG['imageFieldName'];
 					$result = $this->uploadFile($config, $fieldName);
 					break;
-		
+
 				case 'uploadscrawl':
 					$config = array(
 					"pathFormat" => $CONFIG['scrawlPathFormat'],
@@ -62,7 +62,7 @@
 							$fieldName = $CONFIG['scrawlFieldName'];
 							$result=$this->uploadBase64($config,$fieldName);
 							break;
-		
+
 				case 'uploadvideo':
 					$config = array(
 					"pathFormat" => $CONFIG['videoPathFormat'],
@@ -72,7 +72,7 @@
 					$fieldName = $CONFIG['videoFieldName'];
 					$result=$this->uploadFile($config, $fieldName);
 					break;
-		
+
 				case 'uploadfile':
 					// default:
 					$config = array(
@@ -83,7 +83,7 @@
 					$fieldName = $CONFIG['fileFieldName'];
 					$result=$this->uploadFile($config, $fieldName);
 					break;
-		
+
 				case 'listfile':
 					$config=array(
 					'allowFiles' => $CONFIG['fileManagerAllowFiles'],
@@ -92,7 +92,7 @@
 					);
 					$result = $this->listFile($config);
 					break;
-		
+
 				case 'listimage':
 					$config=array(
 					'allowFiles' => $CONFIG['imageManagerAllowFiles'],
@@ -101,7 +101,7 @@
 					);
 					$result = $this->listFile($config);
 					break;
-						
+
 				case 'catchimage':
 					$config = array(
 					"pathFormat" => $CONFIG['catcherPathFormat'],
@@ -112,15 +112,15 @@
 							$fieldName = $CONFIG['catcherFieldName'];
 							$result = $this->saveRemote($config , $fieldName);
 							break;
-		
+
 				default:
 					$result = json_encode(array(
 					'state'=> 'wrong require'
 							));
 							break;
-								
+
 			}
-		
+
 			if (isset($_GET["callback"])) {
 				if (preg_match("/^[\w_]+$/", $_GET["callback"])) {
 					$this->output = htmlspecialchars($_GET["callback"]) . '(' . $result . ')';
@@ -133,8 +133,8 @@
 				$this->output = $result;
 			}
 		}
-		
-		
+
+
 		/**
 		 *
 		 * 输出结果
@@ -144,7 +144,7 @@
 		public function output(){
 			return $this->output;
 		}
-		
+
 		/**
 		 * 上传文件方法
 		 *
@@ -172,16 +172,16 @@
 						'original'=>$info['name'],
 						'type'=>'.' . $info['extension'],
 						'size'=>$info['size'],
-						'sourcid' => $this->inputAttch($info)
+// 						'sourcid' => $this->inputAttch($info)
  				);
 			}
 			return json_encode($data);
 		}
-		
+
 		/**
 		* 把文件插入数据库
 		* @param  array $_file
-		* @return int　$reid 
+		* @return int　$reid
 		* @author MaWei (http://www.phpyrb.com)
 		* @date 2014-9-21  下午11:35:14
 		*/
@@ -191,32 +191,32 @@
 			$data['size'] = $_file['size'];
 			$data['path'] = $_file['savepath'].$_file['savename'];
 			$data['hash'] = $_file['hash'];
-			$reid = add_updata($data,'SourcAttach');
+			$reid = addupdata($data,'SourcAttach');
 			return $reid;
 		}
-		
+
 		/**
 		 *
 		 * Enter description here ...
 		 */
 		private function uploadBase64($config,$fieldName){
 			$data = array();
-		
+
 			$base64Data = $_POST[$fieldName];
 			$img = base64_decode($base64Data);
 			$path = $this->getFullPath($config['pathFormat']);
-		
+
 			if(strlen($img)>$config['maxSize']){
 				$data['states'] = 'too large';
 				return json_encode($data);
 			}
-		
+
 			$rootpath = $this->rootpath;
-		
+
 			//替换随机字符串
 			$imgname = uniqid().'.png';
 			$filename = $path.$imgname;
-		
+
 			if(\Vin\FileStorage::put($rootpath,$filename,$img)){
 				$data=array(
 						'state'=>'SUCCESS',
@@ -225,7 +225,7 @@
 						'original'=>'scrawl.png',
 						'type'=>'.png',
 						'size'=>strlen($img),
-						 
+
 				);
 			}else{
 				$data=array(
@@ -234,7 +234,7 @@
 			}
 			return json_encode($data);
 		}
-		
+
 		/**
 		 * 列出文件夹下所有文件，如果是目录则向下
 		 */
@@ -243,9 +243,9 @@
 			$size = isset($_GET['size']) ? htmlspecialchars($_GET['size']) : $config['listSize'];
 			$start = isset($_GET['start']) ? htmlspecialchars($_GET['start']) : 0;
 			$end = $start + $size;
-		
+
 			$rootpath = $this->rootpath;
-		
+
 			$path = $config['path'];
 			$files = \Vin\FileStorage::listFile($rootpath,$path, $allowFiles);
 			//return $files;
@@ -257,7 +257,7 @@
 						"total" => count($files)
 				));
 			}
-		
+
 			/* 获取指定范围的列表 */
 			$len = count($files);
 			for ($i = min($end, $len) - 1, $list = array(); $i < $len && $i >= 0 && $i >= $start; $i--){
@@ -267,7 +267,7 @@
 			//for ($i = $end, $list = array(); $i < $len && $i < $end; $i++){
 			//    $list[] = $files[$i];
 			//}
-		
+
 			/* 返回数据 */
 			$result = json_encode(array(
 					"state" => "SUCCESS",
@@ -275,10 +275,10 @@
 					"start" => $start,
 					"total" => count($files)
 			));
-		
+
 			return $result;
 		}
-		
+
 		/**
 		 *
 		 * Enter description here ...
@@ -292,10 +292,10 @@
 			}
 			foreach ($source as $imgUrl) {
 				$upload = new \Think\Upload();
-		
+
 				$imgUrl = htmlspecialchars($imgUrl);
 				$imgUrl = str_replace("&amp;", "&", $imgUrl);
-		
+
 				//http开头验证
 				if (strpos($imgUrl, "http") !== 0) {
 					$data = array('state'=>'不是http链接');
@@ -307,7 +307,7 @@
 					$data = array("state"=>"错误文件格式");
 					return json_encode($data);
 				}
-				 
+
 				//打开输出缓冲区并获取远程图片
 				ob_start();
 				$context = stream_context_create(
@@ -319,20 +319,20 @@
 				$img = ob_get_contents();
 				ob_end_clean();
 				preg_match("/[\/]([^\/]*)[\.]?[^\.\/]*$/", $imgUrl, $m);
-				 
+
 				$path = $this->getFullPath($config['pathFormat']);
 				if(strlen($img)>$config['maxSize']){
 					$data['states'] = 'too large';
 					return json_encode($data);
 				}
-				 
+
 				$rootpath = $this->rootpath;
-				 
+
 				$imgname = uniqid().'.png';
 				$filename = $path.$imgname;
-				 
+
 				$oriName = $m ? $m[1]:"";
-		
+
 				if(\Vin\FileStorage::put($rootpath,$filename,$img)){
 					array_push($list, array(
 					"state" => 'SUCCESS',
@@ -346,14 +346,14 @@
 					array_push($list,array('state'=>'文件写入失败'));
 				}
 			}
-		
+
 			/* 返回抓取数据 */
 			return json_encode(array(
 					'state'=> count($list) ? 'SUCCESS':'ERROR',
 					'list'=> $list
 			));
 		}
-		
+
 		/**
 		 * 规则替换命名文件
 		 * @param $path
@@ -374,7 +374,7 @@
 	        $format = str_replace("{time}", $t, $format);
 	        return $format;
 	    }
-	    
+
 	    /**
 	     * 获取文件扩展名
 	     * @return string
@@ -382,7 +382,7 @@
 	    private function getFileExt(){
 	    	return strtolower(strrchr($this->oriName, '.'));
 	    }
-		
+
 		private function format_exts($exts){
 			$data=array();
 			foreach ($exts as $key => $value) {
@@ -390,5 +390,5 @@
 			}
 			return $data;
 		}
-		
+
 	}

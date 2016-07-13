@@ -11,18 +11,19 @@ var layer = {};
 	// //浏览器高度
 	var SreenH = $(window).height();
 	 //alert(SreenH +'=>'+SreenW);
-	//初始化配置
-	var Options = {
-		bgOpacity : '0.8',
-		bgColor : '#9f9f9f',
-		EditW : 400,
-		EditH : 600,
-		ThumbW : 100,
-		ThumbH : 100,
-	}
 	
 	$.fn.extend(layer, {
 		status : 0,
+		//初始化配置
+		Options : {
+			bgOpacity : '0.8',
+			bgColor : '#9f9f9f',
+			EditW : 400,
+			EditH : 600,
+			ThumbW : 100,
+			ThumbH : 100,
+			top		: 0
+		},
 		
 		box : function(title,html) {
 			layer._html(html,title);
@@ -68,7 +69,8 @@ var layer = {};
 			}
 		},
 		//可以url加载
-		load : function (title,url,parem){
+		load : function (title,url,parem,_top){
+			layer.Options.top = _top;
 			layer._load(url,title,parem);
 		},
 		//关闭窗口
@@ -150,7 +152,8 @@ var layer = {};
 			var oboxh = $(boxid).height();
 			var oboxl = $(boxid).css({
 				'left' : ($(window).width() - oboxw) / 2 + 'px',
-				'top' : (($(window).height() - oboxh) / 2 - 50) + 'px',
+//				'top' : (($(window).height() - oboxh) / 2 - 50) + 'px',
+				'top' : layer.Options.top > 1 ? (layer.Options.top+'px') : '100px',
 			}).fadeTo('slow',0.99);
 		},
 		_iframe : function (){
@@ -168,7 +171,7 @@ var layer = {};
 	     	});
 		},
 		_style : function (){
-			var style = '<style>#mwbg,#msgbgw{display:block;position:fixed;z-index:900;opacity: 0.8;filter:Alpha(Opacity=90);postion:fixed;background:' + Options.bgColor + ';top:0;left:0;width:100%;height:100%;}' + 
+			var style = '<style>#mwbg,#msgbgw{display:block;position:fixed;z-index:900;opacity: 0.8;filter:Alpha(Opacity=90);postion:fixed;background:' + layer.Options.bgColor + ';top:0;left:0;width:100%;height:100%;}' + 
 			'#outsidebox,#laymsgmw{border:3px solid #666;box-shadow:0 0 8px #333;background:#fff;border-radius:10px;z-index:910;position:fixed;padding:10px;display:none;} #outsidebox h3{height:35px;line-height:35px;border-bottom:1px solid #ccc;background:#efefef;}' +
 			 '#laymsgmw .error{color:red;font-size:14px;} #laymsgmw .success{color:green;font-size:14px;} ' + '#outsidebox .clr{clear:both;padding:0;margin:0;}' + 
 			 '#outsidebox #box_content{padding:0 10px;max-height:650px;overflow:hidden;overflow-y:auto;}'+

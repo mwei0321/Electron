@@ -28,9 +28,32 @@ var mwUI = {};
 			});
 			return toStr ? reIds.toString() : reIds; 
 		},
+		
+		/**
+		 * 下拉菜单
+		 * @parem obj 要下拉的菜单对象
+		 * @parem type ul|dl 下拉菜单的所有的标签
+		 * @parem addclass 添加的样式
+		 * @parem atag 添加样式的标签
+		 */
+		slideMenu : function (obj,type,addclass,atag){
+			var tag = type == 'ul' ? 'li' : 'dd';
+			var objlist = $(obj).children(tag);
+			objlist.click(function () {
+				objlist.children(type).slideUp(100);
+				$(this).children(type).slideDown(500);
+				if(atag){
+					objlist.children(atag).removeClass(addclass);
+					$(this).children(atag).addClass(addclass);
+				}else{
+					objlist.removeClass(addclass);
+					$(this).addClass(addclass);
+				}
+			});
+		},
 		//表单为空检查
 		CheckNull: function (Obj){
-			var obj = Obj ? 1 : 12;
+			var a = 0;
 		},
 		//ajax表单提交
 		AjaxForm : function (Obj){

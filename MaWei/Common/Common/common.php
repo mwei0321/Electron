@@ -24,7 +24,7 @@
     function arr2to1($_data,$_key = 'id',$_unique = true){
         $onearray = array();
         foreach ($_data as $k => $v){
-            $onearray[] = $v["$_key"];
+            $v["$_key"] && $onearray[] = $v["$_key"];
         }
         return $_unique ? array_unique($onearray) : $onearray;
     }
@@ -58,9 +58,9 @@
      * @author MaWei (http://www.phpyrb.com)
      * @date 2014-10-18  上午11:05:59
      */
-    function getTree($_list,$_level = 2){
+    function getTree($_list,$_level = 2,$_childrenkey = 'id'){
         $pid = $pid2 = null;
-        $tree = array();
+        $tree = [];
         foreach ($_list as $k => $v){
             if($v['pid'] == 0){
                 $pid = $k;
@@ -68,9 +68,11 @@
             }else{
                 if($_level == 2 || $v['level'] == 1){
                     $tree[$pid]['children'][$k] = $v;
+                    $tree[$pid]['childrenkey'][] = $v[$_childrenkey];
                     $pid2 = $v['pid'];
                 }elseif($_level == 3 || $v['level'] > 1){
                     $tree[$pid]['children'][$pid2][$k] = $v;
+                    $tree[$pid]['childrenkey'][] = $v[$_childrenkey];
                 }
             }
         }
@@ -89,9 +91,9 @@
         static $leval = [];
         foreach ($_menu as $k => $v){
             if($v['pid'] == $_pid){
-                $leval[$k] = $v;
-                $leval[$k]['level'] = $_level;
-                $leval[$k]['levelstr'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;|----', $_level);
+                $leval[$v['id']] = $v;
+                $leval[$v['id']]['level'] = $_level;
+                $leval[$v['id']]['levelstr'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;|----', $_level);
                 unset($_menu[$k]);
                 level($_menu,$v['id'],$_level+1);
             }
@@ -329,8 +331,9 @@
 
     /**
      * 字符串剪切
-     * @param array
-     * @param string
+     * @param string $str
+     * @param int $length
+     * @param string $ext
      * @return array
      * @author MaWei (http://www.phpyrb.com)
      * @date 2014-11-20 下午4:32:24

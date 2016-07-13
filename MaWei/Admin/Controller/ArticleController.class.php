@@ -14,12 +14,21 @@
     namespace Admin\Controller;
     use Admin\Controller\InitController;
     use Vendor\Page;
+    use Library\Article;
+    use Library\ArticleCateTag;
+    use Library\Edit;
 
     class ArticleController extends InitController{
-        protected $Article,$categorys,$tags;
-        function _initialize(){
-            parent::_initialize();
-            $this->assign('view','article');
+        private $Article,$ArtCateTag;
+        private $pagenum = 20;
+
+        function _init(){
+            parent::_init();
+            $this->Article = new Article();
+            $this->ArtCateTag = new ArticleCateTag();
+
+            //页面条数
+            intval($_REQUEST['pn']) && $this->pagenum = intval($_REQUEST['pn']);
         }
 
         /**
@@ -28,22 +37,23 @@
          * @date 2014-5-23  上午12:02:49
          */
         function index(){
-            $artcount = $this->Article->count();
-            $tags = $this->Article->tags();
-            $page = new Page($artcount,30);
-            $limit = "$page->firstRow,$page->listRows";
-            $artlist = $this->Article->artlist($limit);
-            foreach ($artlist as $k => $v){
-                $str = '';
-                foreach ($v['tags'] as $key => $val){
-                    $str .= $tags["$val"]['name'].'  ';
-                }
-                $artlist[$k]['tagname'] = $str;
-            }
-            $artshow = $page->show();
-            $this->assign('page',$artshow);
-            $this->assign('artlist',$artlist);
-            $this->assign('action','aindex');
+            $where = [];
+
+            //文章列表
+            $count = $this->Article->getArtList($where);
+            $page = new Page($count, $this->pagenum);
+            $list = $this->Article->getArtList($where,"$page->firstRow,$page->listRows");
+
+            //文章标签
+            $tag = $this->ArtCateTag->getArtTagList();
+            //文章分类
+            $cate = $this->ArtCateTag->getArtCateList();
+//             var_dump($cate);
+
+            $this->assign('list',$list);
+            $this->assign('catelist',$cate);
+            $this->assign('taglist',$tag);
+            $this->assign('page',$page->show());
             $this->display();
         }
 
@@ -54,21 +64,35 @@
          */
         function edit(){
             if($_REQUEST['artid']){
-                $artinfo = $this->Article->artinfo($_REQUEST['artid']);
-                // 				dump($artinfo);exit;
-                $this->assign('artinfo',$artinfo);
+                $artinfo = $this->Article->getArtInfo($_REQUEST['artid']);
+// 				dump($artinfo);exit;
+                $this->assign('info',$artinfo);
             }
-            $this->assign('action','aedit');
+
+            //文章分类
+            $catelist = $this->ArtCateTag->getArtCateList();
+
+            $this->assign('catelist',$catelist);
             $this->display();
         }
 
+        /**
+         * 编辑器
+         * @return array
+         * @author MaWei (http://www.phpyrb.com)
+         * @date 2014-9-22  下午11:11:05
+         */
+        function editer(){
+            $editer = new Edit();
+            echo $editer->output();
+        }
 
         /**
          * 文章添加修改入数据库
          * @author MaWei (http://www.phpyrb.com)
          * @date 2014-5-23  上午12:01:56
          */
-        function add_updata(){
+        function addupdata(){
             $data = array();
             $temp = array();
             $_REQUEST['artid'] ? $data['id'] = $_REQUEST['artid'] : FALSE;

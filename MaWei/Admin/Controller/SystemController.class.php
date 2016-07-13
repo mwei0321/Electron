@@ -18,7 +18,8 @@
 		protected $app,$System;
 		function _init(){
 			parent::_init();
-			$this->assign('position',array('顶部','左则'));
+
+			$this->assign('position',['顶级','二级']);
 			$this->System = new \Library\AdminNaviMenu();
 		}
 
@@ -31,7 +32,7 @@
 		* @author MaWei (http://www.phpyrb.com)
 		* @date 2014-10-5  上午10:53:46
 		*/
-		function adminmenu(){
+		function menu(){
 			$menu = $this->System->getAdminNaviMenu();
 			$this->assign('list',$menu);
 			$this->display();
@@ -52,7 +53,7 @@
 					if($id){
 						$info = $this->System->getMenuInfo($id);
 					}
-					$pmenu = $this->System->getAdminNaviMenu(array('position'=>0,'status'=>1));
+					$pmenu = $this->System->getAdminNaviMenu(['position'=>0,'status'=>1]);
 					$template = 'menuedit';
 					$this->assign('pmenu',$pmenu);
 					break;

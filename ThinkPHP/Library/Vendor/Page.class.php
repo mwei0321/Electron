@@ -5,9 +5,9 @@
 *  +----------------------------------------------------------------------------------------------+
 *   | Author: ONLY <491518132@qq.com>
 *	+----------------------------------------------------------------------------------------------+
-*   | Creater Time : 2014-1-17 	
+*   | Creater Time : 2014-1-17
 *  +----------------------------------------------------------------------------------------------+
-*   | Link :		http://www.phpyrb.com	     
+*   | Link :		http://www.phpyrb.com
 *  +----------------------------------------------------------------------------------------------+
 **/
 namespace Vendor;
@@ -30,12 +30,18 @@ class Page{
 
 	// 分页显示定制
 	private $config  = array(
-			'header' => '<a class="textpage" href="javascript:void(0);">%TOTAL_ROW% 条</a>',
-			'prev'   => '上一页',
-			'next'   => '下一页',
-			'first'  => '1...',
-			'last'   => '...%TOTAL_PAGE%',
-			'theme'  => '%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% <a href="javascript:void(0);">%NOW_PAGE%/%TOTAL_PAGE%页</a>',
+// 			'header' => '<a class="textpage" href="javascript:void(0);">%TOTAL_ROW% 条</a>',
+// 			'prev'   => '上一页',
+// 			'next'   => '下一页',
+// 			'first'  => '1...',
+// 			'last'   => '...%TOTAL_PAGE%',
+// 			'theme'  => '%HEADER% %FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% <a href="javascript:void(0);">%NOW_PAGE%/%TOTAL_PAGE%页</a>',
+			'header' => '<a class="textpage" href="javascript:void(0);">%TOTAL_ROW%</a>',
+			'prev'   => '<<',
+			'next'   => '>>',
+			'first'  => '1',
+			'last'   => '%TOTAL_PAGE%',
+			'theme'  => '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% <a href="javascript:void(0);">%NOW_PAGE%/%TOTAL_PAGE%</a>%HEADER%',
 // 			'theme'  => '%HEADER% %UP_PAGE% %FIRST% %LINK_PAGE% %END% %DOWN_PAGE% <a href="javascript:void(0);">%NOW_PAGE%/%TOTAL_PAGE%页</a>',
 // 			'theme'  => '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% ',
 	);
@@ -59,7 +65,7 @@ class Page{
 		//ajax分页配置
 		$this->ajax       = $_ajax['ajax'];
 		$_ajax['repid']   && $this->repid = $_ajax['repid'];
-		
+
 		/* 生成URL */
 		!$_ajax['ajax'] && $this->parameter[$this->p] = 'PAGE';
 		$this->url = $_ajax['url'] ? $_ajax['url'] : U(ACTION_NAME,$this->parameter);
@@ -87,7 +93,7 @@ class Page{
 		}else{
 			return str_replace('PAGE', $page, $this->url);
 		}
-		
+
 	}
 
 	/**
@@ -110,14 +116,14 @@ class Page{
 		$now_cool_page      = $this->rollPage/2;
 		$now_cool_page_ceil = ceil($now_cool_page);
 		$this->lastSuffix && $this->config['last'] = $this->totalPages;
-		
+
 		//上一页
 		$up_row  = $this->nowPage - 1;
-		$up_page = $up_row > 0 ? '<a href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a>' : '';
-		
+		$up_page = $up_row > 0 ? '<a class="prev" href="' . $this->url($up_row) . '">' . $this->config['prev'] . '</a>' : '';
+
 		//下一页
 		$down_row  = $this->nowPage + 1;
-		$down_page = ($down_row <= $this->totalPages) ? '<a href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a>' : '';
+		$down_page = ($down_row <= $this->totalPages) ? '<a class="next" href="' . $this->url($down_row) . '">' . $this->config['next'] . '</a>' : '';
 
 		//第一页
 		$the_first = '';

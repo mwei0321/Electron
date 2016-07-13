@@ -17,14 +17,14 @@
                     </div>
                     <div class="clr"> </div>
                     <div class="seach_select">
-                        <form action="{:U('Admin/Sourc/index')}" method="post">
+                        <form action="{:U('Admin/Article/index')}" method="post">
                             <input type="text" name="id" class="intext" value="{$seach['uid']}" placeholder="用户ID"/>
                             <input type="text" name="keyword" class="intext" value="{$seach['keyword']}" placeholder="用户名或邮箱"/>
                             <input type="submit" class="btn btn-sm btn-primary" value="搜索"　/>
                         </form>
                     </div>
                     <div class="seach_select">
-                        <a href="{:U('Admin/Book/edit')}" class="btn btn-sm btn-success opn">小说编辑</a>
+                        <a href="{:U('Admin/Article/edit')}" class="btn btn-sm btn-success opn">小说编辑</a>
                         <input type="button" url="{:U('Admin/Sourc/delete')}" class="btn btn-sm btn-primary" value="批量删除" onclick="delall($(this))"　/>
                     </div>
                     <div class="pull-right flpostion">
@@ -62,17 +62,9 @@
                                     <td class="recomm">{$recomm[$v['recommend']]}</td>
                                     <td>{$v['uptime']|date="Y-m-d H:m:s",###}</td>
                                     <td class="bnt-pl3">
-                                        <a href="{:U('Admin/Book/edit',array('id'=>$v['id']))}" ><i class="glyphicon glyphicon-pencil"></i></a>
-                                        <!-- set recommend -->
-                                        <a href="javascript:void(0);" url="{:U('Admin/Book/recommend',array('id'=>$v['id']))}" recomm="{$v['recommend']}" onclick="recommend($(this));" title="设置推荐">
-                                            <if condition="$v['recommend'] EQ 1">
-                                                <i class="glyphicon glyphicon-flag" style="color:green;"></i>
-                                            <else />
-                                                <i class="glyphicon glyphicon-flag" style="color:red;"></i>
-                                            </if>
-                                        </a>
+                                        <a href="{:U('Admin/Article/edit',array('id'=>$v['id']))}" ><i class="glyphicon glyphicon-pencil"></i></a>
                                         <!-- set status -->
-                                        <a href="javascript:void(0);" url="{:U('Admin/Book/status')}" style="color:red;" status="{$v['status']}" onclick="setstatus($(this),{$v['id']});" title="设置状态">
+                                        <a href="javascript:void(0);" url="{:U('Admin/Article/status')}" style="color:red;" status="{$v['status']}" onclick="setstatus($(this),{$v['id']});" title="设置状态">
                                             <if condition="$v['status'] EQ 1">
                                                 <i class="glyphicon glyphicon-minus-sign" style="color:red;"></i>
                                             <else />
@@ -80,8 +72,7 @@
                                             </if>
                                         </a>
                                         <!-- delete -->
-                                        <a href="javascript:void(0);" url="{:U('Admin/Book/delete')}" onclick="delall($(this),{$v['id']});" title="删除小说"><i style="color:#b00;"  class="glyphicon glyphicon-trash"></i></a>
-                                        <a href="{:U('Admin/Book/chapter',array('bookid'=>$v['id'],'name'=>$v['name']))}" title="章节列表"><i style="color:#b00;"  class="glyphicon glyphicon-trash"></i></a>
+                                        <a href="javascript:void(0);" url="{:U('Admin/Article/delete')}" onclick="delall($(this),{$v['id']});" title="删除小说"><i style="color:#b00;"  class="glyphicon glyphicon-trash"></i></a>
                                     </td>
                                 </tr>
                             </volist>

@@ -1,16 +1,6 @@
 <!-- admin system menu edit -->
 <extend name="Public:Temp" />
-<!-- admin system menu edit -->
-<block name="PageName">资源编辑</block>
-<!-- leftmenu -->
-<block name="leftmenu">
-    <li class='<if condition="ACTION_NAME EQ 'index'"> active </if>'>
-        <a href="{:U('Admin/Book/index')}">小说列表</a>
-    </li>
-    <li class='<if condition="ACTION_NAME EQ 'edit'"> active </if>'>
-        <a href="{:U('Admin/Book/edit')}">小说编辑</a>
-    </li>  
-</block>
+
 <block name="js">
 	<script type="text/javascript" charset="utf-8" src="/Public/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="/Public/ueditor/ueditor.all.js"> </script>
@@ -20,7 +10,7 @@
 	    // var ue = UE.getEditor('editor');
 	    $(function(){
 	        var ue = UE.getEditor('editor',{
-	            serverUrl :'{:U("Admin/Book/editer")}'
+	            serverUrl :'{:U("Admin/Article/editer")}'
 	        });
 	        
 	        $('.panel').tabnav({});
@@ -33,26 +23,10 @@
 	</script>
 </block>
 <block name="css">
-	<link rel="stylesheet" media="screen" href="/Public/css/prism.css">
 </block>
 <!-- stystem menu content -->
 <block name="content">
 <div class="row">
-	<div>
-	<pre class="language-"><code class="language-c">
-unsigned int GetHighTime(){
-	TH1 = 0;
-	TL1 = 0;
-	TR1 = 1;
-	while(Inf_IO){
-		if(TH1 >= 0x40){
-			break;
-		}
-	}
-}
-	</code></pre>
-	</div>
-
     <div class="col-lg-12">
         <div class="panel panel-default bootstrap-admin-no-table-panel">
                 <div class="tabnavigtion">

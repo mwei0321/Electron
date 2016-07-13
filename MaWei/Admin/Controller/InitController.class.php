@@ -20,6 +20,12 @@
 
 	        //init菜单
 	        $this->initMenu();
+
+	        //template style
+	        $theme = ['live','beauty','default'];
+	        $_REQUEST['style'] && C('DEFAULT_THEME',$theme[intval($_REQUEST['style'])]);
+	        //status
+	        $this->assign('status',['关闭','开启']);
 	    }
 
 
@@ -34,7 +40,8 @@
 			$AdminNavMenu = new \Library\AdminNaviMenu();
 
 			$naviMenu = $AdminNavMenu->getAdminNaviMenu(['status'=>1]);
-			$naviMenu = getTree($naviMenu);
+			$naviMenu = getTree($naviMenu,2,'key');
+
 			$naviMenu = fieldtokey($naviMenu,'key');
 // 			var_dump($naviMenu);
 

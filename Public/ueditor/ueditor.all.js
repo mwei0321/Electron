@@ -11650,14 +11650,14 @@ UE.plugins['insertcode'] = function() {
 //    });
     me.setOpt('insertcode',{
 	        'php':'PHP',
+	        'c':'C/C++',
 	        'python':'Python',
             'bash':'Bash/Shell',
-            'c':'C/C++',
             'css':'CSS',
             'js':'Javascript',
+            'sql':'Sql',
             'ruby':'Ruby',
-            'java':'Java',
-            'sql':'Sql'
+            'java':'Java'
     });
 
     /**
@@ -11770,7 +11770,7 @@ UE.plugins['insertcode'] = function() {
 
                     });
                 }
-                me.execCommand('inserthtml','<pre class="language-'+lang+'"><code class="language-'+lang+'">'+code+'</code></pre>',true);
+                me.execCommand('inserthtml','<pre class="language-'+lang+'"><code id="coder" class="language-'+lang+'">'+code+'</code></pre>',true);
 
                 pre = me.document.getElementById('coder');
                 domUtils.removeAttributes(pre,'id');
@@ -11846,7 +11846,6 @@ UE.plugins['insertcode'] = function() {
                }
 
             });
-
             pre.innerText(code.replace(/(&nbsp;|\n)+$/,''))
         })
     });

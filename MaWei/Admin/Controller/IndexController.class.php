@@ -7,18 +7,19 @@
 	*  +---------------------------------------------------------------------------------+
 	*   | Creater Time : 2016年6月2日
 	*  +---------------------------------------------------------------------------------+
-	*   | Link :		http://www.phpython.com	     
+	*   | Link :		http://www.phpython.com
 	*  +---------------------------------------------------------------------------------+
 	**/
 
     namespace Admin\Controller;
-	
+
 	class IndexController extends InitController{
-	    
+
 	    function _init(){
 	        parent::_init();
 	    }
-	    
+
 	    function index(){
+	        $this->display();
 	    }
 	}
