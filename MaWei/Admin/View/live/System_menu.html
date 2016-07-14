@@ -1,0 +1,64 @@
+<!-- include public templates -->
+<extend name="Public:Template" />
+
+<!-- 内容列表 -->
+<block name="content">
+	<div class="bloc">
+	    <div class="title">
+	    	<a href="/">首页</a> / 
+	        <a href="{:U($naviMenu[CONTROLLER_NAME]['url'])}">{$naviMenu[CONTROLLER_NAME]['name']}</a>
+	    </div>
+	    <div class="content">
+	        <table>
+				<thead>
+				   <tr>
+						<th><input type="checkbox" class="checkall"/></th>
+						<th>ID</th>
+						<th>菜单名</th>
+						<th>菜单别名</th>
+						<th>菜单地址</th>
+						<th>菜单等级</th>
+						<th>菜单状态</th>
+						<th>菜单动作</th>
+						<th>菜单排序</th>
+						<th>操作</th>
+				  	</tr>
+				</thead>
+				<tbody>
+					<volist name="list" id="m">
+						<tr id="deleid_{$m['id']}" class="gradeA">
+							<td><input type="checkbox" name="ids[]" value="{$m['id']}"/></td>
+							<td>{$m['id']}</td>
+							<td>{$m['str']}{$m['name']}</td>
+							<td>{$m['str']}{$m['key']}</td>
+							<td><a href="{:U($m['url'])}">{$m['url']}</a></td>
+							<td>{$position[$m['position']]}</td>
+							<td>{$status[$m['status']]}</td>
+							<td>{$m['action']}</td>
+							<td>{$m['sort']}</td>
+							<td class="actions">
+							    <a href="javascript:;" onclick="layer.load('菜单编辑','{:U('Admin/System/edit',array('type'=>'AdminMenu','id'=>$m['id']))}');" ><img src="/Public/live/img/icons/actions/edit.png" alt="编辑" /></a>
+							    <a href="javascript:void(0);" url="{:U('Admin/System/delete',array('type'=>'menu'))}" title="删除" onclick="delall($(this),{$m['id']});"><img src="/Public/live/img/icons/actions/delete.png" alt="删除" /></a>
+							</td>
+						</tr>
+					 </volist>
+				</tbody>
+	        </table>
+	        <div class="left input">
+	            <select name="action" id="tableaction">
+	                <option value="">Action</option>
+	                <option value="delete">Delete</option>
+	            </select>
+	        </div>
+	        <div class="pagination">
+	            <a href="#" class="prev">«</a>
+	            <a href="#">1</a>
+	            <a href="#" class="current">2</a>
+	            ...
+	            <a href="#">21</a>
+	            <a href="#">22</a>
+	            <a href="#" class="next">»</a>
+	        </div>
+	    </div>
+	</div>
+</block>

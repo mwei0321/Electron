@@ -1,0 +1,47 @@
+<!-- include public templates -->
+<extend name="Public:Template" />
+
+<block name="content"> <!-- Dynamic table -->
+	<!-- Table with check all checkboxes fubction -->
+	<div class="widget">
+	   <div class="title">
+		   	<span class="titleIcon"><input type="checkbox" id="titleCheck" name="titleCheck" /></span>
+		   	<h6>Static table with checkboxes</h6>
+	   </div>
+	   <table cellpadding="0" cellspacing="0" width="100%" class="sTable withCheck" id="checkAll">
+	         <thead>
+	              <tr>
+						<th><img src="images/icons/tableArrows.png" alt="" /></th>
+						<th>ID</th>
+						<th>菜单名</th>
+						<th>菜单别名</th>
+						<th>菜单地址</th>
+						<th>菜单位置</th>
+						<th>菜单状态</th>
+						<th>菜单动作</th>
+						<th>菜单排序</th>
+						<th>操作</th>
+				  </tr>
+	         </thead>
+	         <tbody>
+					<volist name="list" id="m">
+						<tr id="deleid_{$m['id']}" class="gradeA">
+							<td><input type="checkbox" name="ids[]" value="{$m['id']}"/></td>
+							<td>{$m['id']}</td>
+							<td>{$m['str']}{$m['name']}</td>
+							<td>{$m['str']}{$m['key']}</td>
+							<td><a href="{:U($m['url'])}">{$m['url']}</a></td>
+							<td>{$position[$m['position']]}</td>
+							<td>{$status[$m['status']]}</td>
+							<td>{$m['action']}</td>
+							<td>{$m['sort']}</td>
+							<td class="bnt-pl3">
+							    <a href="javascript:;" onclick="layer.load('菜单编辑','{:U('Admin/System/edit',array('type'=>'AdminMenu','id'=>$m['id']))}');" ><i class="glyphicon glyphicon-pencil"></i></a>
+							    <a href="javascript:void(0);" url="{:U('Admin/System/delete',array('type'=>'menu'))}" title="删除" onclick="delall($(this),{$m['id']});"><i style="color:#b00;" class="glyphicon glyphicon-trash"></i></a>
+							</td>
+						</tr>
+					 </volist>
+	         </tbody>
+	    </table>
+	</div>
+</block>

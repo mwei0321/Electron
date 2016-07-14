@@ -69,6 +69,7 @@ var mwUI = {};
 			});
 			if (nullstatus > 0) return false;
 			var formVal = formObj.serializeArray();
+			console.log(formVal);
 			var url = Obj.attr('url');
 			$.ajax({
 				type : 'POST',

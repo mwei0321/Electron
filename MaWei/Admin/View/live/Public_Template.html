@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <title><block name="title">MaWei Admin Panel</block></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+    <!-- jQuery AND jQueryUI -->
+    <script type="text/javascript" src="/Public/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/Public/live/js/libs/jquery/1.6/jquery.min.js"></script>
+    <script type="text/javascript" src="/Public/live/js/libs/jqueryui/1.8.13/jquery-ui.min.js"></script>
+    
+    <link rel="stylesheet" href="/Public/live/css/min.css" />
+</head>
+<body>
+        <!--HEAD --> 
+        <div id="head">
+            <div class="left">
+                <a href="#" class="button profile"><img src="/Public/live/img/icons/top/huser.png" alt="" /></a>
+                Hi, 
+                <a href="#">John Doe</a>
+                |
+                <a href="#">Logout</a>
+            </div>
+            <div class="right">
+                <form action="#" id="search" class="search placeholder">
+                    <label>Looking for something ?</label>
+                    <input type="text" value="" name="q" class="text"/>
+                    <input type="submit" value="rechercher" class="submit"/>
+                </form>
+            </div>
+        </div>
+                
+        <!-- SIDEBAR --> 
+        <div id="sidebar">
+            <ul>
+                <volist name="naviMenu" id="m">
+	                <li <if condition="in_array(CONTROLLER_NAME,$m['childrenkey'])">class="current"</if>>
+	                	<a href="#"><img src="/Public/live/img/icons/menu/layout.png" alt="" />{$m['name']}</a>
+	                    <ul>
+	                    	 <volist name="m['children']" id="c">
+	                         	<li <if condition="ACTION_NAME EQ $c['key']">class="current"</if>>
+	                         		<a href="{:U($c['url'])}">{$c['name']}</a>
+	                         	</li>
+	                         </volist>
+	                    </ul>
+	                </li>
+                </volist>
+            </ul>
+        </div>
+        
+        <!--CONTENT --> 
+        <div id="content" class="white contmargin">
+        	<h1><img src="/Public/live/img/icons/dashboard.png" alt="" /> Dashboard</h1>
+        	<block name="content"></block>
+        </div>
+    </body>
+    
+    <!-- js include -->
+    <script type="text/javascript" src="/Public/live/js/min.js"></script>
+    <!-- loas mw layer -->
+    <script type="text/javascript" src="/Public/js/mwlayer.js"></script>
+    <script type="text/javascript" src="/Public/js/mwUI.js"></script>
+    <script type="text/javascript" src="/Public/admin/js/admin.js"></script>
+</html>

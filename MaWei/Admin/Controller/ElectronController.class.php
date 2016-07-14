@@ -69,7 +69,7 @@
 	            $this->assign('info',$info);
 	        }
 
-	        $this->assign('cate',$cate);
+	        $this->assign('catelist',$cate);
             $this->display();
 	    }
 
@@ -120,11 +120,13 @@
 	                break;
 	        }
 	        $reid = addUpdata($data,"$model");
-	        if($reid === false){
-	            $this->error('添加修改失败',U('Admin/Electron/edit',array('type'=>$_REQUEST['type'],'id'=>intval($_REQUEST['id']))));
-	        }else{
-	            $this->success('添加修改成功',U('Admin/Electron/index',array('type'=>$_REQUEST['type'])));
-	        }
+	        //return
+	        $rearray = [
+	            'reCode' => 200,
+	            'msg'	 => 'success!',
+	            'emsg'   => 'error!'
+	        ];
+	        echo json_encode($rearray);
 	    }
 
 	    /**
@@ -159,7 +161,7 @@
 	     * @author MaWei (http://www.phpyrb.com)
 	     * @date 2014-8-10  下午5:16:04
 	     */
-	    function delect(){
+	    function delete(){
 	        $model = $_REQUEST['type'] == 'cate' ? 'BookCategory' : 'BookTag';
 	        $reid = delall($_REQUEST['ids'],"$model");
 	        if($reid === false){

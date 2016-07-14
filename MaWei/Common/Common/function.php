@@ -38,7 +38,7 @@
         }else{
             $reid = $m->add($_data);
         }
-//         echo $this->remind_M->getLastSql();
+//         echo $m->getLastSql();
         return $reid;
     }
 
