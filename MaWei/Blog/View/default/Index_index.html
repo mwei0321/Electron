@@ -1,0 +1,34 @@
+<!-- include public templates -->
+<extend name="Public:Template" />
+
+<!--  -->
+<block name="left-content">
+	<volist name="artlist" id="a">
+		<div class="article first">
+			<h2 class="h123">
+				<a href="{:U('Artclie/index',['artid'=>$a['id']])}" title="{$a['title']}" target="_blank">{$a['title']}</a>
+			</h2>
+			<p class="tag">
+				标 签：
+				<volist name="a['tagids']" id="t">
+					<a href="{:U('Article/index',['tagid'=>$t])}" title="{$taglist[$t]['name']}"><span>{$taglist[$t]['name']}</span></a>
+				</volist>
+			</p>
+			<div class="clr"></div>
+			<div class="cont" id="maxart">
+				{$a['content']}
+			</div>
+			<div class="info">
+				<p>
+					<span><a href="{:U('Article/index',['catid'=>$a['cateid']])}" target="_blank">{$catelist[$a['cateid']]['name']}</a></span> / 
+					<span><a href="{:U('Article/content',['artid'=>$a['id']])}" target="_blank">评 论&nbsp;({$a['com_num']})</a></span> / 
+					<span>热度&nbsp;({$a['hots']}℃)</span> / 
+					<span>{$a['uptime']|date="Y-m-d",###}</span> / 
+					<span><a href="{:U('Article/content',['artid'=>$a['id']])}" target="_blank">阅读全文&nbsp;</a></span> / 
+					<span>MaWei</span>
+				</p>
+			</div>
+		</div>
+		<div class="clr"></div>
+	</volist>
+</block>

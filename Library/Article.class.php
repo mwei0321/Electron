@@ -20,6 +20,37 @@
         }
 
         /**
+         * 获取文章详情列表
+         * @param  array $_where 条件
+         * @param  string $_page 分页
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2016年7月19日 下午4:39:55
+        */
+        function getArtInfoList($_where = '',$_page = 'count'){
+            $filed = "*";
+            $sql = "SELECT $filed FROM `article` a LEFT JOIN `article_content` ac ON a.`id`=ac.`artid` WHERE a.`status` = 1";
+            $_where && $sql .= ' AND '.$_where;
+            //count
+            if($_page == 'count'){
+                $filed = 'COUNT(a.`id`) `num`';
+                $count = M()->query($sql);
+                return $count['num'];
+            }
+
+            //list
+            $sql .= ' ORDER BY `uptime` DESC LIMIT '.$_page;
+            $list = M()->query($sql);
+
+            //tag array
+            foreach ($list as $k => $v){
+                $list[$k]['tagids'] = explode(',', $v['tags']);
+            }
+
+            return $list;
+        }
+
+        /**
          * 获取文章列表
          * @return array
          * @author MaWei (http://www.phpython.com)
@@ -32,6 +63,11 @@
                 return $count;
             }
             $list = $m->where($_where)->order('uptime DESC')->limit($_limit)->select();
+            //tag array
+            foreach ($list as $k => $v){
+                $list[$k]['tagids'] = explode(',', $v['tags']);
+            }
+
             return $list;
         }
 
@@ -47,4 +83,5 @@
             $info = M()->query($sql);
             return array_shift($info);
         }
+
     }

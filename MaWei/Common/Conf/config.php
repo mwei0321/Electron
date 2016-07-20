@@ -12,8 +12,8 @@
 	**/
 
 	$iniconfig = [
-			'MODULE_ALLOW_LIST'     => array('Novel','Admin','Member',''),
-			'DEFAULT_MODULE'     	=> 'Admin', //默认模块
+			'MODULE_ALLOW_LIST'     => array('Blog','Admin','Member',''),
+			'DEFAULT_MODULE'     	=> 'Blog', //默认模块
 			'SESSION_AUTO_START' 	=> true, //是否开启session
 			//URL 配置
 			'URL_MODEL'          	=> '2', //URL模式

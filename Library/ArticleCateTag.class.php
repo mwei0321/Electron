@@ -43,7 +43,7 @@
         */
         function getArtTagList($_where = []){
             $list = $this->tag->where($_where)->select();
-            return $list;
+            return fieldtokey($list);
         }
 
         /**

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>prism</title>
+	<link rel="stylesheet" type="text/css" href="css/prism.css" />
+	<script type="text/javascript" src="js/prism.js"></script>
+</head>
+<body>
+	<pre class="language-php"><code class="language-php">			
+		    function index(){
+		        $count = $this->electron->getElectronList();
+	            if($count > 0){
+	                $page = new Page($count, 50);
+	                $list = $this->electron->getElectronList([],$page->firstRow.','.$page->listRows);
+	            }
+
+	            $this->assign('list',$list);
+	            $this->display();
+		    }
+		</code></pre>
+</body>
+</html>
