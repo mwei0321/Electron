@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <title><block name="title">Python博客,马伟个人博客,PhPyRb博客</block></title>
@@ -60,11 +60,13 @@
 			<!-- start left content -->
 			<block name="left-content"></block>
 			<!-- end left content -->
-			<div id="page">
-				<p>
-					<a class="textpage" href="javascript:void(0);">62 条</a> <a class="current" href="javascript:void(0);">1</a><a href="/Article-index-p-2.html">2</a><a href="/Article-index-p-3.html">3</a><a href="/Article-index-p-4.html">4</a><a href="/Article-index-p-5.html">5</a> <a href="/Article-index-p-7.html">7</a> <a href="/Article-index-p-2.html">&gt;&gt;</a> <a href="javascript:void(0);">1/7页</a>
-				</p>
-			</div>
+			<if condition="$page">
+				<div id="page">
+					<p>
+						{$page}
+					</p>
+				</div>
+			</if>
 			<div class="clr"></div>
 		</div>
 		<!-- start right -->
@@ -82,21 +84,9 @@
 				<h2>热门文章</h2>
 				<div class="clr"></div>
 				<ul class="sb_menu">
-					<li><a href="/Article-content-artid-39.html" title="Python列表常用函数详解, index,in,extend,append,insert">Python列表常用函数详解</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-1.html" title="debian初始安装,debian安装设置,debian安装vim,debian安装代码提示,debian安装PHP环境,debian安装lnmp">debian 初始安装</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-32.html" title="django的url配置、用法。">django url 详解 - Python Django 学习笔记4</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-12.html" title="mysql分组group mysql gorup mysql分组统计 mysql分组显示">mysql分组group </a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-6.html" title="php面试题 php陷阱题 php基础题 php常见面试题 php考题">php面试题 陷阱题</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-8.html" title="wamp5,apache 虚拟主机配置 wamp5虚拟主机配置 apache虚拟主机配置">wamp虚拟主机配置</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-2.html" title="Js获取屏幕高度，获取屏幕宽度。 ">Js获取屏幕body宽高度</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-7.html" title="MySql常用语句 有用的MySQL语句 MySql语句">MySql常用语句</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-3.html" title="php空间的在线解压 php空间的在线解压ZIP php空间解压ZIP 在线解压ZIP 在线解压zip 空间php解压 php空间解压">php空间的在线解压 ZIP</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-22.html" title="vps 安全登录的方法 ssh  登录">vps 安全登录的方法 ssh 登录</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-24.html" title="django 初始化安装，python django学习笔记">django 安装初始化-Python Django 学习笔记1</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-15.html" title="vim基本命令,vim常用命令">vim基本命令,vim常用命令</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-11.html" title="Linux安装git git linux配置安装 liunx git">Linux安装git</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-19.html" title="python安装mysql">python安装mysql</a>&nbsp;(216)</li>
-					<li><a href="/Article-content-artid-4.html" title="Jquery随屏滚动特效 jquery滚动 jquery滚动特效 jquery特效">Jquery随屏滚动特效</a>&nbsp;(216)</li>
+					<volist name="topArt" id="t">
+						<li><a href="{:U('Article/info',['artid'=>$t['id']])}" title="{$t['title']}">{$t['title']}</a>&nbsp;({$t['hots']})</li>
+					</volist>
 				</ul>
 			</div>
 			<div class="sidebar">

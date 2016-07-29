@@ -50,7 +50,7 @@ body{font-size:12px;font-family:Arial,Helvetica,Sans-serif;background:url(img/bg
 #content .good{color:#6F9106}
 #content .neutral{color:#FF7400}
 #content .bad{color:#C21C1C}
-.navmenu{display:inline-block;margin-right:25px;float:right;}
+.navmenu{display:inline-block;float:right;}
 .navmenu a img{width:20px;height:20px;margin-top:7px;}
 .modal #content{margin:0;padding:0px}
 .modal #content .bloc{margin:0px;padding:0px;-moz-text-shadow:none;-webkit-text-shadow:none;-o-text-shadow:none;text-shadow:none}

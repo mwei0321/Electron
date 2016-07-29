@@ -56,7 +56,7 @@ var mwUI = {};
 			var a = 0;
 		},
 		//ajax表单提交
-		AjaxForm : function (Obj){
+		AjaxForm : function (Obj,debug){
 			//表单为空检查
 			var formObj = Obj.parents('form');
 			var nullstatus = 0;
@@ -71,14 +71,16 @@ var mwUI = {};
 			var formVal = formObj.serializeArray();
 			console.log(formVal);
 			var url = Obj.attr('url');
+			var jumpurl = Obj.attr('jumpurl');
 			$.ajax({
 				type : 'POST',
 				url  : url,
 				data : formVal,
 				dataType : 'json'
 			}).done(function (e) {
+				if(debug) return false;
 				if(e.reCode == 200){
-					layer.msgjump(e.msg,e.reUrl);
+					layer.msgjump(e.msg,jumpurl);
 				}else{
 					layer.msg(e.emsg);
 				}

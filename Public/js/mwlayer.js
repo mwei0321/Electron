@@ -22,7 +22,6 @@ var layer = {};
 			EditH : 600,
 			ThumbW : 100,
 			ThumbH : 100,
-			top		: 0
 		},
 		
 		box : function(title,html) {
@@ -109,7 +108,8 @@ var layer = {};
 						'<div id="outsidebox">'+ t +
 						'<div id="box_content">'+
 						'<div></div>';
-			$('body').prepend(html);
+//			$('body').prepend(html);
+			$('body').append(html);
 			var h = ajx ? '<iframe>'+cont+'</iframe>' : cont;
 			$('#box_content').append(h);
 			layer._center();
@@ -127,7 +127,7 @@ var layer = {};
 			//添加html
 			$('body').prepend(msg);
 			//居中
-			layer._center('#laymsgmw');
+			layer._center('#laymsgmw',-1);
 			//主窗口状态 
 			var status = layer.status;
      		var setmsg = setTimeout(function() {
@@ -142,7 +142,7 @@ var layer = {};
 			return false;
 		},
 		//居中
-		_center : function (boxid){
+		_center : function (boxid,_top){
 			boxid = boxid ? boxid : '#outsidebox';
 			//浏览器宽度
 			//var W = $(document).width();
@@ -150,10 +150,18 @@ var layer = {};
 			//var H = $(document).height();
 			var oboxw = $(boxid).width();
 			var oboxh = $(boxid).height();
+			
+			var top = 100;
+			if(_top > 1){
+				top = _top;
+			}else if(_top == -1){
+				top = (($(window).height() - oboxh) / 2 - 50);
+				console.log(top);
+			}
 			var oboxl = $(boxid).css({
 				'left' : ($(window).width() - oboxw) / 2 + 'px',
 //				'top' : (($(window).height() - oboxh) / 2 - 50) + 'px',
-				'top' : layer.Options.top > 1 ? (layer.Options.top+'px') : '100px',
+				'top' : (top+'px'),
 			}).fadeTo('slow',0.99);
 		},
 		_iframe : function (){

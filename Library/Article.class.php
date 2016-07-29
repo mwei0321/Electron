@@ -84,4 +84,17 @@
             return array_shift($info);
         }
 
+        /**
+         * 获取最热的文章
+         * @param  int $_toptype 1.为点击数 2.评论数
+         * @param  int $_num
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2016年7月22日 下午2:46:20
+        */
+        function getTopArt($_toptype = 1,$_num = 15){
+            $order = $_toptype == 1 ? '`hots` DESC' : '`com_num` DESC';
+            $list = M('Article')->where(['status'=>1])->order($order)->limit($_num)->select();
+            return $list;
+        }
     }

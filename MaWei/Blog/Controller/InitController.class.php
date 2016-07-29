@@ -16,6 +16,12 @@
     use Library\ArticleCateTag;
 
     class InitController extends Controller{
+        //ajax返回定义
+        protected $reCode = 200;
+        protected $msg      =   'operate success!';
+        protected $emsg     =   'operate error!';
+        protected $restatus =   1;
+        //分类，标签定义
         protected $catelist,$taglist;
         function _init(){
             //分类列表
@@ -50,4 +56,21 @@
             $this->taglist = $taglist;
         }
 
+        /**
+         * ajax接口返回
+         * @param  array $_data 数据
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2016年7月26日 上午11:10:33
+        */
+        protected function _reCode($_data = []){
+            $data = [];
+            $data['reCode']       =   $this->reCode;
+            $data['msg']        =   $this->msg;
+            $data['emsg']       =   $this->emsg;
+            $data['restatus']   =   $this->restatus;
+            $data['data']       =   $_data;
+            echo json_encode($data);
+            exit;
+        }
     }

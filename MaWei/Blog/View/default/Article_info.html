@@ -1,0 +1,44 @@
+<!-- include public templates -->
+<extend name="Public:Template" />
+
+<block name="left-content">
+	<div class="article first">
+		<h2 class="h123">
+			<a href="{:U('Article/info',['artid'=>$info['id']])}" title="{$info['title']}">{$info['title']}</a>
+		</h2>
+		<p class="tag">
+			标 签：
+			<volist name="info['tagids']" id="t">
+				<a href="{:U('Article/index',['tagid'=>$t])}" title="{$taglist[$t]['name']}"><span>{$taglist[$t]['name']}</span></a>
+			</volist>
+		</p>
+		<div class="clr"></div>
+		<div class="cont" id="minart">
+			{$info['content']}
+		</div>
+		<div class="info">
+			<p>
+				<span><a href="{:U('Article/index',['catid'=>$info['cateid']])}" target="_blank">{$catelist[$info['cateid']]['name']}</a></span> / 
+				<span><a href="{:U('Article/content',['artid'=>$info['id']])}" target="_blank">评 论&nbsp;({$info['com_num']})</a></span> / 
+				<span>热度&nbsp;({$info['hots']}℃)</span> / 
+				<span>{$info['uptime']|date="Y-m-d",###}</span> / 
+				<span><a href="{:U('Article/content',['artid'=>$info['id']])}" target="_blank">阅读全文&nbsp;</a></span> / 
+				<span>MaWei</span>
+			</p>
+		</div>
+	</div>
+	<div class="clr"></div>
+	<div class="clr"></div>
+	<div class="comment">
+		<div class="comt">
+			<form method="POST" action="/Article-comment.html">
+				<input type="hidden" name="artid" value="74">
+				<p>
+					<span><label>Name：<input name="name" type="text" /></label></span>&nbsp;&nbsp; <span><label>Email：<input name="email" type="text" /></label></span>&nbsp;&nbsp; <span><label>Home：<input name="home" type="text" value="http://" /></label></span> <input type="submit" value="Submit" style="width: 60px; cursor: pointer; height: 24px; color: #999; border: 1px solid #ccc;" />
+				</p>
+				<textarea name="comment" rows="6" cols="88%"></textarea>
+			</form>
+			<p style="color: #999; margin-left: 53%;">希望各位朋友多评论，多给点意见，谢谢！</p>
+		</div>
+	</div>
+</block>

@@ -121,12 +121,7 @@
 	        }
 	        $reid = addUpdata($data,"$model");
 	        //return
-	        $rearray = [
-	            'reCode' => 200,
-	            'msg'	 => 'success!',
-	            'emsg'   => 'error!'
-	        ];
-	        echo json_encode($rearray);
+	        $this->_reCode();
 	    }
 
 	    /**

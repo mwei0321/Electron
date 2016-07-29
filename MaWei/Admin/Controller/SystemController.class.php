@@ -46,7 +46,7 @@
 		function edit(){
 			$type = $_REQUEST['type'] ? text($_REQUEST['type']) : exit(null);
 			$id = intval($_REQUEST['id']);
-			$info = $pmenu = array();
+			$info = $pmenu = [];
 			$template = null;
 			switch ($type){
 				case 'AdminMenu':
@@ -74,7 +74,7 @@
 			$type = $_REQUEST['type'] ? text($_REQUEST['type']) : exit(null);
 			$_ids = intval($_REQUEST['ids']);
 			switch ($type) {
-				case 'menu' :
+				case 'AdminMenu' :
 					$reid = delall($_ids, 'AdminNavigatorMenu');
 					if($reid === false){
 						echo null;
@@ -110,7 +110,7 @@
 		* @author MaWei (http://www.phpyrb.com)
 		* @date 2014-9-7  下午8:47:33
 		*/
-		function add_updata(){
+		function addupdata(){
 			$type = $_REQUEST['type'] ? text($_REQUEST['type']) : exit(null);
 			$data = array();
 			$_REQUEST['id'] && $id = $data['id'] = intval($_REQUEST['id']);
@@ -127,16 +127,13 @@
 					$data['url'] = $_REQUEST['url'];
 					$data['status'] = $_REQUEST['status'] ? intval($_REQUEST['status']) : 1;
 					$reid = addUpdata($data,'AdminNavigatorMenu');
-					$url = U('Admin/System/adminmenu');
 					S('Menu',null);
 					break;
 				default:
 					exit();
 			}
-			if($reid === false){
-				$this->error('添加修改失败！');
-			}else{
-				$this->success('添加修改成功！');
-			}
+
+			//return
+			$this->_reCode();
 		}
 	}

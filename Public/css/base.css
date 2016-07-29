@@ -57,6 +57,8 @@ body .date a img{border:none;background:none;}
 .content .left .article .tag{float:right;padding-right:20px;z-index:15px; position:relative;top:-30px;};
 .content .left .article .tag span{margin-right:10px;}
 .content .left .article .tag a{color:#afafaf;margin-right:5px;}
+/* 代码选择**/
+.syntaxhighlighter table tr td:first-child{-moz-user-select: none; /*火狐*/-webkit-user-select: none; /*webkit浏览器*/-ms-user-select: none; /*IE10*/-khtml-user-select: none; /*早期浏览器*/user-select: none;}
 
 .content .left .article .info{height:40px;padding-left:25px;border-top:1px solid #eaeaea;z-index: 10;background:#fafafa;box-shadow:0px -2px 2px #eee;border-radius:0 0 5px 5px;}
 .content .left .article .info p{float:right;margin-top:7px;color:#fff;background:url("/Public/image/h123.gif") repeat-x;}
