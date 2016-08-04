@@ -82,7 +82,7 @@ var mwUI = {};
 				if(e.reCode == 200){
 					layer.msgjump(e.msg,jumpurl);
 				}else{
-					layer.msg(e.emsg);
+					layer.msg(e.msg);
 				}
 			});
 		},

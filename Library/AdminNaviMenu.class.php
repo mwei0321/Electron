@@ -20,7 +20,7 @@
         protected $menu;
 
         function __construct(){
-            $this->naviMenu = M('AdminNavigatorMenu');
+            $this->naviMenu = M('AdminNaviMenu');
         }
 
         /**
@@ -31,11 +31,10 @@
          * @date 2014-8-2  下午9:45:07
          */
         function getAdminNaviMenu($_where = array()){
-            $where = array();
+            $where = [];
             $menulist = $this->naviMenu->where($_where)->order('sort DESC')->select();
-            $this->menu = array();
-            $this->level($menulist);
-            return $this->menu;
+            $menulist = level($menulist);
+            return $menulist;
         }
 
         /**
@@ -48,28 +47,6 @@
         function getMenuInfo($_menuid){
             $menuinfo = $this->naviMenu->where(array('id'=>$_menuid))->find();
             return $menuinfo;
-        }
-
-        /**
-         * 返回菜单层级
-         * @param  array　$_menu
-         * @param  int $_pid
-         * @param  int $_level
-         * @return array
-         * @author MaWei (http://www.phpyrb.com)
-         * @date 2014-9-12  下午10:19:12
-         */
-        function level($_menu,$_pid = 0,$_level=0){
-            foreach ($_menu as $k => $v){
-                if($v['pid'] == $_pid){
-                    $this->menu[$k] = $v;
-                    $this->menu[$k]['level'] = $_level;
-                    $this->menu[$k]['str'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;|----', $_level);
-                    unset($_menu[$k]);
-                    $this->level($_menu,$v['id'],$_level+1);
-                }
-            }
-            return $this->menu;
         }
 
         /**

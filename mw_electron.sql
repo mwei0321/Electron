@@ -10,16 +10,16 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-07-13 18:26:33
+Date: 2016-08-04 18:28:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for admin_navigator_menu
+-- Table structure for admin_navi_menu
 -- ----------------------------
-DROP TABLE IF EXISTS `admin_navigator_menu`;
-CREATE TABLE `admin_navigator_menu` (
+DROP TABLE IF EXISTS `admin_navi_menu`;
+CREATE TABLE `admin_navi_menu` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` int(11) DEFAULT NULL COMMENT '父级菜单',
   `name` varchar(20) DEFAULT NULL COMMENT '菜单名称',
@@ -30,20 +30,28 @@ CREATE TABLE `admin_navigator_menu` (
   `sort` tinyint(2) DEFAULT '1' COMMENT '菜单排序',
   `position` tinyint(20) DEFAULT NULL COMMENT '位置  顶部0　左则1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
 
 -- ----------------------------
--- Records of admin_navigator_menu
+-- Records of admin_navi_menu
 -- ----------------------------
-INSERT INTO `admin_navigator_menu` VALUES ('1', '0', '系统管理', 'System', 'index', 'Admin/System/index', '1', '97', '0');
-INSERT INTO `admin_navigator_menu` VALUES ('2', '1', '后台导航菜单', 'System', 'adminmenu', 'Admin/System/menu', '1', '80', '1');
-INSERT INTO `admin_navigator_menu` VALUES ('11', '0', '元件管理', 'Electron', 'index', 'Admin/Electron/index', '1', '90', '0');
-INSERT INTO `admin_navigator_menu` VALUES ('12', '11', '元件列表', 'Electron', 'index', 'Admin/Electron/index', '1', '80', '1');
-INSERT INTO `admin_navigator_menu` VALUES ('13', '11', '元件分类', 'Electron', 'category', 'Admin/Electron/category', '1', '70', '1');
-INSERT INTO `admin_navigator_menu` VALUES ('14', '0', '文章管理', 'Article', 'index', 'Admin/Article/index', '1', '95', '0');
-INSERT INTO `admin_navigator_menu` VALUES ('15', '14', '文章列表', 'Article', 'index', 'Admin/Article/index', '1', '80', '1');
-INSERT INTO `admin_navigator_menu` VALUES ('17', '14', '文章分类', 'CateTag', 'index', 'Admin/CateTag/index/type/cate', '1', '75', '1');
-INSERT INTO `admin_navigator_menu` VALUES ('19', '14', '文章标签', 'CateTag', 'tagedit', 'Admin/CateTag/index/type/tag', '1', '60', '1');
+INSERT INTO `admin_navi_menu` VALUES ('1', '0', '系统管理', 'System', 'index', 'Admin/System/index', '1', '97', '0');
+INSERT INTO `admin_navi_menu` VALUES ('2', '1', '后台导航菜单', 'System', 'adminmenu', 'Admin/System/menu', '1', '80', '1');
+INSERT INTO `admin_navi_menu` VALUES ('11', '0', '元件管理', 'Electron', 'index', 'Admin/Electron/index', '1', '90', '0');
+INSERT INTO `admin_navi_menu` VALUES ('12', '11', '元件列表', 'Electron', 'index', 'Admin/Electron/index', '1', '80', '1');
+INSERT INTO `admin_navi_menu` VALUES ('13', '11', '元件分类', 'Electron', 'category', 'Admin/Electron/category', '1', '70', '1');
+INSERT INTO `admin_navi_menu` VALUES ('14', '0', '文章管理', 'Article', 'index', 'Admin/Article/index', '1', '95', '0');
+INSERT INTO `admin_navi_menu` VALUES ('15', '14', '文章列表', 'Article', 'index', 'Admin/Article/index', '1', '80', '1');
+INSERT INTO `admin_navi_menu` VALUES ('17', '14', '文章分类', 'CateTag', 'index', 'Admin/CateTag/index/type/cate', '1', '75', '1');
+INSERT INTO `admin_navi_menu` VALUES ('20', '0', '前端设置', 'Home', 'index', 'Admin/Home/index', '1', '60', '0');
+INSERT INTO `admin_navi_menu` VALUES ('19', '14', '文章标签', 'CateTag', 'tagedit', 'Admin/CateTag/index/type/tag', '1', '60', '1');
+INSERT INTO `admin_navi_menu` VALUES ('21', '20', '导航菜单', 'Home', 'naviMenu', 'Admin/WebConf/naviMenu', '1', '90', '1');
+INSERT INTO `admin_navi_menu` VALUES ('22', '0', '用户权限管理', 'Rbac', 'index', 'Admin/Rbac/inde', '1', '50', '0');
+INSERT INTO `admin_navi_menu` VALUES ('23', '22', '权限父节点', 'Rbac', 'parentNode', 'Admin/Rbac/parentNode', '1', '70', '1');
+INSERT INTO `admin_navi_menu` VALUES ('24', '22', '权限子节点', 'Rbac', 'node', 'Admin/Rbac/node', '1', '80', '1');
+INSERT INTO `admin_navi_menu` VALUES ('25', '22', '权限节点组', 'Rbac', 'nodeGroup', 'Admin/Rbac/nodeGroup', '1', '85', '1');
+INSERT INTO `admin_navi_menu` VALUES ('26', '22', '用户权限', 'Rbac', 'user', 'Admin/Rbac/user', '1', '90', '1');
+INSERT INTO `admin_navi_menu` VALUES ('27', '20', '焦点广告管理', 'WebConf', 'bannr', 'Admin/WebConf/bannr', '1', '70', '1');
 
 -- ----------------------------
 -- Table structure for admin_user
@@ -86,56 +94,57 @@ CREATE TABLE `app` (
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(11) NOT NULL COMMENT '用户ID',
-  `cateid` int(11) NOT NULL COMMENT '分类ID',
-  `tags` varchar(200) NOT NULL COMMENT '标签ID',
-  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态（0 隐藏、1显示）',
-  `title` varchar(150) NOT NULL COMMENT '文章标题',
-  `author` int(11) NOT NULL COMMENT '作者ID',
-  `hots` int(11) NOT NULL COMMENT '点击率',
+  `uid` int(11) DEFAULT NULL COMMENT '用户ID',
+  `cateid` int(11) DEFAULT NULL COMMENT '分类ID',
+  `tags` varchar(200) DEFAULT NULL COMMENT '标签ID',
+  `status` tinyint(1) DEFAULT '1' COMMENT '状态（0 隐藏、1显示）',
+  `title` varchar(150) DEFAULT NULL COMMENT '文章标题',
+  `author` int(11) DEFAULT NULL COMMENT '作者ID',
+  `hots` int(11) DEFAULT '0' COMMENT '点击率',
+  `com_num` int(11) DEFAULT '0' COMMENT '评论数',
   `keyword` varchar(100) DEFAULT NULL COMMENT '关键字',
-  `uptime` int(11) NOT NULL COMMENT '更新时间',
+  `uptime` int(11) DEFAULT NULL COMMENT '更新时间',
   `ctime` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 COMMENT='文章表';
+) ENGINE=MyISAM AUTO_INCREMENT=83 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '1', '9', '17,14,13', '1', 'debian 初始安装', '1', '833', 'debian初始安装,debian安装设置,debian安装vim,debian安装代码提示,debian安装PHP环境,debian安装lnmp', '1463987952', '1371746494');
-INSERT INTO `article` VALUES ('2', '1', '6', '18', '1', 'Js获取屏幕body宽高度', '1', '731', 'Js获取屏幕高度，获取屏幕宽度。 ', '1401163229', '1371782692');
-INSERT INTO `article` VALUES ('3', '1', '3', '16,19', '1', 'php空间的在线解压 ZIP', '1', '708', 'php空间的在线解压 php空间的在线解压ZIP php空间解压ZIP 在线解压ZIP 在线解压zip 空间php解压 php空间解压', '1372669921', '1371871456');
-INSERT INTO `article` VALUES ('4', '1', '6', '18', '1', 'Jquery随屏滚动特效', '1', '623', 'Jquery随屏滚动特效 jquery滚动 jquery滚动特效 jquery特效', '1372756985', '1371872464');
-INSERT INTO `article` VALUES ('6', '1', '3', '16,19', '1', 'php面试题 陷阱题', '1', '808', 'php面试题 php陷阱题 php基础题 php常见面试题 php考题', '1372757248', '1371896734');
-INSERT INTO `article` VALUES ('7', '1', '10', '16,19', '1', 'MySql常用语句', '1', '710', 'MySql常用语句 有用的MySQL语句 MySql语句', '1373789463', '1371899755');
-INSERT INTO `article` VALUES ('18', '1', '4', '16,21', '0', 'python mysql基础 学习', '1', '237', 'python mysql连接,python mysql', '1374059025', '1373942637');
-INSERT INTO `article` VALUES ('8', '1', '10', '16,19,20', '1', 'wamp虚拟主机配置', '1', '788', 'wamp5,apache 虚拟主机配置 wamp5虚拟主机配置 apache虚拟主机配置', '1373451770', '1371961592');
-INSERT INTO `article` VALUES ('9', '1', '9', '13,17', '1', 'Liunx配置IP和DNS', '1', '477', 'Liunx配置IP和DNS debian配置ip debian配置dns liunx配置ip和dns', '1372757673', '1371987080');
-INSERT INTO `article` VALUES ('10', '1', '9', '17,14,13', '1', 'Linux配置`.bashrc`,  `vim`， Linux配置命令缩写', '1', '606', 'Linux配置`.bashrc`,  `vim`  Linux配置命令缩写', '1409653291', '1371907485');
-INSERT INTO `article` VALUES ('11', '1', '9', '13,15', '1', 'Linux安装git', '1', '658', 'Linux安装git git linux配置安装 liunx git', '1373452568', '1371988171');
-INSERT INTO `article` VALUES ('12', '1', '10', '16,19', '1', 'mysql分组group ', '1', '814', 'mysql分组group mysql gorup mysql分组统计 mysql分组显示', '1372757732', '1372063686');
-INSERT INTO `article` VALUES ('13', '1', '6', '18', '1', '  jQuery 获取高度宽度', '1', '409', '  jQuery 获取屏幕高度、宽度,jquery 高度，jquery宽度', '1372757748', '1372415916');
-INSERT INTO `article` VALUES ('15', '1', '9', '13,14', '1', 'vim基本命令,vim常用命令', '1', '664', 'vim基本命令,vim常用命令', '1380112061', '1372865638');
-INSERT INTO `article` VALUES ('14', '1', '4', '', '0', 'python各种类型转换-int,str,char,float,ord,hex,oct等', '1', '6', 'python各种类型转换-int,str,char,float,ord,hex,oct等 ', '1372762175', '1372761865');
-INSERT INTO `article` VALUES ('17', '1', '4', '21', '1', 'python 基础学习笔记1', '1', '522', 'python 基础笔记 python基础 ', '1373440508', '1373437782');
-INSERT INTO `article` VALUES ('19', '1', '4', '16,21', '1', 'python安装mysql', '1', '632', 'python安装mysql', '1373957762', '1373956731');
-INSERT INTO `article` VALUES ('20', '1', '3', '', '0', 'php 文件下载详解', '1', '11', 'php 文件下载详解', '1375523177', '1375523177');
-INSERT INTO `article` VALUES ('21', '1', '9', '13,14,17', '1', 'vim中tab转成空格', '1', '486', 'vim中将tab自动转换成空格 ', '1377268337', '1377268337');
-INSERT INTO `article` VALUES ('22', '1', '9', '13,17', '1', 'vps 安全登录的方法 ssh 登录', '1', '687', 'vps 安全登录的方法 ssh  登录', '1377513177', '1377271802');
-INSERT INTO `article` VALUES ('31', '1', '4', '22,21', '1', 'django 正则表达式－Python Django  学习笔记3', '1', '538', '正则表达式用法，正则表达式详解，python中正则表达式。', '1401421189', '1382514720');
-INSERT INTO `article` VALUES ('24', '1', '4', '21,22', '1', 'django 安装初始化-Python Django 学习笔记1', '1', '680', 'django 初始化安装，python django学习笔记', '1395647313', '1377760757');
-INSERT INTO `article` VALUES ('25', '1', '23', '14', '1', 'Sublime 快捷键', '1', '460', 'Sublime 常用的快捷键。', '1378371170', '1378371104');
-INSERT INTO `article` VALUES ('26', '1', '4', '13,17,19,21,22', '1', '反向代理', '1', '424', 'Python使用反向代理，lnmp反向代理。', '1378779640', '1378779640');
-INSERT INTO `article` VALUES ('27', '1', '10', '16', '1', 'mysql 数据库导入、导出', '1', '454', 'mysql 数据库导入、导出', '1380795718', '1378909247');
-INSERT INTO `article` VALUES ('28', '1', '4', '21,22', '0', 'django post csrf', '1', '180', 'Python Django POST Forbidden (403)', '1380115380', '1380115040');
-INSERT INTO `article` VALUES ('29', '1', '9', '13,17', '1', 'lftp 命令如何使用', '1', '492', 'liunx lftp,debian lftp', '1380802115', '1380801134');
-INSERT INTO `article` VALUES ('30', '1', '6', '18', '1', ' jQuery 如何为动态添加的元素绑定事件', '1', '466', ' jQuery 如何为动态添加的元素绑定事件', '1381135077', '1381134321');
-INSERT INTO `article` VALUES ('32', '1', '4', '22,21', '1', 'django url 详解 - Python Django  学习笔记4', '1', '820', 'django的url配置、用法。', '1411890014', '1382521106');
-INSERT INTO `article` VALUES ('33', '1', '4', '21,22', '1', 'django 新建工程和项目－Python Django 学习笔记2', '1', '451', 'django如何新建工程和项目', '1384676829', '1382521966');
-INSERT INTO `article` VALUES ('34', '1', '4', '21,22', '1', 'django 模板详解 － Python Django 学习笔记5', '1', '574', 'django模型，django模型的新建。', '1384831398', '1384676770');
-INSERT INTO `article` VALUES ('35', '1', '4', '16,21,22', '1', 'django模型详解之模型创建 － Python Django 学习笔记6', '1', '452', '新建模型，模型语法', '1385279652', '1385174807');
-INSERT INTO `article` VALUES ('36', '1', '4', '', '0', 'django模型详解之数据库操作 － Python Django 学习笔记7', '1', '16', '', '1389189068', '1385279767');
-INSERT INTO `article` VALUES ('37', '1', '4', '16,21,22', '1', 'django如何连接mysql,django如何安装mysql', '1', '424', 'django如何安装mysql,django如何连接msyql.', '1389191862', '1389189913');
+INSERT INTO `article` VALUES ('1', '1', '9', '17,14,13', '1', 'debian 初始安装', '1', '833', '0', 'debian初始安装,debian安装设置,debian安装vim,debian安装代码提示,debian安装PHP环境,debian安装lnmp', '1463987952', '1371746494');
+INSERT INTO `article` VALUES ('2', '1', '6', '18', '1', 'Js获取屏幕body宽高度', '1', '731', '0', 'Js获取屏幕高度，获取屏幕宽度。 ', '1401163229', '1371782692');
+INSERT INTO `article` VALUES ('3', '1', '3', '16,19', '1', 'php空间的在线解压 ZIP', '1', '708', '0', 'php空间的在线解压 php空间的在线解压ZIP php空间解压ZIP 在线解压ZIP 在线解压zip 空间php解压 php空间解压', '1372669921', '1371871456');
+INSERT INTO `article` VALUES ('4', '1', '6', '18', '1', 'Jquery随屏滚动特效', '1', '623', '0', 'Jquery随屏滚动特效 jquery滚动 jquery滚动特效 jquery特效', '1372756985', '1371872464');
+INSERT INTO `article` VALUES ('6', '1', '3', '16,19', '1', 'php面试题 陷阱题', '1', '808', '0', 'php面试题 php陷阱题 php基础题 php常见面试题 php考题', '1372757248', '1371896734');
+INSERT INTO `article` VALUES ('7', '1', '10', '16,19', '1', 'MySql常用语句', '1', '710', '0', 'MySql常用语句 有用的MySQL语句 MySql语句', '1373789463', '1371899755');
+INSERT INTO `article` VALUES ('18', '1', '4', '16,21', '0', 'python mysql基础 学习', '1', '237', '0', 'python mysql连接,python mysql', '1374059025', '1373942637');
+INSERT INTO `article` VALUES ('8', '1', '10', '16,19,20', '1', 'wamp虚拟主机配置', '1', '788', '0', 'wamp5,apache 虚拟主机配置 wamp5虚拟主机配置 apache虚拟主机配置', '1373451770', '1371961592');
+INSERT INTO `article` VALUES ('9', '1', '9', '13,17', '1', 'Liunx配置IP和DNS', '1', '477', '0', 'Liunx配置IP和DNS debian配置ip debian配置dns liunx配置ip和dns', '1372757673', '1371987080');
+INSERT INTO `article` VALUES ('10', '0', '9', null, '1', 'Linux配置`.bashrc`,  `vim`， Linux配置命令缩写', '1', '616', '0', 'Linux配置`.bashrc`,  `vim`  Linux配置命令缩写', '1468835805', '1371907485');
+INSERT INTO `article` VALUES ('11', '1', '9', '13,15', '1', 'Linux安装git', '1', '658', '0', 'Linux安装git git linux配置安装 liunx git', '1373452568', '1371988171');
+INSERT INTO `article` VALUES ('12', '1', '10', '16,19', '1', 'mysql分组group ', '1', '814', '0', 'mysql分组group mysql gorup mysql分组统计 mysql分组显示', '1372757732', '1372063686');
+INSERT INTO `article` VALUES ('13', '1', '6', '18', '1', '  jQuery 获取高度宽度', '1', '409', '0', '  jQuery 获取屏幕高度、宽度,jquery 高度，jquery宽度', '1372757748', '1372415916');
+INSERT INTO `article` VALUES ('15', '1', '9', '13,14', '1', 'vim基本命令,vim常用命令', '1', '664', '0', 'vim基本命令,vim常用命令', '1380112061', '1372865638');
+INSERT INTO `article` VALUES ('14', '1', '4', '', '0', 'python各种类型转换-int,str,char,float,ord,hex,oct等', '1', '6', '0', 'python各种类型转换-int,str,char,float,ord,hex,oct等 ', '1372762175', '1372761865');
+INSERT INTO `article` VALUES ('17', '1', '4', '21', '1', 'python 基础学习笔记1', '1', '522', '0', 'python 基础笔记 python基础 ', '1373440508', '1373437782');
+INSERT INTO `article` VALUES ('19', '1', '4', '16,21', '1', 'python安装mysql', '1', '632', '0', 'python安装mysql', '1373957762', '1373956731');
+INSERT INTO `article` VALUES ('20', '1', '3', '', '0', 'php 文件下载详解', '1', '11', '0', 'php 文件下载详解', '1375523177', '1375523177');
+INSERT INTO `article` VALUES ('21', '1', '9', '13,14,17', '1', 'vim中tab转成空格', '1', '486', '0', 'vim中将tab自动转换成空格 ', '1377268337', '1377268337');
+INSERT INTO `article` VALUES ('22', '1', '9', '13,17', '1', 'vps 安全登录的方法 ssh 登录', '1', '687', '0', 'vps 安全登录的方法 ssh  登录', '1377513177', '1377271802');
+INSERT INTO `article` VALUES ('31', '1', '4', '22,21', '1', 'django 正则表达式－Python Django  学习笔记3', '1', '538', '0', '正则表达式用法，正则表达式详解，python中正则表达式。', '1401421189', '1382514720');
+INSERT INTO `article` VALUES ('24', '1', '4', '21,22', '1', 'django 安装初始化-Python Django 学习笔记1', '1', '680', '0', 'django 初始化安装，python django学习笔记', '1395647313', '1377760757');
+INSERT INTO `article` VALUES ('25', '1', '23', '14', '1', 'Sublime 快捷键', '1', '460', '0', 'Sublime 常用的快捷键。', '1378371170', '1378371104');
+INSERT INTO `article` VALUES ('26', '1', '4', '13,17,19,21,22', '1', '反向代理', '1', '424', '0', 'Python使用反向代理，lnmp反向代理。', '1378779640', '1378779640');
+INSERT INTO `article` VALUES ('27', '1', '10', '16', '1', 'mysql 数据库导入、导出', '1', '454', '0', 'mysql 数据库导入、导出', '1380795718', '1378909247');
+INSERT INTO `article` VALUES ('28', '1', '4', '21,22', '0', 'django post csrf', '1', '180', '0', 'Python Django POST Forbidden (403)', '1380115380', '1380115040');
+INSERT INTO `article` VALUES ('29', '1', '9', '13,17', '1', 'lftp 命令如何使用', '1', '492', '0', 'liunx lftp,debian lftp', '1380802115', '1380801134');
+INSERT INTO `article` VALUES ('30', '1', '6', '18', '1', ' jQuery 如何为动态添加的元素绑定事件', '1', '466', '0', ' jQuery 如何为动态添加的元素绑定事件', '1381135077', '1381134321');
+INSERT INTO `article` VALUES ('32', '1', '4', '22,21', '1', 'django url 详解 - Python Django  学习笔记4', '1', '820', '0', 'django的url配置、用法。', '1411890014', '1382521106');
+INSERT INTO `article` VALUES ('33', '1', '4', '21,22', '1', 'django 新建工程和项目－Python Django 学习笔记2', '1', '451', '0', 'django如何新建工程和项目', '1384676829', '1382521966');
+INSERT INTO `article` VALUES ('34', '1', '4', '21,22', '1', 'django 模板详解 － Python Django 学习笔记5', '1', '574', '0', 'django模型，django模型的新建。', '1384831398', '1384676770');
+INSERT INTO `article` VALUES ('35', '1', '4', '16,21,22', '1', 'django模型详解之模型创建 － Python Django 学习笔记6', '1', '452', '0', '新建模型，模型语法', '1385279652', '1385174807');
+INSERT INTO `article` VALUES ('36', '1', '4', '', '0', 'django模型详解之数据库操作 － Python Django 学习笔记7', '1', '16', '0', '', '1389189068', '1385279767');
+INSERT INTO `article` VALUES ('37', '1', '4', '16,21,22', '1', 'django如何连接mysql,django如何安装mysql', '1', '424', '0', 'django如何安装mysql,django如何连接msyql.', '1389191862', '1389189913');
 
 -- ----------------------------
 -- Table structure for article_category
@@ -211,7 +220,7 @@ INSERT INTO `article_content` VALUES ('7', '计算年数MySql语句 两个时间
 INSERT INTO `article_content` VALUES ('18', 'python如何连接mysql,mysqld', '<p>\r\n	python mysql连接:\r\n</p>\r\n<p>\r\n	1.在python里面连接mysql，首先要安装MySqldb,详细的方法请看我的另一篇文章，<a href=\"http://phpyrb.com/Article/index/artid/18.html\" target=\"_blank\">python安装mysql</a>.\r\n</p>\r\n<p>\r\n	2.\r\n</p>');
 INSERT INTO `article_content` VALUES ('8', 'wamp5虚拟主机配置 wamp虚拟主机配置 apache虚拟主机配置 虚拟主机配置', '<h2 align=\"center\">\r\n	wamp5虚拟主机配置\r\n</h2>\r\n<p align=\"center\">\r\n	<br />\r\n</p>\r\n<p>\r\n	1&nbsp; 编辑httpd.conf，查找Include conf/extra/httpd-vhosts.conf，把前面注释符号“#”删掉。<br />\r\n2&nbsp; 编辑httpd-vhosts.conf，我把WAMPServer安装在D:/wamp，所以我这里的路径是D:\\wamp\\Apache2\\conf\\extra。\r\n</p>\r\n<p>\r\n	3&nbsp; 把里面的内容清空掉，换成下面的内容：\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp;&nbsp;\r\n<pre class=\"brush:bash\">NameVirtualHost *:80\r\n<virtualhost *:80=\"\">\r\nServerName www.host1.com\r\nServerAlias www.host1.com\r\nDocumentRoot \"D:/wamp/www/host1\"<virtualhost *:80=\"\">\r\nServerName www.host2.com\r\nServerAlias www.host2.com\r\nDocumentRoot \"D:/wamp/www/host2\"</pre>\r\n<pre class=\"brush:bash\">&nbsp;</pre>\r\n	<p>\r\n		4&nbsp; 修改C:/WINDOWS/system3/drivers/etc/host这个文件，用记事本打开，加上如下内容:\r\n	</p>\r\n<pre class=\"brush:bash\">127.0.0.1  www.host1.com\r\n127.0.0.1  www.host2.com</pre>\r\n	<p>\r\n		<br />\r\n	</p>\r\n	<p>\r\n		<br />\r\n	</p>\r\n<span id=\"__kindeditor_bookmark_start_30__\"></span> \r\n	<p align=\"left\">\r\n		&nbsp;好了，然后重启apache，在浏览器里面输入www.host1.com，看看访问到的内容是不是host1这个目录呢\r\n	</p>');
 INSERT INTO `article_content` VALUES ('9', 'Liunx配置IP和DNS debian配置ip debian配置dns liunx配置ip和dns', '<h2 align=\"center\">\r\n	配置 IP 和 DNS\r\n</h2>\r\n配置IP和NDS，把 /etc/network/interfaces 修改成\r\n<pre class=\"brush:bash\"># This file describes the network interfaces available on your system\r\n# and how to activate them. For more information, see interfaces(5).\r\n\r\n# The loopback network interface\r\nauto lo\r\niface lo inet loopback\r\n\r\n# The primary network interface\r\nallow-hotplug eth0\r\niface eth0 inet static\r\n\r\naddress 192.168.1.23\r\nnetmask 255.255.255.0\r\nnetwork 192.168.1.0\r\nbroadcast 192.168.1.255\r\ngateway 192.168.1.1\r\n# dns-* options are implemented by the resolvconf package, if installed\r\ndns-nameservers 192.168.1.1</pre>\r\nDNS，把 /etc/resolv.conf 修改成\r\n<pre class=\"brush:bash\">nameserver 192.168.1.1</pre>\r\n<p>\r\n	之后运行 reboot 重启电脑\r\n</p>\r\n<p align=\"left\">\r\n	<br />\r\n</p>');
-INSERT INTO `article_content` VALUES ('10', 'Linux配置`.bashrc`,  `vim` Linux配置命令缩写 Linux配置git Linux配置vim vim配置', '<h2 align=\"center\">\r\n	Linux配置`.bashrc`,&nbsp; `vim`\r\n</h2>\r\n<p>\r\n	linux 命令缩写，简写配置命令如下：\r\n</p>\r\n<p>\r\n	配置&nbsp;`.bashrc`，修改成\r\n</p>\r\n<p>\r\n	首先执行命令 cd\r\n</p>\r\n<p>\r\n	然后输入 vi .bashrc 执行 然后把下面的的代码替换里面的找码，（复制需要升级VI 请看我的另一篇<a href=\"http://phpyrb.com/Article-content-artid-1.html\" target=\"_blank\"> debian 初始安装</a>）\r\n</p>\r\n<pre class=\"brush:bash\"># You may uncomment the following lines if you want `ls\' to be colorized:\r\n# export LS_OPTIONS=\'--color=auto\'\r\n# eval \"`dircolors`\"\r\nalias ls=\'ls -Ah --color=auto\'\r\nalias grep=\'grep --color=auto\'\r\nalias fgrep=\'fgrep --color=auto\'\r\nalias egrep=\'egrep --color=auto\'\r\n\r\nalias la=\'ls -AF\'\r\nalias ll=\'ls -lF\'\r\nalias l=\'ls -CF\'\r\n\r\n# Some more alias to avoid making mistakes:\r\nalias rm=\'rm -i\'\r\nalias cp=\'cp -i\'\r\nalias mv=\'mv -i\'\r\n\r\n</pre>\r\n配置 `vim`\r\n<p>\r\n	clone github 已经配置好的。 已配置的相关插件：\r\n</p>\r\n<ul>\r\n	<li>\r\n		blog\r\n	</li>\r\n	<li>\r\n		calendar\r\n	</li>\r\n	<li>\r\n		neocomplcache\r\n	</li>\r\n	<li>\r\n		NERD_commenter\r\n	</li>\r\n	<li>\r\n		NERD_tree\r\n	</li>\r\n	<li>\r\n		taglist\r\n	</li>\r\n	<li>\r\n		txtbrowser\r\n	</li>\r\n	<li>\r\n		vimwiki\r\n	</li>\r\n	<li>\r\n		voom\r\n	</li>\r\n	<li>\r\n		zencoding\r\n	</li>\r\n</ul>\r\n<p>\r\n	下载配置\r\n</p>\r\n<pre class=\"brush:bash\">cd\r\ngit clone https://github.com/fxiao/vimrc-linux_osx.git .vim\r\n\r\nln -s .vim/vimrc ./.vimrc</pre>\r\n配置联动提示\r\n<pre class=\"brush:bash\">ctags -R --languages=php .</pre>');
+INSERT INTO `article_content` VALUES ('10', 'Linux配置`.bashrc`,  `vim` Linux配置命令缩写 Linux配置git Linux配置vim vim配置', '<h2 align=\"center\">\r\n	Linux配置`.bashrc`,&nbsp; `vim`</h2><p>\r\n	linux 命令缩写，简写配置命令如下：</p><p>\r\n	配置&nbsp;`.bashrc`，修改成</p><p>\r\n	首先执行命令 cd</p><p>\r\n	然后输入 vi .bashrc 执行 然后把下面的的代码替换里面的找码，（复制需要升级VI 请看我的另一篇<a href=\"http://phpyrb.com/Article-content-artid-1.html\" target=\"_blank\"> debian 初始安装</a>）</p><pre class=\"brush:bash\">#&nbsp;You&nbsp;may&nbsp;uncomment&nbsp;the&nbsp;following&nbsp;lines&nbsp;if&nbsp;you&nbsp;want&nbsp;`ls&#39;&nbsp;to&nbsp;be&nbsp;colorized:\r\n#&nbsp;export&nbsp;LS_OPTIONS=&#39;--color=auto&#39;\r\n#&nbsp;eval&nbsp;&quot;`dircolors`&quot;\r\nalias&nbsp;ls=&#39;ls&nbsp;-Ah&nbsp;--color=auto&#39;\r\nalias&nbsp;grep=&#39;grep&nbsp;--color=auto&#39;\r\nalias&nbsp;fgrep=&#39;fgrep&nbsp;--color=auto&#39;\r\nalias&nbsp;egrep=&#39;egrep&nbsp;--color=auto&#39;\r\n\r\nalias&nbsp;la=&#39;ls&nbsp;-AF&#39;\r\nalias&nbsp;ll=&#39;ls&nbsp;-lF&#39;\r\nalias&nbsp;l=&#39;ls&nbsp;-CF&#39;\r\n\r\n#&nbsp;Some&nbsp;more&nbsp;alias&nbsp;to&nbsp;avoid&nbsp;making&nbsp;mistakes:\r\nalias&nbsp;rm=&#39;rm&nbsp;-i&#39;\r\nalias&nbsp;cp=&#39;cp&nbsp;-i&#39;\r\nalias&nbsp;mv=&#39;mv&nbsp;-i&#39;</pre><p>配置 `vim`</p><p>\r\n	clone github 已经配置好的。 已配置的相关插件：</p><ul><li>\r\n		blog	</li><li>\r\n		calendar	</li><li>\r\n		neocomplcache	</li><li>\r\n		NERD_commenter	</li><li>\r\n		NERD_tree	</li><li>\r\n		taglist	</li><li>\r\n		txtbrowser	</li><li>\r\n		vimwiki	</li><li>\r\n		voom	</li><li>\r\n		zencoding	</li></ul><p>\r\n	下载配置</p><pre class=\"brush:bash\">cd\r\nhttps://github.com/mwei0321/.vim.git\r\n\r\nln&nbsp;-s&nbsp;.vim/vimrc&nbsp;./.vimrc</pre><p>配置联动提示</p><pre class=\"brush:bash\">ctags&nbsp;-R&nbsp;--languages=php&nbsp;.</pre>');
 INSERT INTO `article_content` VALUES ('11', 'Linux配置安装git git linux配置 liunx git配置安装 git如何安装配置 linux中git如何安装配置 git在linux中如何安装配置 ', '<h2 align=\"center\">\r\n	Linux配置git\r\n</h2>\r\n<p>\r\n	配置 git 的基本信息和命令缩写\r\n</p>\r\n<pre class=\"brush:bash\">cd\r\nvi .gitconfig</pre>\r\n<p>\r\n	写入\r\n</p>\r\n<pre class=\"brush:bash\">[user]\r\n    name = mawei\r\n    email = 491518132@qq.com\r\n[core]\r\n    excludesfile = /root/.gitignore_global\r\n    editor = vim\r\n[alias]\r\n    co = checkout\r\n    ci = commit\r\n    st = status\r\n    ca = commit -a\r\n    b = branch\r\n    lg = log --graph --pretty=format:\'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset - %C(yellow)%cn%Creset\' --abbrev-commit --date=relative\r\n[diff]\r\n    tool = vimdiff\r\n[difftool]\r\n    prompt = No</pre>\r\n配置 git 忽略文件规则\r\n<pre class=\"brush:bash\">cd\r\nvi .gitignore_global</pre>\r\n写入\r\n<pre class=\"brush:bash\">#compiled source #\r\n###################\r\n*.com\r\n*.class\r\n*.dll\r\n*.exe\r\n*.o\r\n*.so\r\n*.pyc\r\n\r\n# Packages #\r\n############\r\n# it\'s better to unpack these files and commit the raw source\r\n# git has its own built in compression methods\r\n*.7z\r\n*.dmg\r\n*.gz\r\n*.iso\r\n*.jar\r\n*.rar\r\n*.tar\r\n*.zip\r\n\r\n# Logs and databases #\r\n######################\r\n*.log\r\n*.sqlite\r\n\r\n# OS generated files #\r\n######################\r\n.DS_Store*\r\nehthumbs.db\r\n._*\r\n.Spotlight-V100\r\n.Trashes\r\nIcon?\r\nThumbs.db\r\n.svn\r\n*.bak\r\nehthumbs.db\r\nRuntime\r\n*.swp\r\ntags\r\n*~</pre>');
 INSERT INTO `article_content` VALUES ('12', 'mysql分组group mysql gorup mysql分组统计 mysql分组显示 mysql分组并显示id mysql分组统计', '<p align=\"center\">\r\n	mysql分组group\r\n</p>\r\n<p align=\"left\">\r\n	mysql分组并显示id\r\n</p>\r\n<pre class=\"brush:sql\">SELECT *,group_concat(id) as ids FROM tablename WHERE condition GROUP BY field</pre>\r\n<p align=\"left\">\r\n	mysql分组统计\r\n</p>\r\n<pre class=\"brush:sql\">SELECT *,COUNT(id) as count FROM tablename WHERE condition GROUP BY field</pre>\r\n<p align=\"left\">\r\n	<br />\r\n</p>');
 INSERT INTO `article_content` VALUES ('13', '浏览器当前窗口可视区域高度 浏览器当前窗口文档body的总高度 包括border padding margin 浏览器当前窗口文档对象宽度alert($(document.body).width());//浏览器当前窗口文档body的高度', '<h3 style=\"text-align:center;\">\r\n	&nbsp; jQuery 获取屏幕高度、宽度\r\n</h3>\r\n<blockquote>\r\n	<br />\r\nalert($(window).height());//浏览器当前窗口可视区域高度<br />\r\nalert($(document).height());//浏览器当前窗口文档的高度<br />\r\nalert($(document.body).height());//浏览器当前窗口文档body的高度<br />\r\nalert($(document.body).outerHeight(true));//浏览器当前窗口文档body的总高度 包括border padding margin<br />\r\nalert($(window).width());//浏览器当前窗口可视区域宽度<br />\r\nalert($(document).width());//浏览器当前窗口文档对象宽度alert($(document.body).width());//浏览器当前窗口文档body的高度<br />\r\nalert($(document.body).outerWidth(true));//浏览器当前窗口文档body的总宽度 包括border padding margin<br />\r\n&nbsp;// 获取页面的高度、宽度<br />\r\n<pre class=\"brush:jscript\">functiongetPageSize() {\r\n			varxScroll, yScroll;\r\n			if(window.innerHeight &amp;&amp; window.scrollMaxY) {\r\n				xScroll = window.innerWidth + window.scrollMaxX;\r\n				yScroll = window.innerHeight + window.scrollMaxY;\r\n			}else{\r\n				if(document.body.scrollHeight &gt; document.body.offsetHeight) {// all but Explorer Mac\r\n					xScroll = document.body.scrollWidth;\r\n					yScroll = document.body.scrollHeight;\r\n				}else{// Explorer Mac...would also work in Explorer 6 Strict, Mozilla and Safari\r\n					xScroll = document.body.offsetWidth;\r\n					yScroll = document.body.offsetHeight;\r\n				}\r\n			}\r\n			varwindowWidth, windowHeight;\r\n			if(self.innerHeight) {// all except Explorer\r\n				if(document.documentElement.clientWidth) {\r\n					windowWidth = document.documentElement.clientWidth;\r\n				}else{\r\n					windowWidth = self.innerWidth;\r\n				}\r\n				windowHeight = self.innerHeight;\r\n			}else{\r\n				if(document.documentElement &amp;&amp; document.documentElement.clientHeight) {// Explorer 6 Strict Mode\r\n					windowWidth = document.documentElement.clientWidth;\r\n					windowHeight = document.documentElement.clientHeight;\r\n				}else{\r\n					if(document.body) {// other Explorers\r\n						windowWidth = document.body.clientWidth;\r\n						windowHeight = document.body.clientHeight;\r\n					}\r\n				}\r\n			}\r\n			// for small pages with total height less then height of the viewport\r\n			if(yScroll &lt; windowHeight) {\r\n				pageHeight = windowHeight;\r\n			}else{\r\n				pageHeight = yScroll;\r\n			}\r\n			// for small pages with total width less then width of the viewport\r\n			if(xScroll &lt; windowWidth) {\r\n				pageWidth = xScroll;\r\n			}else{\r\n				pageWidth = windowWidth;\r\n			}\r\n			arrayPageSize =newArray(pageWidth, pageHeight, windowWidth, windowHeight);\r\n			returnarrayPageSize;\r\n		}</pre>\r\n&nbsp;// 滚动条\r\n<pre class=\"brush:jscript\">document.body.scrollTop;\r\n$(document).scrollTop();\r\n</pre>\r\n<br />\r\n&nbsp;\r\n</blockquote>');
@@ -334,13 +343,14 @@ CREATE TABLE `electron_componet` (
   `value` char(20) DEFAULT NULL COMMENT '值',
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 (1:有效，0:失效)',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='电子元件表';
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='电子元件表';
 
 -- ----------------------------
 -- Records of electron_componet
 -- ----------------------------
-INSERT INTO `electron_componet` VALUES ('1', '1', 'aaa', 'aaaa', 'aaaa', 'aaa', '1');
+INSERT INTO `electron_componet` VALUES ('1', '1', 'aaab', 'AAAABF', 'AAAABF', 'AAABF', '1');
 INSERT INTO `electron_componet` VALUES ('2', '1', '贴片电容', '0805', 'SOT－223', '107C', '1');
+INSERT INTO `electron_componet` VALUES ('3', '1', 'nnnn', 'NNN', 'NNNN', 'NNNN', '1');
 
 -- ----------------------------
 -- Table structure for grade
@@ -420,6 +430,74 @@ CREATE TABLE `member_electron_order` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for rbac_node
+-- ----------------------------
+DROP TABLE IF EXISTS `rbac_node`;
+CREATE TABLE `rbac_node` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) NOT NULL DEFAULT '1' COMMENT '控制器',
+  `action` varchar(20) NOT NULL DEFAULT '' COMMENT '动作',
+  `controller` varchar(20) NOT NULL DEFAULT '' COMMENT '父节点名',
+  `name` varchar(20) DEFAULT NULL COMMENT '名称',
+  `status` tinyint(1) DEFAULT '1' COMMENT '状态 （0：不生效，1：生效）',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='权限节点表';
+
+-- ----------------------------
+-- Records of rbac_node
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for rbac_node_group
+-- ----------------------------
+DROP TABLE IF EXISTS `rbac_node_group`;
+CREATE TABLE `rbac_node_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL DEFAULT '',
+  `node_ids` varchar(200) NOT NULL DEFAULT '' COMMENT '节点IDS，多个用，分割',
+  `status` tinyint(1) DEFAULT '1' COMMENT '状态 （0：不生效，1：生效）',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='权限节点组';
+
+-- ----------------------------
+-- Records of rbac_node_group
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for rbac_parent_node
+-- ----------------------------
+DROP TABLE IF EXISTS `rbac_parent_node`;
+CREATE TABLE `rbac_parent_node` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `controller` varchar(20) NOT NULL COMMENT '动作名',
+  `name` varchar(20) DEFAULT NULL COMMENT '名称',
+  `status` tinyint(1) DEFAULT '1' COMMENT '状态 （0：不生效，1：生效）',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `controller` (`controller`) USING HASH
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='动作管理表';
+
+-- ----------------------------
+-- Records of rbac_parent_node
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for rbac_user
+-- ----------------------------
+DROP TABLE IF EXISTS `rbac_user`;
+CREATE TABLE `rbac_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `group_id` varchar(100) NOT NULL DEFAULT '-1' COMMENT '节点组ID (-1:超级管理员)',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uid` (`uid`) USING BTREE,
+  KEY `group_id` (`group_id`) USING HASH
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rbac_user
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for system_init_config
 -- ----------------------------
 DROP TABLE IF EXISTS `system_init_config`;
@@ -438,3 +516,24 @@ CREATE TABLE `system_init_config` (
 -- ----------------------------
 -- Records of system_init_config
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for web_navi_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `web_navi_menu`;
+CREATE TABLE `web_navi_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) DEFAULT '0' COMMENT '父ID',
+  `name` varchar(15) DEFAULT NULL COMMENT '名称',
+  `url` varchar(100) DEFAULT NULL COMMENT '链接',
+  `status` tinyint(1) DEFAULT '1' COMMENT '状态 (1:有效，0:失效)',
+  `sort` tinyint(3) DEFAULT '0' COMMENT '排序',
+  `description` varchar(120) DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='前端主导航菜单管理';
+
+-- ----------------------------
+-- Records of web_navi_menu
+-- ----------------------------
+INSERT INTO `web_navi_menu` VALUES ('1', '0', '首页', 'Home/Index/index', '1', '95', '首页');
+INSERT INTO `web_navi_menu` VALUES ('2', '0', '文章', 'Home/Index/index', '1', '90', '文章');

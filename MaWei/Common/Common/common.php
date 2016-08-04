@@ -80,25 +80,26 @@
     }
 
     /**
-     *
-     * @param  array
-     * @param  string
+     * 把数组有PID的层次化
+     * @param  array $_list
+     * @param  int $_pid
      * @return array
      * @author MaWei (http://www.phpython.com)
      * @date 2016年6月11日 下午8:25:22
     */
-    function level($_menu,$_pid = 0,$_level=0){
-        static $leval = [];
+    function level($_menu,$_pid = 0,$_level=0,$_flag = 1){
+        static $level = [];
+        $_flag && $level = [] && $_flag = 0;
         foreach ($_menu as $k => $v){
             if($v['pid'] == $_pid){
-                $leval[$v['id']] = $v;
-                $leval[$v['id']]['level'] = $_level;
-                $leval[$v['id']]['levelstr'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;|----', $_level);
+                $level[$v['id']] = $v;
+                $level[$v['id']]['level'] = $_level;
+                $level[$v['id']]['levelstr'] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;|----', $_level);
                 unset($_menu[$k]);
-                level($_menu,$v['id'],$_level+1);
+                level($_menu,$v['id'],$_level+1,0);
             }
         }
-        return $leval;
+        return $level;
     }
 
     /**

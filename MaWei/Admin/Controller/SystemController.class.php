@@ -7,12 +7,13 @@
 	*  +----------------------------------------------------------------------------------------------+
 	*   | Creater Time : 2014-8-3
 	*  +----------------------------------------------------------------------------------------------+
-	*   | Link :  http://www.phpyrb.com
+	*   | Link :  http://www.phpython.com
 	*  +----------------------------------------------------------------------------------------------+
 	**/
 
 	namespace Admin\Controller;
 	use Admin\Controller\InitController;
+	use Library\AdminNaviMenu;
 
 	class SystemController extends InitController{
 		protected $app,$System;
@@ -20,7 +21,7 @@
 			parent::_init();
 
 			$this->assign('position',['顶级','二级']);
-			$this->System = new \Library\AdminNaviMenu();
+			$this->System = new AdminNaviMenu();
 		}
 
 		function index(){
@@ -75,7 +76,7 @@
 			$_ids = intval($_REQUEST['ids']);
 			switch ($type) {
 				case 'AdminMenu' :
-					$reid = delall($_ids, 'AdminNavigatorMenu');
+					$reid = delall($_ids, 'AdminNaviMenu');
 					if($reid === false){
 						echo null;
 					}else{
@@ -126,7 +127,7 @@
 					$data['action'] = text($_REQUEST['action']);
 					$data['url'] = $_REQUEST['url'];
 					$data['status'] = $_REQUEST['status'] ? intval($_REQUEST['status']) : 1;
-					$reid = addUpdata($data,'AdminNavigatorMenu');
+					$reid = addUpdata($data,'AdminNaviMenu');
 					S('Menu',null);
 					break;
 				default:
