@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50709
 File Encoding         : 65001
 
-Date: 2016-08-04 18:28:07
+Date: 2016-08-12 10:52:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `admin_navi_menu` (
   `sort` tinyint(2) DEFAULT '1' COMMENT '菜单排序',
   `position` tinyint(20) DEFAULT NULL COMMENT '位置  顶部0　左则1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
 
 -- ----------------------------
 -- Records of admin_navi_menu
@@ -50,8 +50,10 @@ INSERT INTO `admin_navi_menu` VALUES ('22', '0', '用户权限管理', 'Rbac', '
 INSERT INTO `admin_navi_menu` VALUES ('23', '22', '权限父节点', 'Rbac', 'parentNode', 'Admin/Rbac/parentNode', '1', '70', '1');
 INSERT INTO `admin_navi_menu` VALUES ('24', '22', '权限子节点', 'Rbac', 'node', 'Admin/Rbac/node', '1', '80', '1');
 INSERT INTO `admin_navi_menu` VALUES ('25', '22', '权限节点组', 'Rbac', 'nodeGroup', 'Admin/Rbac/nodeGroup', '1', '85', '1');
-INSERT INTO `admin_navi_menu` VALUES ('26', '22', '用户权限', 'Rbac', 'user', 'Admin/Rbac/user', '1', '90', '1');
-INSERT INTO `admin_navi_menu` VALUES ('27', '20', '焦点广告管理', 'WebConf', 'bannr', 'Admin/WebConf/bannr', '1', '70', '1');
+INSERT INTO `admin_navi_menu` VALUES ('26', '22', '用户权限', 'Rbac', 'index', 'Admin/Rbac/index', '1', '90', '1');
+INSERT INTO `admin_navi_menu` VALUES ('27', '1', '焦点广告管理', 'WebConf', 'bannr', 'Admin/WebConf/bannr', '1', '70', '1');
+INSERT INTO `admin_navi_menu` VALUES ('28', '11', '元件套装', 'Electron', 'suit', 'Admin/Electron/suit', '1', '70', '1');
+INSERT INTO `admin_navi_menu` VALUES ('29', '14', '教程文章', 'Tutorial', 'index', 'Admin/Tutorial/index', '1', '85', '1');
 
 -- ----------------------------
 -- Table structure for admin_user
@@ -94,19 +96,19 @@ CREATE TABLE `app` (
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `uid` int(11) DEFAULT NULL COMMENT '用户ID',
-  `cateid` int(11) DEFAULT NULL COMMENT '分类ID',
+  `uid` int(11) unsigned DEFAULT NULL COMMENT '用户ID',
+  `cateid` int(11) unsigned DEFAULT NULL COMMENT '分类ID',
   `tags` varchar(200) DEFAULT NULL COMMENT '标签ID',
   `status` tinyint(1) DEFAULT '1' COMMENT '状态（0 隐藏、1显示）',
   `title` varchar(150) DEFAULT NULL COMMENT '文章标题',
   `author` int(11) DEFAULT NULL COMMENT '作者ID',
-  `hots` int(11) DEFAULT '0' COMMENT '点击率',
-  `com_num` int(11) DEFAULT '0' COMMENT '评论数',
+  `hots` int(11) unsigned DEFAULT '0' COMMENT '点击率',
+  `com_num` int(11) unsigned DEFAULT '0' COMMENT '评论数',
   `keyword` varchar(100) DEFAULT NULL COMMENT '关键字',
   `uptime` int(11) DEFAULT NULL COMMENT '更新时间',
   `ctime` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=83 DEFAULT CHARSET=utf8 COMMENT='文章表';
+) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 -- ----------------------------
 -- Records of article
@@ -145,6 +147,7 @@ INSERT INTO `article` VALUES ('34', '1', '4', '21,22', '1', 'django 模板详解
 INSERT INTO `article` VALUES ('35', '1', '4', '16,21,22', '1', 'django模型详解之模型创建 － Python Django 学习笔记6', '1', '452', '0', '新建模型，模型语法', '1385279652', '1385174807');
 INSERT INTO `article` VALUES ('36', '1', '4', '', '0', 'django模型详解之数据库操作 － Python Django 学习笔记7', '1', '16', '0', '', '1389189068', '1385279767');
 INSERT INTO `article` VALUES ('37', '1', '4', '16,21,22', '1', 'django如何连接mysql,django如何安装mysql', '1', '424', '0', 'django如何安装mysql,django如何连接msyql.', '1389191862', '1389189913');
+INSERT INTO `article` VALUES ('83', '0', '1', null, '1', '萝莉控教程', '1', '0', '0', '萝莉控教程', '1470795904', '1470795904');
 
 -- ----------------------------
 -- Table structure for article_category
@@ -152,7 +155,7 @@ INSERT INTO `article` VALUES ('37', '1', '4', '16,21,22', '1', 'django如何连�
 DROP TABLE IF EXISTS `article_category`;
 CREATE TABLE `article_category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父ID',
+  `pid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父ID',
   `name` varchar(30) NOT NULL COMMENT '分类名',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态（0 隐藏、1显示）',
   `description` varchar(120) DEFAULT NULL COMMENT '描述',
@@ -163,8 +166,8 @@ CREATE TABLE `article_category` (
 -- ----------------------------
 -- Records of article_category
 -- ----------------------------
-INSERT INTO `article_category` VALUES ('1', '0', 'Skill', '1', '顶级分类', '0');
-INSERT INTO `article_category` VALUES ('2', '0', 'Program', '1', '编程语言主分类', '0');
+INSERT INTO `article_category` VALUES ('1', '0', 'DIY制作', '1', '顶级分类', '0');
+INSERT INTO `article_category` VALUES ('2', '0', '编程语言', '1', '编程语言主分类', '0');
 INSERT INTO `article_category` VALUES ('3', '2', 'PHP', '1', 'php是一门很好学，很容易懂的语言，易学，想要精通得花的功夫。', '90');
 INSERT INTO `article_category` VALUES ('4', '2', 'Python', '1', 'Python是一个很牛的语言，是应该好好学习的语言。', '99');
 INSERT INTO `article_category` VALUES ('5', '2', 'Ruby', '1', 'Ruby分类，Ruby的相关文章。', '0');
@@ -182,8 +185,8 @@ INSERT INTO `article_category` VALUES ('24', '2', 'MongoDB', '1', '', '0');
 DROP TABLE IF EXISTS `article_comment`;
 CREATE TABLE `article_comment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `artid` int(11) NOT NULL COMMENT '文章ID',
-  `uid` int(11) NOT NULL DEFAULT '-1' COMMENT '用户ID',
+  `artid` int(11) unsigned NOT NULL COMMENT '文章ID',
+  `uid` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
   `content` text NOT NULL COMMENT '内容',
   `uname` varchar(15) DEFAULT NULL COMMENT '用户名',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '状态（0 隐藏、1显示）',
@@ -202,7 +205,7 @@ CREATE TABLE `article_comment` (
 -- ----------------------------
 DROP TABLE IF EXISTS `article_content`;
 CREATE TABLE `article_content` (
-  `artid` int(11) NOT NULL COMMENT '文章ID',
+  `artid` int(11) unsigned NOT NULL COMMENT '文章ID',
   `description` text NOT NULL COMMENT '描述',
   `content` longtext NOT NULL COMMENT '内容',
   PRIMARY KEY (`artid`)
@@ -278,6 +281,7 @@ INSERT INTO `article_content` VALUES ('69', '如果你忘记mysql root密码，�
 INSERT INTO `article_content` VALUES ('70', '修改crontab的默认编辑器方法。', '<p>\r\n	<br />\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 今天做项目的时候，需要用到计划任务，执行PHP任务。用crontab -e，打开，一下子傻眼了，一看用的nano编辑器，\r\n</p>\r\n<p>\r\n	这个编辑我只听过，不会用啊，跟VIM命令完全不一样，我想要换编辑器，在网上查了一下，我自己又总结了一下，方法如下，\r\n</p>\r\n<p>\r\n	下面的是把默认的nano修改为vim;\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 方法1：（此方法只是临时生效）\r\n</p>\r\n<pre class=\"brush:bash\">export EDITOR=/usr/bin/vim;</pre>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 方法2：（此方法相对上面要好一点，但要重启服务器）\r\n<pre class=\"brush:bash\">\r\necho export EDITOR=/usr/bin/vim &gt;&gt; ~/.bashrc</pre>\r\n&nbsp;&nbsp; 方法3： （此方法也要重启）\r\n<pre class=\"brush:jscript\">\r\n#查看当前系统有那些编辑器可用 \r\nupdate-alternatives --list editor\r\n#修改系统默认编辑器，输入如下的命令后，然后会提示你选择那个，直接输入数字\r\nupdate-alternatives --config editor\r\n</pre>\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 方法4：（这种方法更直接，而且不用重启）\r\n<pre class=\"brush:bash\">\r\napt-get remove nano</pre>\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 直接卸载nano编辑器，我个人推荐这种，不用这个编辑器，直接卸载更好\r\n</p>');
 INSERT INTO `article_content` VALUES ('71', 'linux计划任务的命令相关的详细解释。', '<p>\r\n	&nbsp;&nbsp;&nbsp; 最近项目要用到计划任务，学习了一下linux计划任务命令：crontab，这个命令是linux定时任务服务命令，下面我总结了一下，共大家一起共同学习一下：\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 1.安装crontab命令服务：\r\n</p>\r\n<pre class=\"brush:bash\">#debian安装\r\napt-get install cron\r\n#centos安装\r\nyum install crontabs</pre>\r\n&nbsp;&nbsp;&nbsp;&nbsp; 2.开启crontab服务：\r\n<pre class=\"brush:bash\">/etc/init.d/cron restart｜reload|start|stop #重启｜重载配置｜开启｜停止</pre>\r\n&nbsp;&nbsp;&nbsp;&nbsp; 3.查看crontab服务状态\r\n<pre class=\"brush:bash\">service cron status</pre>\r\n&nbsp;&nbsp;&nbsp;&nbsp; 4.crontab命令格式：\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; crontab user command #crontab 执行程序的用户名 执行的命令，\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 5.crontab命令完整格式：\r\n</p>\r\n<pre class=\"brush:bash\">* * * * * user command  #前面五个星号为时期，依次表示，分 时 天 周 月,user为执行的用户名,command为执行命令</pre>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp;&nbsp; 6.Crontab执行时间说明：\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * 星号表示全部，为任意时间\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ,&nbsp; 逗号表示范围，例：1,2,3&nbsp; 如果写的周上，表示 星期一到星期三\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&nbsp; 中横杠表示一个连续的整数范围 例：1-3 如果写的周上，表示 星期一到星期三\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /&nbsp; 正斜线表示时间间隔频率 例：0-23/4写在时上，表示一天24小时每四小时执行一次\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 7.crontab编辑：\r\n</p>\r\n<pre class=\"brush:bash\">crontab -e</pre>\r\n&nbsp;&nbsp;&nbsp;&nbsp; 用上面的命令，会打开crontab计划任务的编辑文件，在里面输入你执行的计划任务，详细请看第六步，例：\r\n<pre class=\"brush:bash\">* */2 * * * www curl http://www.phpyrb.com #意思为每二分钟访问一个这个网站</pre>\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 以上我个人理解，整理。\r\n</p>');
 INSERT INTO `article_content` VALUES ('72', '在lnmp里面给php安装rar模块,给php5安装rar模块,给nginx里面的php安装rar解压模块方法', '<p>\r\n	&nbsp;&nbsp;&nbsp; 最近项目需要用到php解压rar,不知道怎么搞,这几天一直在折腾php解压rar,搞的我都没有脾气了,在网上找各种资料,发现真的没有什么这方面的资料,http://www.phpyrb.com/Admin-Article-edit.html\r\n</p>\r\n<p>\r\n	可能这个需求比较少吧,搞了好久,今天终于搞定了,下面说一下方法:\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 1.下载php扩展rar包,网址为 http://pecl.php.net/package/rar;\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 2.首先还是来说一下window版本的,这个容易,直接下载一个dll动态链接库包都放在php扩展包目录里面的,然后改一下配置文件重启就可以了.具体如下:\r\n</p>\r\n<p>\r\n	网址:http://pecl.php.net/package/rar/3.0.2/windows,已经在上面的网址中选择最新版本的rar扩展包,后面有个window DLL的图标点击进去下载,下载后把\r\n</p>\r\n<p>\r\n	里面的php_rar.dll这个文件放在你的php安装目录/php/ext/文件夹里面,然后再修改 php.ini ,在里面加上:\r\n</p>\r\n<pre class=\"brush:bash\">extension=php_rar.dll</pre>\r\n然后重启你的服务器就可以,这个很简单,主要是linux服务器难搞,下面来说说liunx的安装方法:\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 3.我用的是debian的系统,装的是 nginx 也就是lnmp包,\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 4.第一步还是先下载并解压,命令如下:\r\n</p>\r\n<pre class=\"brush:bash\">wget http://pecl.php.net/get/rar-3.0.2.tgz\r\ntar -xvf rar-3.0.2.tgz\r\ncd rar-3.0.2\r\n</pre>\r\n&nbsp;&nbsp;&nbsp;&nbsp; 5.然后是编译,首页你要安装一个编译插件:\r\n<pre class=\"brush:bash\">#Debianhttp://www.phpyrb.com/Admin-Article-edit.html\r\napt-get install libc-client-dev\r\n#CentOS\r\nyum install libc-client-devel</pre>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp; 6.下面两步很关键,我就是这步没有搞好,所以一直不行,在官方文档里面,安装是直接运行 phpize,这是他包里面默认就有的,我照着他里面做就是不行,这个应该用你安装的php里面的phpize再编译,如果没有你修改\r\n</p>\r\n<p>\r\n	nginx安装路径,那么命令应该如下,反正就是用你安装好的php里面的phpize来编辑,不要用包里面自带这的.命令如下:\r\n</p>\r\n<pre class=\"brush:bash\">/usr/local/php/bin/phpize</pre>\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n	可能这步会出现一些警告,如下的一样\r\n</p>\r\n<pre class=\"brush:bash\">Configuring for:\r\nPHP Api Version:         20090626\r\nZend Module Api No:      20090626\r\nZend Extension Api No:   220090626\r\nconfigure.in:3: warning: prefer named diversions\r\nconfigure.in:3: warning: prefer named diversions</pre>\r\n这个没有关系 ,不要影响后面的.\r\n<p>\r\n	<br />\r\n</p>\r\n<p>\r\n	&nbsp;&nbsp;&nbsp;&nbsp; 7.这步是最关键的,就是告诉编译环境你的php路径,这步非常重要,我就是被这步给搞死的,命令如下,如果你没有修改默认路径的话:\r\n</p>\r\n<pre class=\"brush:bash\">./configure --with-php-config=/usr/local/php/bin/php-config</pre>\r\n&nbsp;&nbsp;&nbsp;&nbsp; 8.最后一步就是添加配置,然后重启,修改php.ini配置:\r\n<pre class=\"brush:bash\">vi /usr/local/php/etc/php.ini</pre>\r\n然后在里面的添加:\r\n<pre class=\"brush:bash\">extension=rar.so</pre>\r\n然后保存,退出,重启nginx:\r\n<pre class=\"brush:bash\">~/lnmp restart</pre>\r\n如果没有报错,那就OK了.如果有问题,重新来一遍.嘿嘿^<br />\r\n<p>\r\n	<br />\r\n</p>');
+INSERT INTO `article_content` VALUES ('83', '萝莉控教程', '<p>萝莉控教程萝莉控教程萝莉控教程萝莉控教程萝莉控教程</p>');
 
 -- ----------------------------
 -- Table structure for article_tag
@@ -285,10 +289,10 @@ INSERT INTO `article_content` VALUES ('72', '在lnmp里面给php安装rar模块,
 DROP TABLE IF EXISTS `article_tag`;
 CREATE TABLE `article_tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cate_id` int(11) DEFAULT '0' COMMENT '分类ID',
+  `cate_id` int(11) unsigned DEFAULT '0' COMMENT '分类ID',
   `name` char(10) DEFAULT NULL COMMENT '标签名称',
   `description` varchar(120) DEFAULT NULL COMMENT '描述',
-  `sort` tinyint(2) DEFAULT '100' COMMENT '排序',
+  `sort` tinyint(2) unsigned DEFAULT '100' COMMENT '排序',
   `status` tinyint(1) DEFAULT '1' COMMENT '状态',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='文章标签表';
@@ -312,12 +316,75 @@ INSERT INTO `article_tag` VALUES ('25', '2', 'NoSQL', '', '50', '1');
 INSERT INTO `article_tag` VALUES ('26', '2', 'MongoDB', '', '50', '1');
 
 -- ----------------------------
+-- Table structure for article_tutorial
+-- ----------------------------
+DROP TABLE IF EXISTS `article_tutorial`;
+CREATE TABLE `article_tutorial` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cateid` int(11) unsigned NOT NULL COMMENT '分类ID',
+  `title` varchar(10) NOT NULL DEFAULT '' COMMENT '文章标题',
+  `author` int(11) DEFAULT '1' COMMENT '作者',
+  `status` tinyint(1) DEFAULT '1' COMMENT '状态（0 隐藏、1显示）',
+  `hots` int(11) unsigned DEFAULT '0' COMMENT '点击率',
+  `com_num` int(11) unsigned DEFAULT '0' COMMENT '评论数',
+  `keyword` varchar(120) DEFAULT '' COMMENT '关键字',
+  `description` mediumtext COMMENT '简介',
+  `content` text COMMENT '文章内容简介',
+  `uptime` int(11) DEFAULT '0' COMMENT '更新时间',
+  `ctime` int(11) DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `cateid` (`cateid`) COMMENT '分类ID'
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='教程文章表';
+
+-- ----------------------------
+-- Records of article_tutorial
+-- ----------------------------
+INSERT INTO `article_tutorial` VALUES ('1', '1', '工', '1', '1', '0', '0', '工', '工a', '<p>&nbsp;工工工工a</p>', '0', '0');
+
+-- ----------------------------
+-- Table structure for article_tutorial_content
+-- ----------------------------
+DROP TABLE IF EXISTS `article_tutorial_content`;
+CREATE TABLE `article_tutorial_content` (
+  `directory_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '目录ID',
+  `artid` int(11) unsigned NOT NULL,
+  `content` text COMMENT '文章内容',
+  PRIMARY KEY (`directory_id`),
+  KEY `artid` (`artid`) USING BTREE COMMENT '文章ID'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='教程内容表';
+
+-- ----------------------------
+-- Records of article_tutorial_content
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for article_tutorial_directory
+-- ----------------------------
+DROP TABLE IF EXISTS `article_tutorial_directory`;
+CREATE TABLE `article_tutorial_directory` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(11) unsigned DEFAULT '0' COMMENT '父目录',
+  `title` varchar(50) DEFAULT NULL COMMENT '目录标题',
+  `hots` int(11) unsigned DEFAULT '0' COMMENT '点击率',
+  `com_num` int(11) unsigned DEFAULT '0' COMMENT '评论数',
+  `keyword` varchar(120) DEFAULT '' COMMENT '关键字',
+  `uptime` int(11) DEFAULT '0' COMMENT '更新时间',
+  `ctime` int(11) DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`),
+  KEY `pid` (`pid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='教程文章目录';
+
+-- ----------------------------
+-- Records of article_tutorial_directory
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for electron_category
 -- ----------------------------
 DROP TABLE IF EXISTS `electron_category`;
 CREATE TABLE `electron_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pid` int(11) DEFAULT '0' COMMENT '元件父分类',
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pid` int(11) unsigned DEFAULT '0' COMMENT '元件父分类',
   `name` char(10) DEFAULT NULL COMMENT '元件分类名',
   `mark` char(10) DEFAULT NULL COMMENT '元件分类别名',
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 (1:有效，0:失效)',
@@ -341,16 +408,54 @@ CREATE TABLE `electron_componet` (
   `model` char(20) DEFAULT NULL COMMENT '型号',
   `packaging` char(20) DEFAULT NULL COMMENT '封装类型',
   `value` char(20) DEFAULT NULL COMMENT '值',
+  `minnum` int(11) DEFAULT '1' COMMENT '最小数量',
+  `price` int(11) DEFAULT '0' COMMENT '价格(单位：分）',
   `status` tinyint(1) DEFAULT '1' COMMENT '状态 (1:有效，0:失效)',
+  `uptime` int(11) DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='电子元件表';
 
 -- ----------------------------
 -- Records of electron_componet
 -- ----------------------------
-INSERT INTO `electron_componet` VALUES ('1', '1', 'aaab', 'AAAABF', 'AAAABF', 'AAABF', '1');
-INSERT INTO `electron_componet` VALUES ('2', '1', '贴片电容', '0805', 'SOT－223', '107C', '1');
-INSERT INTO `electron_componet` VALUES ('3', '1', 'nnnn', 'NNN', 'NNNN', 'NNNN', '1');
+INSERT INTO `electron_componet` VALUES ('1', '1', 'aaab', 'AAAABF', 'AAAABF', 'AAABF', '1', null, '1', null);
+INSERT INTO `electron_componet` VALUES ('2', '1', '贴片电容', '0805', 'SOT－223', '107C', '1', null, '1', null);
+INSERT INTO `electron_componet` VALUES ('3', '1', 'nnnn', 'NNN', 'NNNN', 'NNNN', '1', null, '1', null);
+
+-- ----------------------------
+-- Table structure for electron_suit
+-- ----------------------------
+DROP TABLE IF EXISTS `electron_suit`;
+CREATE TABLE `electron_suit` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1' COMMENT '状态 (1:有效，0:失效)',
+  `stime` int(11) DEFAULT NULL COMMENT '开始时间',
+  `etime` int(11) DEFAULT NULL COMMENT '结束时间',
+  `uptime` int(11) DEFAULT NULL COMMENT '更新时间',
+  `description` text COMMENT '套装说明',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='套装列表';
+
+-- ----------------------------
+-- Records of electron_suit
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for electron_suit_list
+-- ----------------------------
+DROP TABLE IF EXISTS `electron_suit_list`;
+CREATE TABLE `electron_suit_list` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `elect_id` int(11) unsigned DEFAULT NULL COMMENT '元件ID',
+  `num` int(11) unsigned DEFAULT NULL COMMENT '数量',
+  PRIMARY KEY (`id`),
+  KEY `elect_id` (`elect_id`) USING BTREE COMMENT '元件ID'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='套装元件列表';
+
+-- ----------------------------
+-- Records of electron_suit_list
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for grade
