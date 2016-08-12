@@ -1,0 +1,60 @@
+<!-- admin system menu edit -->
+<!-- Bootstrap -->
+<link rel="stylesheet" media="screen" href="/Public/live/css/bootstrap.min.css">
+
+
+<!-- stystem menu content -->
+<div class="row" style="width:600px;">
+    <div class="col-lg-12">
+        <div class="panel panel-default bootstrap-admin-no-table-panel">
+            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
+                <form class="form-horizontal" method="post" action="#" enctype="multipart/form-data" id="submit">
+                    <input type="hidden" name="id" value="{$info['id']}" />
+                    <legend></legend>
+                    <fieldset>
+                       	<div class="form-group">
+                             <label class="col-lg-3 control-label" for="disabledInput">所属分类</label>
+                             <div class="col-lg-6">
+                                 <select class="form-control" name="elect_cate_id">
+                                 <volist name="catelist" id="c">
+                                     <if condition="$c['level'] LT 1">
+                                     	<option value="{$c['id']}" <if condition="$info['elect_cate_id'] EQ $c['id']">selected</if> >{$c['levelstr']}{$c['name']}</option>
+                                     </if>
+                                 </volist>
+                             </select>
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="focusedInput">元件名称</label>
+                            <div class="col-lg-6">
+                                <input class="form-control checknull" name="name" id="focusedInput" emsg="{$name[$type]}名称不能为空" type="text" placeholder="元件名称" value="{$info['name']}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="focusedInput">型号</label>
+                            <div class="col-lg-4">
+                                <input class="form-control" name="model" id="focusedInput" type="text" placeholder="型号" value="{$info['model']}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="focusedInput">封装</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" name="packaging" id="focusedInput" type="text" placeholder="封装" value="{$info['packaging']}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="focusedInput">值</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" name="value" id="focusedInput" type="text" placeholder="值" value="{$info['value']}">
+                            </div>
+                        </div>
+                        <div class="fr bntmr20">
+                        <button type="button" class="btn btn-primary" url="{:U('Admin/Electron/addupdata',array('type'=>'electron'))}" onclick="mwUI.AjaxForm($(this));">确定</button>
+                        <button type="reset" class="btn btn-default" onclick="layer.close(0.3);">取消</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

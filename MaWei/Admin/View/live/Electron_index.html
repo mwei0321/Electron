@@ -21,6 +21,8 @@
                             <th>型号</th>
                             <th>封装</th>
                             <th>值</th>
+                            <th>价格</th>
+                            <th>最小购买数</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -34,6 +36,8 @@
 							<td>{$m['model']}</td>
 							<td>{$m['packaging']}</td>
 							<td>{$m['value']}</td>
+							<td>{$m['price']}</td>
+							<td>{$m['minnum']}</td>
 							<td class="actions">
 							    <a href="javascript:;" onclick="layer.load('菜单编辑','{:U('Admin/Electron/edit',['id'=>$m['id']])}',[],50);" >
 							    <img src="/Public/live/img/icons/actions/edit.png" alt="编辑" /></a>

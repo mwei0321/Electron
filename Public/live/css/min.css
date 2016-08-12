@@ -95,7 +95,7 @@ body{font-size:12px;font-family:Arial,Helvetica,Sans-serif;background:url(img/bg
 #content table tbody tr td{height:30px;vertical-align:middle;border-bottom:1px solid #DADADA;border-top:1px solid #FFF}
 #content table tbody tr:nth-child(2n+1) td{background-color:#F0F0F0}
 #content table tbody tr:hover td{background-color:#EAEAEA;border-bottom:1px solid #CACACA;border-top:1px solid #E2E2E2}
-#content table tbody tr td.actions{text-align:right;padding-right:10px;width:70px}
+#content table tbody tr td.actions{padding-right:10px;width:70px}
 #content table.noalt tbody tr td{background-color:transparent !important;border-bottom:1px solid #DADBDD}
 #content table.noborder tbody tr td{border:none}
 #content table tbody tr td img{padding-right:5px}

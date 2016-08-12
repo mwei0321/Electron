@@ -48,6 +48,18 @@
                                 <input class="form-control" name="value" id="focusedInput" type="text" placeholder="值" value="{$info['value']}">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="focusedInput">价格</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" name="price" id="focusedInput" type="text" placeholder="价格（单位：元）" value="{$info['price']/100}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label" for="focusedInput">最小购买数</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" name="minnum" id="focusedInput" type="text" placeholder="最小购买数" value="{$info['minnum']}">
+                            </div>
+                        </div>
                         <div class="fr bntmr20">
                         <button type="button" class="btn btn-primary" url="{:U('Admin/Electron/addupdata',array('type'=>'electron'))}" onclick="mwUI.AjaxForm($(this));">确定</button>
                         <button type="reset" class="btn btn-default" onclick="layer.close(0.3);">取消</button>

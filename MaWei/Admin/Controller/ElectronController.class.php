@@ -74,6 +74,16 @@
 	    }
 
 	    /**
+	     * 元件套装编辑
+	     * @return array
+	     * @author MaWei (http://www.phpython.com)
+	     * @date 2016年8月8日 上午10:38:28
+	    */
+	    function suitedit(){
+
+	    }
+
+	    /**
 	     * 元件分类编辑
 	     * @return array
 	     * @author MaWei (http://www.phpython.com)

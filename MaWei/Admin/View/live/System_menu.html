@@ -36,7 +36,7 @@
 							<td>{$position[$m['position']]}</td>
 							<td>{$status[$m['status']]}</td>
 							<td>{$m['action']}</td>
-							<td>{$m['sort']}</td>
+							<td>{$m['levelstr']}{$m['sort']}</td>
 							<td class="actions">
 							    <a href="javascript:;" onclick="layer.load('菜单编辑','{:U('Admin/System/edit',array('type'=>'AdminMenu','id'=>$m['id']))}');" ><img src="/Public/live/img/icons/actions/edit.png" alt="编辑" /></a>
 							    <a href="javascript:void(0);" url="{:U('Admin/System/delete',array('type'=>'menu'))}" title="删除" onclick="delall($(this),{$m['id']});"><img src="/Public/live/img/icons/actions/delete.png" alt="删除" /></a>

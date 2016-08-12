@@ -98,14 +98,14 @@
         }
 
         /**
-         * 获取用户动作权限列表
+         * 获取用户具体操作权限列表
          * @param  int $_uid
          * @param  int $_status
          * @return array
          * @author MaWei (http://www.phpython.com)
          * @date 2016年8月4日 下午4:23:53
         */
-        function getUserRbacList($_uid,$_status = null){
+        function getUserRbacInfo($_uid,$_status = null){
             //提取用户权限组IDS
             $m = M('RbacUser');
             $where = [];
@@ -135,5 +135,55 @@
                 }
             }
             return $rbaclist;
+        }
+
+        /**
+         * 用户权限列表
+         * @param  string $_page
+         * @param  array $_where
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2016年8月4日 下午6:48:51
+        */
+        function getUserRbacList($_page = 'count',$_where = []){
+            $m = M('RbacUser');
+            if($_page == 'count'){
+                $count = $m->where($_where)->count();
+                return $count;
+            }
+            $list = $m->where($_where)->limit($_page)->select();
+
+            return $list;
+        }
+
+        /**
+         * 数据库添加、更新操作
+         * @param  array $_data 数据
+         * @param  string $_model 表名
+         * @param  string|array $_upfiled 更新字段
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2016年6月2日 下午6:48:11
+         */
+        function addUpdata($_data,$_model,$_upfiled = 'id'){
+            $m = M("$_model");
+            $reid = FALSE;
+            if($_data[$_upfiled] || $_data[$_upfiled[0]]){
+                $where = [];
+                if(is_array($_upfiled)){
+                    foreach ($_upfiled as $k => $v){
+                        $_data[$v] && $where[$v] = $_data["$v"];
+                        unset($_data[$v]);
+                    }
+                }else{
+                    $where["$_upfiled"] = $_data["$_upfiled"];
+                    unset($_data["$_upfiled"]);
+                }
+                $reid = $m->where($where)->save($_data);
+            }else{
+                $reid = $m->add($_data);
+            }
+    //         echo $m->getLastSql();
+            return $reid;
         }
     }

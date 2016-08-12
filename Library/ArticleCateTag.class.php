@@ -28,7 +28,7 @@
          * @author MaWei (http://www.phpython.com)
          * @date 2016年6月9日 下午9:02:23
         */
-        function getArtCateList($_where = []){
+        function getArtCateList($_where = ['status'=>1]){
             $list = $this->catetag->where($_where)->select();
             $list = level($list);
             return $list;
