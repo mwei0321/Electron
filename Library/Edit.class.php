@@ -166,12 +166,13 @@
 				);
 			}else{
 				$data = array(
-						'state'=>"SUCCESS",
-						'url'=>$info['savepath'].$info['savename'],
-						'title'=>$info['savename'],
-						'original'=>$info['name'],
-						'type'=>'.' . $info['extension'],
-						'size'=>$info['size'],
+						'state'       =>  "SUCCESS",
+						'url'         =>  $info['savepath'].$info['savename'],
+						'title'       =>  $info['savename'],
+						'original'    =>  $info['name'],
+						'type'        =>  '.' . $info['extension'],
+						'size'        =>  $info['size'],
+// 				        'filetype'    =>  in_array($info['extension'],['jpg','png','bmp','jpeg','gif']) ? 1 : 2,
 // 						'sourcid' => $this->inputAttch($info)
  				);
 			}
@@ -190,7 +191,10 @@
 			$data['name'] = $_file['name'];
 			$data['size'] = $_file['size'];
 			$data['path'] = $_file['savepath'].$_file['savename'];
-			$data['hash'] = $_file['hash'];
+			$data['type'] = in_array($_file['extension'],['jpg','png','bmp','jpeg','gif']) ? 1 : 2;
+			$data['path'] = $_file['savepath'].$_file['savename'];
+// 			$data['hash'] = $_file['hash'];
+			$data['ctime'] = time();
 			$reid = addupdata($data,'SourcAttach');
 			return $reid;
 		}

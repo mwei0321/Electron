@@ -10748,7 +10748,7 @@ UE.commands['insertimage'] = {
             var html = [], str = '', ci;
             ci = opt[0];
             if (opt.length == 1) {
-                str = '<img src="' + ci.src + '" ' + (ci._src ? ' _src="' + ci._src + '" ' : '') +
+                str = '<img mwattach="' + ci.src + '" src="' + ci.src + '" ' + (ci._src ? ' _src="' + ci._src + '" ' : '') +
                     (ci.width ? 'width="' + ci.width + '" ' : '') +
                     (ci.height ? ' height="' + ci.height + '" ' : '') +
                     (ci['floatStyle'] == 'left' || ci['floatStyle'] == 'right' ? ' style="float:' + ci['floatStyle'] + ';"' : '') +
@@ -10761,10 +10761,9 @@ UE.commands['insertimage'] = {
                     str = '<p style="text-align: center">' + str + '</p>';
                 }
                 html.push(str);
-
             } else {
                 for (var i = 0; ci = opt[i++];) {
-                    str = '<p ' + (ci['floatStyle'] == 'center' ? 'style="text-align: center" ' : '') + '><img src="' + ci.src + '" ' +
+                    str = '<p ' + (ci['floatStyle'] == 'center' ? 'style="text-align: center" ' : '') + '><img mwattach="' + ci.src + '" src="' + ci.src + '" ' +
                         (ci.width ? 'width="' + ci.width + '" ' : '') + (ci._src ? ' _src="' + ci._src + '" ' : '') +
                         (ci.height ? ' height="' + ci.height + '" ' : '') +
                         ' style="' + (ci['floatStyle'] && ci['floatStyle'] != 'center' ? 'float:' + ci['floatStyle'] + ';' : '') +
@@ -10773,7 +10772,7 @@ UE.commands['insertimage'] = {
                     html.push(str);
                 }
             }
-
+            
             me.execCommand('insertHtml', html.join(''));
         }
 
@@ -15902,11 +15901,11 @@ UE.plugin.register('insertfile', function (){
                         title = item.title || item.url.substr(item.url.lastIndexOf('/') + 1);
                         html += '<p style="line-height: 16px;">' +
                             '<img style="vertical-align: middle; margin-right: 2px;" src="'+ icon + '" _src="' + icon + '" />' +
-                            '<a style="font-size:12px; color:#0066cc;" href="' + item.url +'" title="' + title + '">' + title + '</a>' +
-                            '</p><div>';
-                       	$('#inputfile').append('<input type="hidden" value="'+item.sourcid+'" name="inputfile[]" />');
+                            '<a style="font-size:12px; color:#0066cc;" mwattach="' + item.url +'" href="' + item.url +'" title="' + title + '">' + title + '</a>' +
+                            '</p>';
+//                       	$('#inputfile').append('<input type="hidden" value="'+item.sourcid+'" name="inputfile[]" />');
                     }
-                    html += '<div>';
+//                    html += '<div>';
                     me.execCommand('insertHtml', html,1);
                 }
             }

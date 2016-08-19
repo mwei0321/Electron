@@ -85,6 +85,9 @@
                         echo '<span></span>';
 //                         var_dump($info);
                     $template = 'tutorialedit';
+                    //教程文章列表
+                    $tutorial = $this->tutorial->getTutorialList(['status'=>1],null);
+                    $this->assign('tutorial',$tutorial);
                     break;
             }
 
