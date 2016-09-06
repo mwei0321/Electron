@@ -10,7 +10,8 @@
 	        <div class="navmenu"><a href="javascript:;" onclick="layer.load('菜单编辑','{:U('Admin/Tutorial/edit/type/tutorial')}',[],50);"><img src="/Public/live/img/icons/button-add.png"></a></div>
 	    </div>
 	    
-	    <div class="content" style="float:left;">
+	    <div class="content" style="float:left;width:35%;">
+	    	<h5>教程列表</h5>
 	        <table>
 				<thead>
 				   <thead>
@@ -42,6 +43,8 @@
 							    <img src="/Public/live/img/icons/actions/edit.png" alt="编辑" /></a>
 							    <a href="javascript:void(0);" url="{:U('Admin/Tutorial/delete')}" title="删除" onclick="delall($(this),{$m['id']});">
 							    <img src="/Public/live/img/icons/actions/delete.png" alt="删除" /></a>
+							    <a href="javascript:;" onclick="layer.load('菜单编辑','{:U('Admin/Tutorial/edit/type/tutorial')}',[],50);">
+							    <img src="/Public/live/img/icons/button-add.png" style="width:18px;height:18px;"></a>
 							</td>
 						</tr>
 					 </volist>
@@ -52,7 +55,8 @@
 	        </div>
 	    </div>
 	    <!-- STAT -->
-	    <div class="content" style="float:left;">
+	    <div class="content" id="dir_content" style="float:right;width:60%;">
+	    	<h5>教程文章目录</h5>
 	        <table>
 				<thead>
 				   <thead>

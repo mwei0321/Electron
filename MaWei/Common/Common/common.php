@@ -456,7 +456,7 @@
         }
         $rand   =  array();
         for($i=0; $i<$number; $i++) {
-            $rand[] =   self::randString($length,$mode);
+            $rand[] =   randString($length,$mode);
         }
         $unqiue = array_unique($rand);
         if(count($unqiue)==count($rand)) {
@@ -464,7 +464,7 @@
         }
         $count   = count($rand)-count($unqiue);
         for($i=0; $i<$count*3; $i++) {
-            $rand[] =   self::randString($length,$mode);
+            $rand[] =   randString($length,$mode);
         }
         $rand = array_slice(array_unique ($rand),0,$number);
         return $rand;
@@ -487,13 +487,13 @@
                 $char = substr($format,$i,1);
                 switch($char){
                     case "*"://字母和数字混合
-                        $strtemp   .= String::randString(1);
+                        $strtemp   .= randString(1);
                         break;
                     case "#"://数字
-                        $strtemp  .= String::randString(1,1);
+                        $strtemp  .= randString(1,1);
                         break;
                     case "$"://大写字母
-                        $strtemp .=  String::randString(1,2);
+                        $strtemp .=  randString(1,2);
                         break;
                     default://其他格式均不转换
                         $strtemp .=   $char;
@@ -581,6 +581,99 @@
             }
         }
         return $text;
+    }
+
+    function ad(){
+        require_once ROOT_PATH.'/Library/phpQuery.php';
+        $html = file_get_contents('http://www.xxbiquge.com/1_1767/');
+        $phpquery = phpQuery::newDocumentHTML("$html",'UTF-8');
+        $a = pq('#list dd')->find('a');
+        $data = [];
+        foreach ($a as $k=>$v){
+            $url = pq($v)->attr('href');
+            $data[] = "http://www.xxbiquge.com/1_1767/".$url."\r\n";
+        }
+        file_put_contents('/char.txt', $data);
+    }
+
+    function bb(){
+        require_once ROOT_PATH.'/Library/phpQuery.php';
+        $a = rFile('/char.txt');
+        $i = 0;
+        $e = 27;
+        $regx = ['<br>','<script type="text/javascript" src="/js/chaptererror.js"></script>'];
+        foreach ($a as $k => $v){
+//             if(!$v) continue;
+            $html = file_get_contents($v);
+            $phpquery = phpQuery::newDocumentHTML("$html",'UTF-8');
+            $title = pq('.bookname h1')->text();
+            $content = pq('#content')->html();
+//             var_dump($content);exit;
+//             $content = iconv('GB2312', 'UTF-8'.'//IGNORE', $content);
+            $aa []= $title.str_replace($regx, "\r\n", $content);
+            $i ++;
+            if($i > 50) {
+                $i = 0;
+                file_put_contents('/abc'.$e.'.txt', $aa);
+                $e++;
+                unset($aa);
+                sleep(2);
+            };
+        }
+        file_put_contents('/abc'.$e.'.txt', $aa);
+    }
+
+    /**
+     * 采集
+     * @param string $_url 网址
+     * @param array $_filter 采集过滤规则   filed$DOMEle-type|
+     * @param string $_area 采集区域 '#area－mulitiele',区域－多个DOM
+     * @return array $data
+     * @author MaWei (http://www.phpyrb.com)
+     * @date 2014-12-11 上午10:39:33
+     */
+    function getUrlGather($_url,$_filter,$_area = null,$_charset = null){
+        require_once ROOT_PATH.'/Library/phpQuery.php';
+        $html = file_get_contents($_url);
+        $charset = $_charset ? $_charset : mb_detect_encoding($html, array('ASCII', 'GB2312', 'GBK', 'UTF-8'));
+        $phpquery = phpQuery::newDocumentHTML("$html",$charset);
+        $data = array();
+        if($_area){
+            $area = is_array($_area) ? pq($_area[0])->find($_area[1]) : pq($_area);
+            foreach ($area as $k => $v){
+                while (!!list($key,$value) = each($_filter)){
+                    switch ($value[1]){
+                        case 'text' :
+                            $data[$k][$key] = trim(pq($v)->find($value[0])->text());
+                            break;
+                        case 'html' :
+                            $data[$k][$key] = pq($v)->find($value[0])->html();
+                            break;
+                        default:
+                            $data[$k][$key] = pq($v)->find($value[0])->attr($value[1]);
+                            break;
+                    }
+                }
+                reset($_filter);
+            }
+        }else{
+            while (!!list($key,$value) = each($_filter)){
+                switch ($value[1]){
+                    case 'text' :
+                        $data[$key] = trim(pq('body')->find($value[0])->text());
+                        break;
+                    case 'html' :
+                        $data[$key] = pq('body')->find($value[0])->html();
+                        eval('$data[$key] = '.iconv($charset, 'UTF-8'.'//IGNORE', var_export($data[$key],TRUE)).';');
+                        break;
+                    default:
+                        $data[$key] = pq('body')->find($value[0])->attr($value[1]);
+                        break;
+                }
+            }
+            reset($_filter);
+        }
+        return $data;
     }
 
     /**

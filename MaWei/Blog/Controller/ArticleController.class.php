@@ -20,7 +20,6 @@
         private $Article;
         function _init(){
             parent::_init();
-
             //init article class
             $this->Article = new Article();
             //获取最热文章
@@ -45,7 +44,7 @@
             $page = new Page($count, 12);
             //list
             $artlist = $this->Article->getArtInfoList($where,"$page->firstRow,$page->listRows");
-            //             var_dump($artlist);
+            //var_dump($artlist);
 
             $this->assign('artlist',$artlist);
             $this->display();
