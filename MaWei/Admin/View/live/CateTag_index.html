@@ -28,7 +28,7 @@
 				</thead>
 				<tbody>
 					<volist name="list" id="u">
-						<tr id="deleid_{$u['id']}">
+						<tr id="deleid_{$u['id']}" <if condition="$u['pid'] EQ 0">style="color:#333;"<else />style="color:#888;"</if>>
 							<td><input type="checkbox" name="ids[]" value="{$m['id']}"/></td>
 							<td>{$u['id']}</td>
 							<if condition="$type EQ 'tag'">

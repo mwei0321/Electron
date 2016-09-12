@@ -35,8 +35,13 @@
         */
         function index(){
             //condition
-            $where = [];
-            $_REQUEST['keywords'] && $where['keywords'] = ['LIKE','%'.text($_REQUEST['keywords']).'%'];
+            $keyword = text($_REQUEST['keyword']);
+            $cateid = intval($_REQUEST['cid']);
+            $tagid = intval($_REQUEST['tid']);
+            $keyword && $where[] = " a.`title` LIKE '%$keyword%' ";
+            $cateid && $where[] = " a.`cateid` = $cateid ";
+            $tagid && $where[] = " FIND_IN_SET($tagid,'tags') ";
+            $where = implode(' AND ', $where);
 
             //get article count
             $count = $this->Article->getArtInfoList($where);

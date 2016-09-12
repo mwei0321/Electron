@@ -40,6 +40,7 @@
             $cate = new ArticleCateTag();
             $catelist = $cate->getArtCateList();
             $this->assign('catelist',$catelist);
+            $this->assign('naviMenu',getTree($catelist));
             $this->catelist = $catelist;
         }
 

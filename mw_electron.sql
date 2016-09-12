@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50709
+Source Server Version : 50711
 Source Host           : localhost:3306
 Source Database       : mw_electron
 
 Target Server Type    : MYSQL
-Target Server Version : 50709
+Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2016-08-12 10:52:33
+Date: 2016-09-12 20:11:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,7 @@ CREATE TABLE `admin_navi_menu` (
   `sort` tinyint(2) DEFAULT '1' COMMENT '菜单排序',
   `position` tinyint(20) DEFAULT NULL COMMENT '位置  顶部0　左则1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='后台菜单设置';
 
 -- ----------------------------
 -- Records of admin_navi_menu
@@ -54,6 +54,8 @@ INSERT INTO `admin_navi_menu` VALUES ('26', '22', '用户权限', 'Rbac', 'index
 INSERT INTO `admin_navi_menu` VALUES ('27', '1', '焦点广告管理', 'WebConf', 'bannr', 'Admin/WebConf/bannr', '1', '70', '1');
 INSERT INTO `admin_navi_menu` VALUES ('28', '11', '元件套装', 'Electron', 'suit', 'Admin/Electron/suit', '1', '70', '1');
 INSERT INTO `admin_navi_menu` VALUES ('29', '14', '教程文章', 'Tutorial', 'index', 'Admin/Tutorial/index', '1', '85', '1');
+INSERT INTO `admin_navi_menu` VALUES ('30', '0', '会员管理', 'Member', 'index', 'Admin/Member/index', '1', '55', '0');
+INSERT INTO `admin_navi_menu` VALUES ('31', '30', '会员列表', 'Member', 'index', 'Admin/Member/index', '1', '90', '1');
 
 -- ----------------------------
 -- Table structure for admin_user
@@ -107,47 +109,69 @@ CREATE TABLE `article` (
   `keyword` varchar(100) DEFAULT NULL COMMENT '关键字',
   `uptime` int(11) DEFAULT NULL COMMENT '更新时间',
   `ctime` int(11) DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `category` (`cateid`),
+  KEY `tag` (`tags`)
 ) ENGINE=MyISAM AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '1', '9', '17,14,13', '1', 'debian 初始安装', '1', '833', '0', 'debian初始安装,debian安装设置,debian安装vim,debian安装代码提示,debian安装PHP环境,debian安装lnmp', '1463987952', '1371746494');
-INSERT INTO `article` VALUES ('2', '1', '6', '18', '1', 'Js获取屏幕body宽高度', '1', '731', '0', 'Js获取屏幕高度，获取屏幕宽度。 ', '1401163229', '1371782692');
-INSERT INTO `article` VALUES ('3', '1', '3', '16,19', '1', 'php空间的在线解压 ZIP', '1', '708', '0', 'php空间的在线解压 php空间的在线解压ZIP php空间解压ZIP 在线解压ZIP 在线解压zip 空间php解压 php空间解压', '1372669921', '1371871456');
-INSERT INTO `article` VALUES ('4', '1', '6', '18', '1', 'Jquery随屏滚动特效', '1', '623', '0', 'Jquery随屏滚动特效 jquery滚动 jquery滚动特效 jquery特效', '1372756985', '1371872464');
-INSERT INTO `article` VALUES ('6', '1', '3', '16,19', '1', 'php面试题 陷阱题', '1', '808', '0', 'php面试题 php陷阱题 php基础题 php常见面试题 php考题', '1372757248', '1371896734');
-INSERT INTO `article` VALUES ('7', '1', '10', '16,19', '1', 'MySql常用语句', '1', '710', '0', 'MySql常用语句 有用的MySQL语句 MySql语句', '1373789463', '1371899755');
-INSERT INTO `article` VALUES ('18', '1', '4', '16,21', '0', 'python mysql基础 学习', '1', '237', '0', 'python mysql连接,python mysql', '1374059025', '1373942637');
-INSERT INTO `article` VALUES ('8', '1', '10', '16,19,20', '1', 'wamp虚拟主机配置', '1', '788', '0', 'wamp5,apache 虚拟主机配置 wamp5虚拟主机配置 apache虚拟主机配置', '1373451770', '1371961592');
-INSERT INTO `article` VALUES ('9', '1', '9', '13,17', '1', 'Liunx配置IP和DNS', '1', '477', '0', 'Liunx配置IP和DNS debian配置ip debian配置dns liunx配置ip和dns', '1372757673', '1371987080');
-INSERT INTO `article` VALUES ('10', '0', '9', null, '1', 'Linux配置`.bashrc`,  `vim`， Linux配置命令缩写', '1', '616', '0', 'Linux配置`.bashrc`,  `vim`  Linux配置命令缩写', '1468835805', '1371907485');
-INSERT INTO `article` VALUES ('11', '1', '9', '13,15', '1', 'Linux安装git', '1', '658', '0', 'Linux安装git git linux配置安装 liunx git', '1373452568', '1371988171');
-INSERT INTO `article` VALUES ('12', '1', '10', '16,19', '1', 'mysql分组group ', '1', '814', '0', 'mysql分组group mysql gorup mysql分组统计 mysql分组显示', '1372757732', '1372063686');
-INSERT INTO `article` VALUES ('13', '1', '6', '18', '1', '  jQuery 获取高度宽度', '1', '409', '0', '  jQuery 获取屏幕高度、宽度,jquery 高度，jquery宽度', '1372757748', '1372415916');
-INSERT INTO `article` VALUES ('15', '1', '9', '13,14', '1', 'vim基本命令,vim常用命令', '1', '664', '0', 'vim基本命令,vim常用命令', '1380112061', '1372865638');
-INSERT INTO `article` VALUES ('14', '1', '4', '', '0', 'python各种类型转换-int,str,char,float,ord,hex,oct等', '1', '6', '0', 'python各种类型转换-int,str,char,float,ord,hex,oct等 ', '1372762175', '1372761865');
-INSERT INTO `article` VALUES ('17', '1', '4', '21', '1', 'python 基础学习笔记1', '1', '522', '0', 'python 基础笔记 python基础 ', '1373440508', '1373437782');
-INSERT INTO `article` VALUES ('19', '1', '4', '16,21', '1', 'python安装mysql', '1', '632', '0', 'python安装mysql', '1373957762', '1373956731');
-INSERT INTO `article` VALUES ('20', '1', '3', '', '0', 'php 文件下载详解', '1', '11', '0', 'php 文件下载详解', '1375523177', '1375523177');
-INSERT INTO `article` VALUES ('21', '1', '9', '13,14,17', '1', 'vim中tab转成空格', '1', '486', '0', 'vim中将tab自动转换成空格 ', '1377268337', '1377268337');
-INSERT INTO `article` VALUES ('22', '1', '9', '13,17', '1', 'vps 安全登录的方法 ssh 登录', '1', '687', '0', 'vps 安全登录的方法 ssh  登录', '1377513177', '1377271802');
-INSERT INTO `article` VALUES ('31', '1', '4', '22,21', '1', 'django 正则表达式－Python Django  学习笔记3', '1', '538', '0', '正则表达式用法，正则表达式详解，python中正则表达式。', '1401421189', '1382514720');
-INSERT INTO `article` VALUES ('24', '1', '4', '21,22', '1', 'django 安装初始化-Python Django 学习笔记1', '1', '680', '0', 'django 初始化安装，python django学习笔记', '1395647313', '1377760757');
+INSERT INTO `article` VALUES ('1', '1', '23', '17,14,13', '1', 'debian 初始安装', '1', '834', '0', 'debian初始安装,debian安装设置,debian安装vim,debian安装代码提示,debian安装PHP环境,debian安装lnmp', '1463987952', '1371746494');
+INSERT INTO `article` VALUES ('2', '1', '28', '18', '1', 'Js获取屏幕body宽高度', '1', '731', '0', 'Js获取屏幕高度，获取屏幕宽度。 ', '1401163229', '1371782692');
+INSERT INTO `article` VALUES ('3', '1', '20', '16,19', '1', 'php空间的在线解压 ZIP', '1', '708', '0', 'php空间的在线解压 php空间的在线解压ZIP php空间解压ZIP 在线解压ZIP 在线解压zip 空间php解压 php空间解压', '1372669921', '1371871456');
+INSERT INTO `article` VALUES ('4', '1', '28', '18', '1', 'Jquery随屏滚动特效', '1', '623', '0', 'Jquery随屏滚动特效 jquery滚动 jquery滚动特效 jquery特效', '1372756985', '1371872464');
+INSERT INTO `article` VALUES ('6', '1', '20', '16,19', '1', 'php面试题 陷阱题', '1', '808', '0', 'php面试题 php陷阱题 php基础题 php常见面试题 php考题', '1372757248', '1371896734');
+INSERT INTO `article` VALUES ('7', '1', '29', '16,19', '1', 'MySql常用语句', '1', '710', '0', 'MySql常用语句 有用的MySQL语句 MySql语句', '1373789463', '1371899755');
+INSERT INTO `article` VALUES ('18', '1', '21', '16,21', '0', 'python mysql基础 学习', '1', '237', '0', 'python mysql连接,python mysql', '1374059025', '1373942637');
+INSERT INTO `article` VALUES ('8', '1', '31', '16,19,20', '1', 'wamp虚拟主机配置', '1', '788', '0', 'wamp5,apache 虚拟主机配置 wamp5虚拟主机配置 apache虚拟主机配置', '1373451770', '1371961592');
+INSERT INTO `article` VALUES ('9', '1', '23', '13,17', '1', 'Liunx配置IP和DNS', '1', '477', '0', 'Liunx配置IP和DNS debian配置ip debian配置dns liunx配置ip和dns', '1372757673', '1371987080');
+INSERT INTO `article` VALUES ('10', '0', '23', null, '1', 'Linux配置`.bashrc`,  `vim`， Linux配置命令缩写', '1', '618', '0', 'Linux配置`.bashrc`,  `vim`  Linux配置命令缩写', '1468835805', '1371907485');
+INSERT INTO `article` VALUES ('11', '1', '23', '13,15', '1', 'Linux安装git', '1', '658', '0', 'Linux安装git git linux配置安装 liunx git', '1373452568', '1371988171');
+INSERT INTO `article` VALUES ('12', '1', '29', '16,19', '1', 'mysql分组group ', '1', '814', '0', 'mysql分组group mysql gorup mysql分组统计 mysql分组显示', '1372757732', '1372063686');
+INSERT INTO `article` VALUES ('13', '1', '28', '18', '1', '  jQuery 获取高度宽度', '1', '409', '0', '  jQuery 获取屏幕高度、宽度,jquery 高度，jquery宽度', '1372757748', '1372415916');
+INSERT INTO `article` VALUES ('15', '1', '23', '13,14', '1', 'vim基本命令,vim常用命令', '1', '664', '0', 'vim基本命令,vim常用命令', '1380112061', '1372865638');
+INSERT INTO `article` VALUES ('14', '1', '21', '', '0', 'python各种类型转换-int,str,char,float,ord,hex,oct等', '1', '6', '0', 'python各种类型转换-int,str,char,float,ord,hex,oct等 ', '1372762175', '1372761865');
+INSERT INTO `article` VALUES ('17', '1', '21', '21', '1', 'python 基础学习笔记1', '1', '522', '0', 'python 基础笔记 python基础 ', '1373440508', '1373437782');
+INSERT INTO `article` VALUES ('19', '1', '21', '16,21', '1', 'python安装mysql', '1', '632', '0', 'python安装mysql', '1373957762', '1373956731');
+INSERT INTO `article` VALUES ('20', '1', '20', '', '0', 'php 文件下载详解', '1', '11', '0', 'php 文件下载详解', '1375523177', '1375523177');
+INSERT INTO `article` VALUES ('21', '1', '23', '13,14,17', '1', 'vim中tab转成空格', '1', '487', '0', 'vim中将tab自动转换成空格 ', '1377268337', '1377268337');
+INSERT INTO `article` VALUES ('22', '1', '23', '13,17', '1', 'vps 安全登录的方法 ssh 登录', '1', '687', '0', 'vps 安全登录的方法 ssh  登录', '1377513177', '1377271802');
+INSERT INTO `article` VALUES ('31', '1', '21', '22,21', '1', 'django 正则表达式－Python Django  学习笔记3', '1', '538', '0', '正则表达式用法，正则表达式详解，python中正则表达式。', '1401421189', '1382514720');
+INSERT INTO `article` VALUES ('24', '1', '21', '21,22', '1', 'django 安装初始化-Python Django 学习笔记1', '1', '680', '0', 'django 初始化安装，python django学习笔记', '1395647313', '1377760757');
 INSERT INTO `article` VALUES ('25', '1', '23', '14', '1', 'Sublime 快捷键', '1', '460', '0', 'Sublime 常用的快捷键。', '1378371170', '1378371104');
-INSERT INTO `article` VALUES ('26', '1', '4', '13,17,19,21,22', '1', '反向代理', '1', '424', '0', 'Python使用反向代理，lnmp反向代理。', '1378779640', '1378779640');
-INSERT INTO `article` VALUES ('27', '1', '10', '16', '1', 'mysql 数据库导入、导出', '1', '454', '0', 'mysql 数据库导入、导出', '1380795718', '1378909247');
-INSERT INTO `article` VALUES ('28', '1', '4', '21,22', '0', 'django post csrf', '1', '180', '0', 'Python Django POST Forbidden (403)', '1380115380', '1380115040');
-INSERT INTO `article` VALUES ('29', '1', '9', '13,17', '1', 'lftp 命令如何使用', '1', '492', '0', 'liunx lftp,debian lftp', '1380802115', '1380801134');
-INSERT INTO `article` VALUES ('30', '1', '6', '18', '1', ' jQuery 如何为动态添加的元素绑定事件', '1', '466', '0', ' jQuery 如何为动态添加的元素绑定事件', '1381135077', '1381134321');
-INSERT INTO `article` VALUES ('32', '1', '4', '22,21', '1', 'django url 详解 - Python Django  学习笔记4', '1', '820', '0', 'django的url配置、用法。', '1411890014', '1382521106');
-INSERT INTO `article` VALUES ('33', '1', '4', '21,22', '1', 'django 新建工程和项目－Python Django 学习笔记2', '1', '451', '0', 'django如何新建工程和项目', '1384676829', '1382521966');
-INSERT INTO `article` VALUES ('34', '1', '4', '21,22', '1', 'django 模板详解 － Python Django 学习笔记5', '1', '574', '0', 'django模型，django模型的新建。', '1384831398', '1384676770');
-INSERT INTO `article` VALUES ('35', '1', '4', '16,21,22', '1', 'django模型详解之模型创建 － Python Django 学习笔记6', '1', '452', '0', '新建模型，模型语法', '1385279652', '1385174807');
-INSERT INTO `article` VALUES ('36', '1', '4', '', '0', 'django模型详解之数据库操作 － Python Django 学习笔记7', '1', '16', '0', '', '1389189068', '1385279767');
-INSERT INTO `article` VALUES ('37', '1', '4', '16,21,22', '1', 'django如何连接mysql,django如何安装mysql', '1', '424', '0', 'django如何安装mysql,django如何连接msyql.', '1389191862', '1389189913');
-INSERT INTO `article` VALUES ('83', '0', '1', null, '1', '萝莉控教程', '1', '0', '0', '萝莉控教程', '1470795904', '1470795904');
+INSERT INTO `article` VALUES ('26', '1', '23', '13,17,19,21,22', '1', '反向代理', '1', '424', '0', 'Python使用反向代理，lnmp反向代理。', '1378779640', '1378779640');
+INSERT INTO `article` VALUES ('27', '1', '29', '16', '1', 'mysql 数据库导入、导出', '1', '454', '0', 'mysql 数据库导入、导出', '1380795718', '1378909247');
+INSERT INTO `article` VALUES ('28', '1', '21', '21,22', '0', 'django post csrf', '1', '180', '0', 'Python Django POST Forbidden (403)', '1380115380', '1380115040');
+INSERT INTO `article` VALUES ('29', '1', '23', '13,17', '1', 'lftp 命令如何使用', '1', '492', '0', 'liunx lftp,debian lftp', '1380802115', '1380801134');
+INSERT INTO `article` VALUES ('30', '1', '28', '18', '1', ' jQuery 如何为动态添加的元素绑定事件', '1', '466', '0', ' jQuery 如何为动态添加的元素绑定事件', '1381135077', '1381134321');
+INSERT INTO `article` VALUES ('32', '1', '21', '22,21', '1', 'django url 详解 - Python Django  学习笔记4', '1', '820', '0', 'django的url配置、用法。', '1411890014', '1382521106');
+INSERT INTO `article` VALUES ('33', '1', '21', '21,22', '1', 'django 新建工程和项目－Python Django 学习笔记2', '1', '451', '0', 'django如何新建工程和项目', '1384676829', '1382521966');
+INSERT INTO `article` VALUES ('34', '1', '21', '21,22', '1', 'django 模板详解 － Python Django 学习笔记5', '1', '575', '0', 'django模型，django模型的新建。', '1384831398', '1384676770');
+INSERT INTO `article` VALUES ('35', '1', '21', '16,21,22', '1', 'django模型详解之模型创建 － Python Django 学习笔记6', '1', '452', '0', '新建模型，模型语法', '1385279652', '1385174807');
+INSERT INTO `article` VALUES ('36', '1', '21', '', '0', 'django模型详解之数据库操作 － Python Django 学习笔记7', '1', '16', '0', '', '1389189068', '1385279767');
+INSERT INTO `article` VALUES ('37', '1', '21', '16,21,22', '1', 'django如何连接mysql,django如何安装mysql', '1', '424', '0', 'django如何安装mysql,django如何连接msyql.', '1389191862', '1389189913');
+INSERT INTO `article` VALUES ('83', '0', '1', null, '1', '萝莉控教程', '1', '1', '0', '萝莉控教程', '1470795904', '1470795904');
+
+-- ----------------------------
+-- Table structure for article_attach
+-- ----------------------------
+DROP TABLE IF EXISTS `article_attach`;
+CREATE TABLE `article_attach` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `artid` int(11) DEFAULT '0' COMMENT '文章ID',
+  `type` tinyint(1) DEFAULT '1' COMMENT '文件类型（1.图片，2.文件）',
+  `name` varchar(120) DEFAULT '' COMMENT '文件名称',
+  `size` varchar(20) DEFAULT '' COMMENT '大小',
+  `path` varchar(120) DEFAULT '' COMMENT '路径',
+  `status` tinyint(1) DEFAULT '1' COMMENT '状态（1.显示，0，隐藏）',
+  `ctime` int(11) DEFAULT '0' COMMENT '时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='文章附件表';
+
+-- ----------------------------
+-- Records of article_attach
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for article_category
@@ -161,23 +185,29 @@ CREATE TABLE `article_category` (
   `description` varchar(120) DEFAULT NULL COMMENT '描述',
   `sort` tinyint(3) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='分类表';
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
 -- ----------------------------
 -- Records of article_category
 -- ----------------------------
-INSERT INTO `article_category` VALUES ('1', '0', 'DIY制作', '1', '顶级分类', '0');
-INSERT INTO `article_category` VALUES ('2', '0', '编程语言', '1', '编程语言主分类', '0');
-INSERT INTO `article_category` VALUES ('3', '2', 'PHP', '1', 'php是一门很好学，很容易懂的语言，易学，想要精通得花的功夫。', '90');
-INSERT INTO `article_category` VALUES ('4', '2', 'Python', '1', 'Python是一个很牛的语言，是应该好好学习的语言。', '99');
-INSERT INTO `article_category` VALUES ('5', '2', 'Ruby', '1', 'Ruby分类，Ruby的相关文章。', '0');
-INSERT INTO `article_category` VALUES ('6', '2', 'Jquery+Js', '1', 'js+jquery分类', '0');
-INSERT INTO `article_category` VALUES ('7', '2', 'HTML', '1', 'HTML5语言的相关文章', '0');
-INSERT INTO `article_category` VALUES ('8', '2', 'CSS', '1', '', '0');
-INSERT INTO `article_category` VALUES ('9', '2', 'Linux', '1', 'Linux系统太牛了，又安全，又稳定，又易移植、家族又强大，一个字牛。', '50');
-INSERT INTO `article_category` VALUES ('10', '2', 'Apache+MySQL', '1', 'Apache+Mysql是一个绝配啊！', '70');
-INSERT INTO `article_category` VALUES ('23', '2', 'Other', '1', '', '0');
-INSERT INTO `article_category` VALUES ('24', '2', 'MongoDB', '1', '', '0');
+INSERT INTO `article_category` VALUES ('1', '0', '后台编程', '1', '顶级分类', '90');
+INSERT INTO `article_category` VALUES ('2', '0', '前端编程', '1', '前端语言主分类', '80');
+INSERT INTO `article_category` VALUES ('3', '0', '服务器', '1', null, '90');
+INSERT INTO `article_category` VALUES ('4', '0', '数据库', '1', null, '99');
+INSERT INTO `article_category` VALUES ('5', '0', '51单片机', '1', null, '0');
+INSERT INTO `article_category` VALUES ('6', '0', 'STM32', '1', null, '0');
+INSERT INTO `article_category` VALUES ('25', '2', 'HTML', '1', 'HTML5语言的相关文章', '0');
+INSERT INTO `article_category` VALUES ('24', '2', 'CSS', '1', null, '0');
+INSERT INTO `article_category` VALUES ('23', '3', 'Linux', '1', 'Linux系统太牛了，又安全，又稳定，又易移植、家族又强大，一个字牛。', '50');
+INSERT INTO `article_category` VALUES ('31', '3', 'Apache', '1', 'Apache+Mysql是一个绝配啊！', '70');
+INSERT INTO `article_category` VALUES ('9', '0', 'DIY', '1', null, '0');
+INSERT INTO `article_category` VALUES ('33', '4', 'MongoDB', '1', null, '0');
+INSERT INTO `article_category` VALUES ('20', '1', 'PHP', '1', 'php是一门很好学，很容易懂的语言，易学，想要精通得花的功夫', null);
+INSERT INTO `article_category` VALUES ('21', '1', 'Python', '1', 'Python是一个很牛的语言，是应该好好学习的语言。', null);
+INSERT INTO `article_category` VALUES ('22', '1', 'C', '1', null, null);
+INSERT INTO `article_category` VALUES ('28', '2', 'Js+JQuery', '1', null, null);
+INSERT INTO `article_category` VALUES ('29', '4', 'MySql', '1', null, null);
+INSERT INTO `article_category` VALUES ('30', '4', 'MongDB', '1', null, null);
 
 -- ----------------------------
 -- Table structure for article_comment

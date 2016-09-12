@@ -17,37 +17,20 @@
 			</div>
 			<div class="inline">
 				<dl class="mean">
-					<dd>
-						<a href="**" title="">学习,马伟</a>
-						<dl class="">
-							<dd>
-								<a href="aa">学习,马伟</a>
-							</dd>
-							<dd>
-								<a href="aa">学习,马伟</a>
-							</dd>
-							<dd>
-								<a href="aa">学习,马伟</a>
-							</dd>
-						</dl>
-					</dd>
-					<dd>
-						<a href="**" title="">学习,马伟</a>
-						<dl>
-							<dd>
-								<a href="aa">学习,马伟</a>
-							</dd>
-							<dd>
-								<a href="aa">学习,马伟</a>
-							</dd>
-							<dd>
-								<a href="aa">学习,马伟</a>
-							</dd>
-							<dd>
-								<a href="aa">学习,马伟</a>
-							</dd>
-						</dl>
-					</dd>
+				<!-- navigation main start -->
+					<volist name="naviMenu" id="m">
+						<dd>
+							<a href="{:U('Blog/Article/index',['cid'=>$m['id']])}" title="{$m['description']}">{$m['name']}</a>
+							<dl class="">
+								<volist name="m['children']" id="ch">
+									<dd>
+										<a href="{:U('Blog/Article/index',['cid'=>$ch['id']])}" title="{$ch['description']}">{$ch['name']}</a>
+									</dd>
+								</volist>
+							</dl>
+						</dd>
+					</volist>
+				<!-- navigation main end -->
 				</dl>
 			</div>
 			<div class="clr"></div>
