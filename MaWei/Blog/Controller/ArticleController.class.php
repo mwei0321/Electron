@@ -25,6 +25,28 @@
             //获取最热文章
             $topArt = $this->Article->getTopArt();
             $this->assign('topArt',$topArt);
+            //分类下的文章数
+            $cateArtNum = $this->Article->getCateArtNum();
+            $this->assign('cateArtNum',$cateArtNum);
+//             bb();exit;
+        }
+
+        function sql(){
+            $path = ROOT_PATH.'/a.txt';
+            var_dump($path);
+            $q = rFile($path);
+            $sql = '';
+            $sql .= "INSERT INTO `read_user` (`name`, `passwd`, `view_num`, `last_sort`, `now_sort`, `article_num`, `ctime`, `nickname`) VALUES \r\n";
+            $time = time();
+            $access = "队名    队长    密码\r\n";
+            foreach ($q as $k => $v){
+                $name = explode('-', $v);
+                $passwd = md5($name['1']);
+                $sql .= "('$name[1]', '".sha1('stjia'.md5($passwd).'getop')."', '0', '1000', '1000', '0', $time, '$name[0]'),";
+                $access .= "$name[0]    $name[1]    $passwd \r\n";
+            }
+            writeFile($sql,ROOT_PATH.'/b.txt');
+            writeFile($access,ROOT_PATH.'/access.txt');
         }
 
         /**
@@ -40,7 +62,7 @@
             $tagid = intval($_REQUEST['tid']);
             $keyword && $where[] = " a.`title` LIKE '%$keyword%' ";
             $cateid && $where[] = " a.`cateid` = $cateid ";
-            $tagid && $where[] = " FIND_IN_SET($tagid,'tags') ";
+            $tagid && $where[] = " FIND_IN_SET($tagid,`tags`) ";
             $where = implode(' AND ', $where);
 
             //get article count
@@ -52,6 +74,7 @@
             //var_dump($artlist);
 
             $this->assign('artlist',$artlist);
+            $this->assign('page',$page->show());
             $this->display();
         }
 

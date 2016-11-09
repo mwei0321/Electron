@@ -77,7 +77,9 @@
 				<div class="clr"></div>
 				<ul class="sb_menu">
 					<volist name="catelist" id="c">
-						<li><a href="{:U('Article/index',['cateid'=>$c['id']])}" title="{$c['description']}">{$c['name']}</a>&nbsp; (25)</li>
+						<if condition="$c['pid'] NEQ 0">
+							<li><a href="{:U('Article/index',['cateid'=>$c['id']])}" title="{$c['description']}">{$c['name']}</a>&nbsp; ({$cateArtNum[$c['id']]['num']|intval})</li>
+						</if>
 					</volist>
 				</ul>
 			</div>

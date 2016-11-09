@@ -34,8 +34,9 @@
             //count
             if($_page == 'count'){
                 $filed = 'COUNT(a.`id`) `num`';
+                $sql = "SELECT $filed FROM `article` a WHERE a.`status` = 1";
                 $count = M()->query($sql);
-                return $count['num'];
+                return $count[0]['num'];
             }
 
             //list
@@ -96,5 +97,17 @@
             $order = $_toptype == 1 ? '`hots` DESC' : '`com_num` DESC';
             $list = M('Article')->where(['status'=>1])->order($order)->limit($_num)->select();
             return $list;
+        }
+
+        /**
+         * 返回分类下的文章数
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2016年9月12日 下午8:34:02
+        **/
+        function getCateArtNum(){
+            $sql = "SELECT COUNT('id') num,cateid FROM `article` WHERE `status` = 1 GROUP BY `cateid`";
+            $num = M()->query($sql);
+            return fieldtokey($num,'cateid');
         }
     }

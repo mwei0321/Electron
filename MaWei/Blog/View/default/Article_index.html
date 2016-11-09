@@ -6,12 +6,12 @@
 	<volist name="artlist" id="a">
 		<div class="article first">
 			<h2 class="h123">
-				<a href="{:U('Article/info',['artid'=>$a['id']])}" title="{$a['title']}" target="_blank">{$a['title']}</a>
+				<a href="{:U('Article/info',['aid'=>$a['id']])}" title="{$a['title']}" target="_blank">{$a['title']}</a>
 			</h2>
 			<p class="tag">
 				标 签：
 				<volist name="a['tagids']" id="t">
-					<a href="{:U('Article/index',['tagid'=>$t])}" title="{$taglist[$t]['name']}"><span>{$taglist[$t]['name']}</span></a>
+					<a href="{:U('Article/index',['tid'=>$t])}" title="{$taglist[$t]['name']}"><span>{$taglist[$t]['name']}</span></a>
 				</volist>
 			</p>
 			<div class="clr"></div>

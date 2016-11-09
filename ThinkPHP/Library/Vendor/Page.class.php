@@ -41,9 +41,9 @@ class Page{
 			'next'   => '>>',
 			'first'  => '1',
 			'last'   => '%TOTAL_PAGE%',
-			'theme'  => '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% <a href="javascript:void(0);">%NOW_PAGE%/%TOTAL_PAGE%</a>%HEADER%',
+// 			'theme'  => '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% <a href="javascript:void(0);">%NOW_PAGE%/%TOTAL_PAGE%</a>%HEADER%',
 // 			'theme'  => '%HEADER% %UP_PAGE% %FIRST% %LINK_PAGE% %END% %DOWN_PAGE% <a href="javascript:void(0);">%NOW_PAGE%/%TOTAL_PAGE%页</a>',
-// 			'theme'  => '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% ',
+			'theme'  => '%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% ',
 	);
 
 	/**

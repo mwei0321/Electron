@@ -51,6 +51,33 @@
     }
 
     /**
+     * 分页
+     * @param  int $_count 总数
+     * @param  int $_num 一页条数
+     * @param  int $_sort 正、反序
+     * @return array
+     * @author MaWei (http://www.phpython.com)
+     * @date 2016年7月27日 下午5:03:03
+     */
+    function page($_count,$_pnum = 10,$_sort = 0){
+        $page = [];
+        $p = intval($_REQUEST['p']);
+        $nowPage = $p > 1 ? $p : 1;
+        $pageNum = intval($_REQUEST['pn']) ? : $_pnum;
+        $totalPage = intval(ceil($_count/$pageNum));
+        if($nowPage > $totalPage) return 0;
+        if($_sort)
+            $row = ($_count - $pageNum * $nowPage) > 0 ? ($_count - $pageNum * $nowPage) : 0;
+        else
+            $row = (($nowPage - 1) * $pageNum);
+        $page['nowPage'] = $nowPage;
+        $page['pageNum'] = $pageNum;
+        $page['totalPage'] = $totalPage;
+        $page['page'] = "$row,$pageNum";
+        return $page;
+    }
+
+    /**
      * 返回两到三层的树形菜单
      * @param  array $_list
      * @param  int $_level
@@ -179,19 +206,33 @@
 
     /**
      * 文件上传
-     * @param  string　$_path 文件夹名（默认为 UPLOAD_PATH 定义下
-     * @param  string　$_file 接收KEY
-     * @param  string　$_name 重命名
-     * @param  string　$_isDate 目录是否按日期文件放
-     * @return array $info
+     * @param  $_param[
+     *              'upKey', //接收KEY
+     *              'upPath', //存放路径
+     *              'name', //文件名
+     *              'isDate', //是否按月份存放
+     *              'filterExe', //过滤的扩展名
+     *              'maxSize',//最大文件大小,单位字节，默认20M
+     *         ];
+     * @return string|int $info (-1:文件类型错误,-2:文件太大)
      * @author MaWei (http://www.phpyrb.com)
      * @date 2014-10-19  下午2:55:23
      */
-    function fileUpload($_path = 'file', $_file = null,$_name = null,$_isDate = 1) {
-        $file = $_file ? $_file : $_FILES ['file'];
-        $path = UPLOAD_PATH.$_path.'/';
-        $_isDate && $path .= date('Ym',time()).'/';
-        $filename = $_name ? $path.$_name : $path.$file['name'];
+    function fileUpload($_param = [],$_path = 'file', $_file = null,$_name = null,$_isDate = 1) {
+        $file = $_param['upKey'] ? $_param['upkey'] : $_FILES ['file'];
+        $path = $_param['upPath'];
+        $_param['isDate'] && $path .= date('Ym',time()).'/';
+        $filename = $_param['name'] ? $path.$_param['name'] : $path.$file['name'];
+        //过滤文件类型
+        $exename = ['gif','jpg','jpeg','bmp','png','swf','txt','xls','doc','xlsx','docx','zip','rar','7z'];
+        if(!in_array(strtolower($file['extension']),$_param['filterExe'] ? $_param['filterExe'] : $exename)){
+            return -1;//文件类型错误
+        }
+        //过滤文件大小
+        if($file['size'] > ($_param['maxSize'] ? $_param['maxSize'] : 24657920) || $file['size'] == -1){
+            return -2;//文件太大
+        }
+        //创建目录
         createDir($path);
         if(!move_uploaded_file($file['tmp_name'], autoCharset($filename,'utf-8','gbk'))) {
             return false;
@@ -585,13 +626,13 @@
 
     function ad(){
         require_once ROOT_PATH.'/Library/phpQuery.php';
-        $html = file_get_contents('http://www.xxbiquge.com/1_1767/');
+        $html = file_get_contents('http://www.xuanshu.com/book/7057/');
         $phpquery = phpQuery::newDocumentHTML("$html",'UTF-8');
-        $a = pq('#list dd')->find('a');
+        $a = pq('.pc_list li')->find('a');
         $data = [];
         foreach ($a as $k=>$v){
             $url = pq($v)->attr('href');
-            $data[] = "http://www.xxbiquge.com/1_1767/".$url."\r\n";
+            $data[] = "http://www.xuanshu.com/book/7057/".$url."\r\n";
         }
         file_put_contents('/char.txt', $data);
     }
@@ -600,14 +641,14 @@
         require_once ROOT_PATH.'/Library/phpQuery.php';
         $a = rFile('/char.txt');
         $i = 0;
-        $e = 27;
+        $e = 6;
         $regx = ['<br>','<script type="text/javascript" src="/js/chaptererror.js"></script>'];
         foreach ($a as $k => $v){
 //             if(!$v) continue;
             $html = file_get_contents($v);
             $phpquery = phpQuery::newDocumentHTML("$html",'UTF-8');
-            $title = pq('.bookname h1')->text();
-            $content = pq('#content')->html();
+            $title = pq('.txt_cont h1')->text();
+            $content = pq('#content1')->html();
 //             var_dump($content);exit;
 //             $content = iconv('GB2312', 'UTF-8'.'//IGNORE', $content);
             $aa []= $title.str_replace($regx, "\r\n", $content);
