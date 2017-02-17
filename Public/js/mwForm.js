@@ -4,10 +4,10 @@
  * @time 2014-09-08
  */
 
-var form = {};
+var mwForm = {};
 
 ;(function ($,window,document,underfinded) {
-	$.fn.extend(form,{
+	$.fn.extend(mwForm,{
 		//表单不能为空验证
 		check : function (check,fmid){
 			var Obj = check ? check : 'check';

@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50711
+Source Server Version : 50714
 Source Host           : localhost:3306
 Source Database       : mw_electron
 
 Target Server Type    : MYSQL
-Target Server Version : 50711
+Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2016-09-12 20:11:27
+Date: 2017-02-17 14:06:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -117,41 +117,40 @@ CREATE TABLE `article` (
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO `article` VALUES ('1', '1', '23', '17,14,13', '1', 'debian 初始安装', '1', '834', '0', 'debian初始安装,debian安装设置,debian安装vim,debian安装代码提示,debian安装PHP环境,debian安装lnmp', '1463987952', '1371746494');
+INSERT INTO `article` VALUES ('1', '1', '23', '17,14,13', '1', 'debian 初始安装', '1', '852', '0', 'debian初始安装,debian安装设置,debian安装vim,debian安装代码提示,debian安装PHP环境,debian安装lnmp', '1463987952', '1371746494');
 INSERT INTO `article` VALUES ('2', '1', '28', '18', '1', 'Js获取屏幕body宽高度', '1', '731', '0', 'Js获取屏幕高度，获取屏幕宽度。 ', '1401163229', '1371782692');
 INSERT INTO `article` VALUES ('3', '1', '20', '16,19', '1', 'php空间的在线解压 ZIP', '1', '708', '0', 'php空间的在线解压 php空间的在线解压ZIP php空间解压ZIP 在线解压ZIP 在线解压zip 空间php解压 php空间解压', '1372669921', '1371871456');
-INSERT INTO `article` VALUES ('4', '1', '28', '18', '1', 'Jquery随屏滚动特效', '1', '623', '0', 'Jquery随屏滚动特效 jquery滚动 jquery滚动特效 jquery特效', '1372756985', '1371872464');
+INSERT INTO `article` VALUES ('4', '1', '28', '18', '1', 'Jquery随屏滚动特效', '1', '624', '0', 'Jquery随屏滚动特效 jquery滚动 jquery滚动特效 jquery特效', '1372756985', '1371872464');
 INSERT INTO `article` VALUES ('6', '1', '20', '16,19', '1', 'php面试题 陷阱题', '1', '808', '0', 'php面试题 php陷阱题 php基础题 php常见面试题 php考题', '1372757248', '1371896734');
 INSERT INTO `article` VALUES ('7', '1', '29', '16,19', '1', 'MySql常用语句', '1', '710', '0', 'MySql常用语句 有用的MySQL语句 MySql语句', '1373789463', '1371899755');
 INSERT INTO `article` VALUES ('18', '1', '21', '16,21', '0', 'python mysql基础 学习', '1', '237', '0', 'python mysql连接,python mysql', '1374059025', '1373942637');
 INSERT INTO `article` VALUES ('8', '1', '31', '16,19,20', '1', 'wamp虚拟主机配置', '1', '788', '0', 'wamp5,apache 虚拟主机配置 wamp5虚拟主机配置 apache虚拟主机配置', '1373451770', '1371961592');
-INSERT INTO `article` VALUES ('9', '1', '23', '13,17', '1', 'Liunx配置IP和DNS', '1', '477', '0', 'Liunx配置IP和DNS debian配置ip debian配置dns liunx配置ip和dns', '1372757673', '1371987080');
-INSERT INTO `article` VALUES ('10', '0', '23', null, '1', 'Linux配置`.bashrc`,  `vim`， Linux配置命令缩写', '1', '618', '0', 'Linux配置`.bashrc`,  `vim`  Linux配置命令缩写', '1468835805', '1371907485');
+INSERT INTO `article` VALUES ('9', '1', '23', '13,17', '1', 'Liunx配置IP和DNS', '1', '479', '0', 'Liunx配置IP和DNS debian配置ip debian配置dns liunx配置ip和dns', '1372757673', '1371987080');
+INSERT INTO `article` VALUES ('10', '0', '23', null, '1', 'Linux配置`.bashrc`,  `vim`， Linux配置命令缩写', '1', '624', '0', 'Linux配置`.bashrc`,  `vim`  Linux配置命令缩写', '1468835805', '1371907485');
 INSERT INTO `article` VALUES ('11', '1', '23', '13,15', '1', 'Linux安装git', '1', '658', '0', 'Linux安装git git linux配置安装 liunx git', '1373452568', '1371988171');
-INSERT INTO `article` VALUES ('12', '1', '29', '16,19', '1', 'mysql分组group ', '1', '814', '0', 'mysql分组group mysql gorup mysql分组统计 mysql分组显示', '1372757732', '1372063686');
+INSERT INTO `article` VALUES ('12', '1', '29', '16,19', '1', 'mysql分组group ', '1', '815', '0', 'mysql分组group mysql gorup mysql分组统计 mysql分组显示', '1372757732', '1372063686');
 INSERT INTO `article` VALUES ('13', '1', '28', '18', '1', '  jQuery 获取高度宽度', '1', '409', '0', '  jQuery 获取屏幕高度、宽度,jquery 高度，jquery宽度', '1372757748', '1372415916');
 INSERT INTO `article` VALUES ('15', '1', '23', '13,14', '1', 'vim基本命令,vim常用命令', '1', '664', '0', 'vim基本命令,vim常用命令', '1380112061', '1372865638');
 INSERT INTO `article` VALUES ('14', '1', '21', '', '0', 'python各种类型转换-int,str,char,float,ord,hex,oct等', '1', '6', '0', 'python各种类型转换-int,str,char,float,ord,hex,oct等 ', '1372762175', '1372761865');
 INSERT INTO `article` VALUES ('17', '1', '21', '21', '1', 'python 基础学习笔记1', '1', '522', '0', 'python 基础笔记 python基础 ', '1373440508', '1373437782');
 INSERT INTO `article` VALUES ('19', '1', '21', '16,21', '1', 'python安装mysql', '1', '632', '0', 'python安装mysql', '1373957762', '1373956731');
 INSERT INTO `article` VALUES ('20', '1', '20', '', '0', 'php 文件下载详解', '1', '11', '0', 'php 文件下载详解', '1375523177', '1375523177');
-INSERT INTO `article` VALUES ('21', '1', '23', '13,14,17', '1', 'vim中tab转成空格', '1', '487', '0', 'vim中将tab自动转换成空格 ', '1377268337', '1377268337');
+INSERT INTO `article` VALUES ('21', '1', '23', '13,14,17', '1', 'vim中tab转成空格', '1', '488', '0', 'vim中将tab自动转换成空格 ', '1377268337', '1377268337');
 INSERT INTO `article` VALUES ('22', '1', '23', '13,17', '1', 'vps 安全登录的方法 ssh 登录', '1', '687', '0', 'vps 安全登录的方法 ssh  登录', '1377513177', '1377271802');
 INSERT INTO `article` VALUES ('31', '1', '21', '22,21', '1', 'django 正则表达式－Python Django  学习笔记3', '1', '538', '0', '正则表达式用法，正则表达式详解，python中正则表达式。', '1401421189', '1382514720');
 INSERT INTO `article` VALUES ('24', '1', '21', '21,22', '1', 'django 安装初始化-Python Django 学习笔记1', '1', '680', '0', 'django 初始化安装，python django学习笔记', '1395647313', '1377760757');
 INSERT INTO `article` VALUES ('25', '1', '23', '14', '1', 'Sublime 快捷键', '1', '460', '0', 'Sublime 常用的快捷键。', '1378371170', '1378371104');
-INSERT INTO `article` VALUES ('26', '1', '23', '13,17,19,21,22', '1', '反向代理', '1', '424', '0', 'Python使用反向代理，lnmp反向代理。', '1378779640', '1378779640');
-INSERT INTO `article` VALUES ('27', '1', '29', '16', '1', 'mysql 数据库导入、导出', '1', '454', '0', 'mysql 数据库导入、导出', '1380795718', '1378909247');
+INSERT INTO `article` VALUES ('26', '1', '23', '13,17,19,21,22', '1', '反向代理', '1', '426', '0', 'Python使用反向代理，lnmp反向代理。', '1378779640', '1378779640');
+INSERT INTO `article` VALUES ('27', '1', '29', '16', '1', 'mysql 数据库导入、导出', '1', '455', '0', 'mysql 数据库导入、导出', '1380795718', '1378909247');
 INSERT INTO `article` VALUES ('28', '1', '21', '21,22', '0', 'django post csrf', '1', '180', '0', 'Python Django POST Forbidden (403)', '1380115380', '1380115040');
 INSERT INTO `article` VALUES ('29', '1', '23', '13,17', '1', 'lftp 命令如何使用', '1', '492', '0', 'liunx lftp,debian lftp', '1380802115', '1380801134');
 INSERT INTO `article` VALUES ('30', '1', '28', '18', '1', ' jQuery 如何为动态添加的元素绑定事件', '1', '466', '0', ' jQuery 如何为动态添加的元素绑定事件', '1381135077', '1381134321');
-INSERT INTO `article` VALUES ('32', '1', '21', '22,21', '1', 'django url 详解 - Python Django  学习笔记4', '1', '820', '0', 'django的url配置、用法。', '1411890014', '1382521106');
+INSERT INTO `article` VALUES ('32', '1', '21', '22,21', '1', 'django url 详解 - Python Django  学习笔记4', '1', '821', '0', 'django的url配置、用法。', '1411890014', '1382521106');
 INSERT INTO `article` VALUES ('33', '1', '21', '21,22', '1', 'django 新建工程和项目－Python Django 学习笔记2', '1', '451', '0', 'django如何新建工程和项目', '1384676829', '1382521966');
-INSERT INTO `article` VALUES ('34', '1', '21', '21,22', '1', 'django 模板详解 － Python Django 学习笔记5', '1', '575', '0', 'django模型，django模型的新建。', '1384831398', '1384676770');
+INSERT INTO `article` VALUES ('34', '1', '21', '21,22', '1', 'django 模板详解 － Python Django 学习笔记5', '1', '576', '0', 'django模型，django模型的新建。', '1384831398', '1384676770');
 INSERT INTO `article` VALUES ('35', '1', '21', '16,21,22', '1', 'django模型详解之模型创建 － Python Django 学习笔记6', '1', '452', '0', '新建模型，模型语法', '1385279652', '1385174807');
 INSERT INTO `article` VALUES ('36', '1', '21', '', '0', 'django模型详解之数据库操作 － Python Django 学习笔记7', '1', '16', '0', '', '1389189068', '1385279767');
-INSERT INTO `article` VALUES ('37', '1', '21', '16,21,22', '1', 'django如何连接mysql,django如何安装mysql', '1', '424', '0', 'django如何安装mysql,django如何连接msyql.', '1389191862', '1389189913');
-INSERT INTO `article` VALUES ('83', '0', '1', null, '1', '萝莉控教程', '1', '1', '0', '萝莉控教程', '1470795904', '1470795904');
+INSERT INTO `article` VALUES ('37', '1', '21', '16,21,22', '1', 'django如何连接mysql,django如何安装mysql', '1', '425', '0', 'django如何安装mysql,django如何连接msyql.', '1389191862', '1389189913');
 
 -- ----------------------------
 -- Table structure for article_attach

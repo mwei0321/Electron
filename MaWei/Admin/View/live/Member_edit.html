@@ -1,0 +1,70 @@
+<!-- Bootstrap -->
+<link rel="stylesheet" media="screen" href="/Public/live/css/bootstrap.min.css">
+<!-- stystem menu content -->
+<div class="row" style="width:1100px;">
+    <div class="col-lg-12">
+        <div class="panel panel-default bootstrap-admin-no-table-panel">
+            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
+                <div class="tabcont">
+                    <form class="form-horizontal" method="post" action="{:U('Admin/Sourc/add_updata')}" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="{$info['id']}" />
+                        <div id="inputfile"></div>
+                        <legend></legend>
+                        <fieldset>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="focusedInput">账号</label>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" name="name" id="focusedInput" type="text" placeholder="标题" value="{$info['title']}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="focusedInput">昵称</label>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" name="nickname" id="focusedInput" type="text" placeholder="关键字" value="{$info['keyword']}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="focusedInput">密码</label>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" name="password" id="focusedInput" type="text" placeholder="关键字" value="{$info['keyword']}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="focusedInput">电子邮件</label>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" name="email" id="focusedInput" type="text" placeholder="关键字" value="{$info['keyword']}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="disabledInput">性别</label>
+                                    <div class="col-lg-3">
+                                        <select class="form-control" name="status">
+                                            <volist name="status" id="s">
+                                                <option value="{$key}" <if condition="$info['status'] EQ $key">selected</if>>{$s}</option>
+                                            </volist>
+                                        </select>
+                                    </div>
+                                </div>
+                                <if condition="$info['id']">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label" for="disabledInput">状态</label>
+                                        <div class="col-lg-3">
+                                            <select class="form-control" name="status">
+                                                <volist name="status" id="s">
+                                                    <option value="{$key}" <if condition="$info['status'] EQ $key">selected</if>>{$s}</option>
+                                                </volist>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </if>
+                                <div class="fr bntmr20">
+                                    <button type="button" class="btn btn-primary" url="{:U('Admin/Member/addupdata')}" onclick="mwUI.AjaxForm($(this));">确定</button>
+                                    <button type="reset" class="btn btn-default" onclick="layer.close(0.3);">取消</button>
+                                </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

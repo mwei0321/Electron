@@ -21,6 +21,7 @@
 
         function index(){
 
+            $this->display();
         }
     }
 
