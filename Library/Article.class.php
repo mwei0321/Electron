@@ -34,13 +34,14 @@
             //count
             if($_page == 'count'){
                 $filed = 'COUNT(a.`id`) `num`';
-                $sql = "SELECT $filed FROM `article` a WHERE a.`status` = 1";
+                $sql = "SELECT a.`id` FROM `article` a WHERE a.`status` = 1";
+                $_where && $sql .= ' AND '.$_where;
                 $count = M()->query($sql);
-                return $count[0]['num'];
+                return count($count);
             }
 
             //list
-            $sql .= ' ORDER BY `uptime` DESC LIMIT '.$_page;
+            $sql .= ' ORDER BY a.`id` DESC LIMIT '.$_page;
             $list = M()->query($sql);
 
             //tag array
@@ -63,10 +64,10 @@
                 $count = $m->where($_where)->count();
                 return $count;
             }
-            $list = $m->where($_where)->order('uptime DESC')->limit($_limit)->select();
+            $list = $m->where($_where)->order('id DESC')->limit($_limit)->select();
             //tag array
             foreach ($list as $k => $v){
-                $list[$k]['tagids'] = explode(',', $v['tags']);
+                $list[$k]['tagids'] = $v['tags'] ? explode(',', $v['tags']) : [];
             }
 
             return $list;
@@ -82,7 +83,9 @@
         function getArtInfo($_artid){
             $sql = "SELECT * FROM `article` a LEFT JOIN `article_content` ac ON a.`id`=ac.`artid` WHERE a.`id`=".$_artid." LIMIT 1";
             $info = M()->query($sql);
-            return array_shift($info);
+            $info = array_shift($info);
+            $info['tagids'] = $info['tags'] ? explode(',', $info['tags']) : [];
+            return $info;
         }
 
         /**

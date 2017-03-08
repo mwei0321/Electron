@@ -29,7 +29,7 @@ h2{font-weight:500;font-style:italic}
 .header .header_nav .mean dl{opacity: 0;position:absolute;top:55px;z-index:99;border-radius:0 0 10px 10px;-webkit-border-radius: 5px;-moz-border-radius: 5px;-webkit-transition: opacity 1s ease 0.3s;-moz-transition: opacity 1s ease 0.3s;-o-transition: opacity 1s ease 0.3s;-ms-transition: opacity 1s ease 0.3s;transition: opacity 1s ease 0.3s;}
 .header .header_nav .mean dd{height:40px;float:left;display:block;position:relative;list-style:none;}
 .header .header_nav .mean dl dd{height:0px;overflow:hidden;-webkit-transition: height 0.25s ease 0.1s;-moz-transition: height 0.25s ease 0.1s;-o-transition: height 0.25s ease 0.1s;-ms-transition: height 0.25s ease 0.1s;transition: height 0.25s ease 0.1s;}
-.header .header_nav .mean dd a{padding:0 10px;display:block;text-shadow: 1px 1px 1px rgba(0,0,0,.6);font-size:14px;width:120px;height:63px;line-height:51px;}
+.header .header_nav .mean dd a{padding:0 10px;display:block;text-shadow: 1px 1px 1px rgba(0,0,0,.6);font-size:18px;width:120px;height:63px;line-height:54px;}
 .header .header_nav .mean dl dd a{height:45px;line-height:40px;}
 .header .header_nav .mean dd dl dd{background:url("/Public/image/menu.png") repeat-x;}
 .header .header_nav .mean dd:hover > dl dd{overflow:visible;height:40px;}
@@ -83,8 +83,8 @@ body .date a img{border:none;background:none;}
 /* start page */
 #page{width:80%;min-width:800px;float:right; margin:10px auto 50px;}
 #page p{height:35px;max-width:450px;width:auto;font-size:14px;padding:5px auto;margin:20px auto;line-height:35px;}
-#page a,#page span{width:27px;border:1px solid #ccc;height:25px;margin:3px; 5px auto 0px;display:block;float:left;line-height:25px;text-align:center;}
-#page .nowpage {color:#eee;background:#B2B2B2; font-weight:700;border:1px solid #888;}
+#page a,#page span{font-size:16px;box-shadow:1px 1px 6px #999;border-radius:5px;width:35px;height:35px;margin:auto 4px;display:block;float:left;line-height:35px;text-align:center;background:#777979;color:#fff;}
+#page .current {color:#2cadff;background:#fff;font-size:18px; font-weight:700;border:1px solid #ccc;}
 #page p .textpage{width:40px;}
 /* end page */
 

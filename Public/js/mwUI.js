@@ -78,7 +78,10 @@ var mwUI = {};
 				data : formVal,
 				dataType : 'json'
 			}).done(function (e) {
-				if(debug) return false;
+				if(debug) {
+					console.log(e);
+					return false;
+				}
 				if(e.reCode == 200){
 					layer.msgjump(e.msg,jumpurl);
 				}else{

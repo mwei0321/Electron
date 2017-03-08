@@ -37,11 +37,11 @@
          * @date 2016年7月19日 下午5:00:26
         */
         private function _getCate(){
-            $cate = new ArticleCateTag();
-            $catelist = $cate->getArtCateList();
-            $this->assign('catelist',$catelist);
-            $this->assign('naviMenu',getTree($catelist));
-            $this->catelist = $catelist;
+            !C('Cate') && C('Cate',(new ArticleCateTag())->getArtCateList());
+            !C('Menu') && C('Menu',getTree(C('Cate')));
+            $this->assign('catelist',C("Cate"));
+            $this->assign('naviMenu',C('Menu'));
+            $this->catelist = C('Menu');
         }
 
         /**
@@ -51,10 +51,15 @@
          * @date 2016年7月19日 下午5:02:26
         */
         private function _getTag(){
-            $tag = new ArticleCateTag();
-            $taglist = $tag->getArtTagList();
+            !C('Tag') && $taglist = (new ArticleCateTag())->getArtTagList();
             $this->assign('taglist',$taglist);
             $this->taglist = $taglist;
+        }
+
+        function _clear(){
+            C("Tag");
+            C('Cate');
+            echo 'clear success';
         }
 
         /**

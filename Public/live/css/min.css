@@ -50,6 +50,9 @@ body{font-size:12px;font-family:Arial,Helvetica,Sans-serif;background:url(img/bg
 #content .good{color:#6F9106}
 #content .neutral{color:#FF7400}
 #content .bad{color:#C21C1C}
+.form-group .form-checkbox{margin-right:10px;display:inline-block;}
+.form-group .form-checkbox label{ vertical-align:middle;}
+.form-group .form-checkbox input{}
 .navmenu{display:inline-block;float:right;}
 .navmenu a img{width:20px;height:20px;margin-top:7px;}
 .modal #content{margin:0;padding:0px}

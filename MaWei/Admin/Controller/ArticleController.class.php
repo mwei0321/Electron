@@ -16,7 +16,6 @@
     use Vendor\Page;
     use Library\Article;
     use Library\ArticleCateTag;
-    use Library\Edit;
 
     class ArticleController extends InitController{
         private $Article,$ArtCateTag;
@@ -72,21 +71,15 @@
 
             //文章分类
             $catelist = $this->ArtCateTag->getArtCateList();
+            //文章标签
+            $taglist = $this->ArtCateTag->getArtTagList(['status'=>1]);
 
             $this->assign('catelist',$catelist);
+            $this->assign('taglist',$taglist);
             $this->display();
         }
 
-        /**
-         * 编辑器
-         * @return array
-         * @author MaWei (http://www.phpyrb.com)
-         * @date 2014-9-22  下午11:11:05
-         */
-        function editer(){
-            $editer = new Edit();
-            echo $editer->output();
-        }
+
 
         /**
          * 文章添加修改入数据库

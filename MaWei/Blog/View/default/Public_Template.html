@@ -20,11 +20,11 @@
 				<!-- navigation main start -->
 					<volist name="naviMenu" id="m">
 						<dd>
-							<a href="{:U('Blog/Article/index',['cid'=>$m['id']])}" title="{$m['description']}">{$m['name']}</a>
+							<a href="{:U('Article/index',['pid'=>$m['id']])}" title="{$m['description']}">{$m['name']}</a>
 							<dl class="">
 								<volist name="m['children']" id="ch">
 									<dd>
-										<a href="{:U('Blog/Article/index',['cid'=>$ch['id']])}" title="{$ch['description']}">{$ch['name']}</a>
+										<a href="{:U('Article/index',['cid'=>$ch['id']])}" title="{$ch['description']}">{$ch['name']}</a>
 									</dd>
 								</volist>
 							</dl>
@@ -101,7 +101,7 @@
 	</div>
 	<script type="text/javascript" src="./Public/SyntaxHighlighter/codehighlight.js"></script>
 	<script type="text/javascript">
-		SyntaxHighlighter.config.clipboardSwf = '/Public/SyntaxHighlighter/clipboard.swf';
+		//SyntaxHighlighter.config.clipboardSwf = '/Public/SyntaxHighlighter/clipboard.swf';
 		SyntaxHighlighter.all();
 	</script>
 

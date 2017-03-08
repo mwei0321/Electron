@@ -18,20 +18,22 @@
 		//public $uid;//要操作的用户id 如有登录需要则去掉注释
 
 		private $output;//要输出的数据
-
 		private $st;
+		//文件信息
+		public $FileInfo = null;
+		//文件上传定义
+		public $RootPath = null;
+		public $AbsPath = null;
+		public $RelativePath = '/Uploads';
+		public $ReceiveKey = 'file';//接收
+		public $FileExe = null;//文件扩展名
+		public $FileSize = 0;//文件扩展名
+		public $fileName = '';//文件名
+		public $MaxSize = '24657920';//最大文件大小,单位字节，默认20M
+		public $FilterExe = ['gif','jpg','jpeg','bmp','png','swf','txt','xls','doc','xlsx','docx','zip','rar','7z'];
 
-		private $rootpath = '/Uploads';
-
-		private $savepath = null;
-
-		private $fileInfo = null;
 
 		public function __construct($uid = ''){
-			//uid 为空则导入当前会话uid
-			//if(''===$uid) $this->uid = session('uid');
-
-			//\Vin\FileStorage::connect(STORAGE_TYPE);
 			//导入设置
 			$CONFIG = json_decode(preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents(CONF_PATH."editconfig.json")), true);
 
@@ -149,34 +151,93 @@
 		 * 上传文件方法
 		 *
 		 */
-		private function uploadFile($config,$fieldName){
-			$upload = new \Vendor\UploadFile();
-			$upload->maxSize   =     $config['maxSize'] ;// 设置附件上传大小
-			$upload->exts      =     $this->format_exts($config['allowFiles']);// 设置附件上传类型
-			$upload->rootPath  =     '.'.$this->rootpath; // 设置附件上传根目录
-			$upload->autoSub = false;
-			$upload->savePath  =     $this->getFullPath($config['pathFormat']); // 设置附件上传（子）目录
+		private function uploadFile($config){
+		    //网站根目录
+		    $this->RootPath = $this->RootPath ??str_replace('\\', '/', dirname(dirname(__FILE__)));
+		    //文件相对路径
+		    $this->RelativePath = $this->getFullPath($config['pathFormat']);
+		    //文件实际上传路径
+		    $this->AbsPath = $this->RootPath.$this->RelativePath;
+		    //创建目录
+		    $this->_CreateDir($this->AbsPath);
+		    //文件信息
+            $fileInfo = $_FILES[$this->ReceiveKey];
+            $this->FileExe = strtolower($this->getExt($fileInfo['name']));
+            $this->FileSize = $fileInfo['size'];
+            //返回数组定义
+            $data = [];
+            //判断文件大小
+            if($this->FileSize > $this->MaxSize){
+                $data['state']  = '文件限制20M';
+                return json_encode($data);
+            }
+            //判断文件格式
+            if(!in_array($this->FileExe,$this->FilterExe)){
+                $data['state']  = '文件格式错误！';
+                return json_encode($data);
+            }
+            //文件名
+            $this->fileName = date('YmdHis').rand(10000,99999).'.'.$this->FileExe;
+            $this->AbsPath .= $this->fileName;
+            $this->RelativePath .= $this->fileName;
+            //写入文件到指定目录
+		    if(move_uploaded_file($fileInfo['tmp_name'], $this->AbsPath)) {
+		        $data = [
+		            'state'   =>  "SUCCESS",
+		            'title'   => $this->fileName,
+		            'original'=> $this->fileName,
+		            'size'    => $this->FileSize,
+		            'url'     => $this->RelativePath,
+		            'path'    => $this->RelativePath,
+		        ];
+		    }else{
+		        $data['state']    = '文件上传失败！';
+		    }
 
-			$info=$upload->uploadOne($_FILES[$fieldName]);
-			$info = $info[0];
-			$rootpath = $this->rootpath;
-			if(!$info){
-				$data = array(
-						"state"=>'error',
-				);
-			}else{
-				$data = array(
-						'state'       =>  "SUCCESS",
-						'url'         =>  $info['savepath'].$info['savename'],
-						'title'       =>  $info['savename'],
-						'original'    =>  $info['name'],
-						'type'        =>  '.' . $info['extension'],
-						'size'        =>  $info['size'],
-// 				        'filetype'    =>  in_array($info['extension'],['jpg','png','bmp','jpeg','gif']) ? 1 : 2,
-// 						'sourcid' => $this->inputAttch($info)
- 				);
-			}
-			return json_encode($data);
+		    return json_encode($data);
+		}
+
+		/**
+		 * 写入文件
+		 * @return array
+		 * @author MaWei (http://www.phpython.com)
+		 * @date 2017年3月3日 下午3:26:36
+		**/
+		function _wirteFile(){
+		    $file = $_FILES[$this->ReceiveKey];
+
+		    //创建目录
+		    createDir($this->AbsPath);
+
+		    if(!move_uploaded_file($file['tmp_name'], autoCharset($filename,'utf-8','gbk'))) {
+		        return false;
+		    }
+		}
+
+		/**
+		 * 获取文件格式
+		 * @param  string $_fileName
+		 * @return array
+		 * @author MaWei (http://www.phpython.com)
+		 * @date 2017年3月6日 下午4:18:45
+		**/
+	    private function getExt($_fileName) {
+            $pathinfo = pathinfo($_fileName);
+            return $pathinfo['extension'];
+        }
+
+		/**
+		 * 创建目录
+		 * @param $_path
+		 * @return array
+		 * @author MaWei (http://www.phpython.com)
+		 * @date 2017年3月3日 下午3:50:06
+		**/
+		private function _CreateDir($_path){
+		    if (!file_exists($_path)){
+		        $this->_CreateDir(dirname($_path));
+		        @mkdir($_path, 0744);
+		    }
 		}
 
 		/**

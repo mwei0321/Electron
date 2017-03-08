@@ -47,6 +47,18 @@
         }
 
         /**
+         * 返回分类下的子分类
+         * @param  int $_pid
+         * @return array
+         * @author MaWei (http://www.phpython.com)
+         * @date 2017年3月7日 下午5:54:48
+        **/
+        function getSubCateByPid($_pid){
+            $ids = $this->catetag->field('id')->where(['pid'=>$_pid])->select();
+            return arr2to1($ids);
+        }
+
+        /**
          * 获取分类详情
          * @param  int $_id
          * @return array

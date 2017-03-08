@@ -1,7 +1,7 @@
 /Cache
 *~
 *tmp
-/Uploads/*
+#/Uploads/*
 */Conf/dbcon*
 .idea*
 access.log

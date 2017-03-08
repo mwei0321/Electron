@@ -31,7 +31,7 @@
 						<tr id="deleid_{$m['id']}" class="gradeA">
 							<td><input type="checkbox" name="ids[]" value="{$m['id']}"/></td>
 							<td style="min-width:25px;">{$m['id']}</td>
-							<td><a href="{:U('Home/Article/info',['id'=>$m['id']])}">{$m['title']}</a></td>
+							<td><a href="{:U('Blog/Article/info',['aid'=>$m['id']])}" target="_bank">{$m['title']}</a></td>
 							<td>{$catelist[$m['cateid']]['name']}</td>
 							<td>{$m['tags']}</td>
 							<td>{$m['keyword']|strCutOut=12}</td>

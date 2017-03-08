@@ -90,7 +90,7 @@
 				$model = 'ArticleCategory';
 				$url = U('CateTag/index',array('delcache'=>1,'type'=>'cate'));
 			}elseif($_REQUEST['type'] == 'tag'){
-				$data['cateid'] = intval($_REQUEST['cateid']);
+				$data['cate_id'] = intval($_REQUEST['cateid']);
 				$model = 'ArticleTag';
 				$url = U('CateTag/index',array('delcache'=>1,'type'=>'tag'));
 			}

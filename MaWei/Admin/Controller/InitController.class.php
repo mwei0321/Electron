@@ -34,6 +34,16 @@
 	    }
 
 
+	    /**
+	     * 编辑器
+	     * @return array
+	     * @author MaWei (http://www.phpyrb.com)
+	     * @date 2014-9-22  下午11:11:05
+	     */
+	    function editer(){
+	        $editer = new \Library\Edit();
+	        echo $editer->output();
+	    }
 
 	    /**
 	     * 菜单设置
