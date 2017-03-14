@@ -96,7 +96,7 @@
             $data['cateid'] = $_REQUEST['cateid'];
             $data['author'] = 1;
             $data['keyword'] = $_REQUEST['keyword'];
-            $data['status'] = intval($_REQUEST['status']) ? : 1;
+            $data['status'] = intval($_REQUEST['status']) ? : ($id ? intval($_REQUEST['status']) : 1);
             $data['tags'] = implode(',', $_REQUEST['tags']);
             $id && $data['id'] = $id;
             $id ? $data['uptime'] = time() : $data['uptime'] = $data['ctime'] = time();
