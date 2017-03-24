@@ -126,6 +126,7 @@ window.UEDITOR_HOME_URL = '/Public/ueditor/';
         //,allHtmlEnabled:false //提交到后台的数据是否包含整个html字符串
 
         //,autoTransWordToList:false  //禁止word中粘贴进来的列表自动变成列表标签
+        ,autoTransWordToList:true  //禁止word中粘贴进来的列表自动变成列表标签
 
         //fontsize
         //字号

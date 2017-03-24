@@ -23,15 +23,16 @@ a:hover { text-decoration:underline;text-decoration:none;}
 /***************start header****************************/
 h2{font-weight:500;font-style:italic}
 .header {background:url(/Public/image/header.png) repeat-x;height:63px;width:100%;}
-.header .header_nav{margin:0 auto;width:82%;min-width:1100px;height:63px;}
-.header .header_nav .logo{width:220px;height:63px;line-height:52px;font-size:20px;float:left;}
-.header .header_nav .mean{height:63px;}
-.header .header_nav .mean dl{opacity: 0;position:absolute;top:55px;z-index:99;border-radius:0 0 10px 10px;-webkit-border-radius: 5px;-moz-border-radius: 5px;-webkit-transition: opacity 1s ease 0.3s;-moz-transition: opacity 1s ease 0.3s;-o-transition: opacity 1s ease 0.3s;-ms-transition: opacity 1s ease 0.3s;transition: opacity 1s ease 0.3s;}
-.header .header_nav .mean dd{height:40px;float:left;display:block;position:relative;list-style:none;}
-.header .header_nav .mean dl dd{height:0px;overflow:hidden;-webkit-transition: height 0.25s ease 0.1s;-moz-transition: height 0.25s ease 0.1s;-o-transition: height 0.25s ease 0.1s;-ms-transition: height 0.25s ease 0.1s;transition: height 0.25s ease 0.1s;}
-.header .header_nav .mean dd a{padding:0 10px;display:block;text-shadow: 1px 1px 1px rgba(0,0,0,.6);font-size:18px;width:120px;height:63px;line-height:54px;}
+.header .header_nav{margin:0 auto;width:85%;min-width:1170px;height:63px;}
+.header .header_nav .logo{width:220px;height:63px;line-height:52px;font-size:20px;}
+.header .header_nav .mean{}
+.header .header_nav .mean dl{opacity: 0;position:absolute;top:55px;left:-15px;z-index:99;border-radius:0 0 10px 10px;-webkit-border-radius: 5px;-moz-border-radius: 5px;}/**-webkit-transition: opacity 1s ease 0.3s;-moz-transition: opacity 1s ease 0.3s;-o-transition: opacity 1s ease 0.3s;-ms-transition: opacity 1s ease 0.3s;transition: opacity 1s ease 0.3s;*/
+.header .header_nav .mean dd{display:inline-block;position:relative;list-style:none;margin:auto 15px;}
+.header .header_nav .mean dl dd{margin:auto 15px;overflow:hidden;}
+.header .header_nav .mean dd a{padding:0 10px;display:block;text-shadow: 1px 1px 1px rgba(0,0,0,.6);font-size:16px;line-height:54px;}
 .header .header_nav .mean dl dd a{height:45px;line-height:40px;}
-.header .header_nav .mean dd dl dd{background:url("/Public/image/menu.png") repeat-x;}
+.header .header_nav .mean dd dl{display:none;}
+.header .header_nav .mean dd dl>dd{background:url("/Public/image/menu.png") repeat-x;width:150px;}
 .header .header_nav .mean dd:hover > dl dd{overflow:visible;height:40px;}
 .header .header_nav .mean dd:hover > dl{opacity: 1;}
 /***************end header****************************/
@@ -47,7 +48,7 @@ body .date a img{border:none;background:none;}
 
 .content {width:85%;min-width:1100px;margin:0 auto;position:relative;}
 .content .left{width:78%;min-width:750px;float:left;}
-.content .left .article{width:95%;height:auto;background:#fff;position:relative;border-radius:5px;}
+.content .left .article{width:97%;height:auto;background:#fff;position:relative;border-radius:5px;}
 .content .left .h123{background:#fafafa;box-shadow:0px 2px 3px #eee; font-size:18px;border-radius:5px 5px 0 0;padding-left:30px;height:40px;line-height:40px;border-bottom: 1px solid #eaeaea;}
 .content .left .first{margin-bottom:50px;}
 .content .left .article .cont{width:95%;margin:10px auto 20px auto; overflow:hidden;font-size:1.1em;}
