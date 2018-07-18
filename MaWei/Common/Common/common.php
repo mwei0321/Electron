@@ -7,7 +7,7 @@
 	*  +---------------------------------------------------------------------------------+
 	*   | Creater Time : 2016年6月2日
 	*  +---------------------------------------------------------------------------------+
-	*   | Link :		http://www.phpython.com
+	*   | Link :		http://www.mawei.live
 	*  +---------------------------------------------------------------------------------+
 	**/
 
@@ -18,7 +18,7 @@
 	 * @param string $_key
 	 * @param string $_unique 值唯一
 	 * @return array $onearray
-     * @author MaWei (http://www.phpython.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014年4月2日 下午2:27:46
      */
     function arr2to1($_data,$_key = 'id',$_unique = true){
@@ -34,7 +34,7 @@
      * @param array $_data 数组
      * @param string $_field key
      * @return array $newdata
-     * @author MaWei ( http://www.phpyrb.com )
+     * @author MaWei ( http://www.mawei.live )
      * @date 2014-4-17 下午1:50:15
      */
     function fieldtokey($_data,$_field = 'id'){
@@ -56,7 +56,7 @@
      * @param  int $_num 一页条数
      * @param  int $_sort 正、反序
      * @return array
-     * @author MaWei (http://www.phpython.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2016年7月27日 下午5:03:03
      */
     function page($_count,$_pnum = 10,$_sort = 0){
@@ -82,7 +82,7 @@
      * @param  array $_list
      * @param  int $_level
      * @return array
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014-10-18  上午11:05:59
      */
     function getTree($_list,$_level = 2,$_childrenkey = 'id'){
@@ -111,7 +111,7 @@
      * @param  array $_list
      * @param  int $_pid
      * @return array
-     * @author MaWei (http://www.phpython.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2016年6月11日 下午8:25:22
     */
     function level($_menu,$_pid = 0,$_level=0,$_flag = 1){
@@ -147,7 +147,7 @@
      * @param  string $str
      * @param  string
      * @return array
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014-8-3  上午1:38:43
      */
     function real_strip_tags($str, $allowable_tags="") {
@@ -161,7 +161,7 @@
      * @param string $_path 文件路径名称
      * @param int $_type 0为复写,1.为添写
      * @return int|boolean
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2015-1-8 下午4:48:29
      */
     function writeFile($_str,$_path,$_type = 0){
@@ -182,7 +182,7 @@
      * @param string|int $_type 读取类型 'array'读r成数组,'0'读取全部为字符串,'2'读取多少
      * @param string $_charset 输出字符格式
      * @return string
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2015-1-12 下午4:09:42
      */
     function rFile($_path,$_type = 'array',$_charset = null){
@@ -215,7 +215,7 @@
      *              'maxSize',//最大文件大小,单位字节，默认20M
      *         ];
      * @return string|int $info (-1:文件类型错误,-2:文件太大)
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014-10-19  下午2:55:23
      */
     function fileUpload($_param = [],$_path = 'file', $_file = null,$_name = null,$_isDate = 1) {
@@ -247,7 +247,7 @@
      * @param  string $_name 重命名
      * @param  string $_chmod 权限
      * @return array
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014-8-3  下午2:10:22
      * @qq群号：341411327
      */
@@ -281,7 +281,7 @@
      * 返回文件的后缀名
      * @param string $_file
      * @return string $exname
-     * @author MaWei ( http://www.phpyrb.com )
+     * @author MaWei ( http://www.mawei.live )
      * @date 2014-4-17 下午1:50:15
      */
     function getFileExeName($_file){
@@ -294,7 +294,7 @@
      * 创建文件夹
      * @param  string $_path 文件夹路径
      * @return array
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014-8-3  下午2:10:22
      */
     function createDir($_path){
@@ -308,7 +308,7 @@
      * 返回目录下的文件夹名称
      * @param string $_path 路径
      * @return array $filelist
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014-10-8 下午2:48:38
      */
     function getDirFile($_path){
@@ -330,7 +330,7 @@
      * @param array $_arr 要转换的数组
      * @param string 类型，1为小写，0为大写
      * @return array $_arr
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014-10-8 下午5:06:43
      */
     function arrtolower($_arr){
@@ -377,7 +377,7 @@
      * @param int $length
      * @param string $ext
      * @return array
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014-11-20 下午4:32:24
      */
     function strCutOut($str, $length = 40, $ext = '……') {
@@ -552,7 +552,7 @@
      * @param  string $from 要转换的字符字符编码
      * @param  string $to 转换成字符编码
      * @return array
-     * @author MaWei (http://www.phpython.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2016年6月2日 下午3:43:39
      */
     function autoCharset($string, $from='gbk', $to='utf-8') {
@@ -670,7 +670,7 @@
      * @param array $_filter 采集过滤规则   filed$DOMEle-type|
      * @param string $_area 采集区域 '#area－mulitiele',区域－多个DOM
      * @return array $data
-     * @author MaWei (http://www.phpyrb.com)
+     * @author MaWei (http://www.mawei.live)
      * @date 2014-12-11 上午10:39:33
      */
     function getUrlGather($_url,$_filter,$_area = null,$_charset = null){
